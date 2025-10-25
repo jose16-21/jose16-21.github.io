@@ -1,4 +1,4 @@
-import type { NotificationOptions, AnimationOptions } from './types';
+import type { AnimationOptions } from './types';
 
 // Utilidades para validación
 export class ValidationUtils {
@@ -61,11 +61,11 @@ export class DOMUtils {
   static addEventListeners<K extends keyof HTMLElementEventMap>(
     elements: NodeListOf<Element> | Element[],
     event: K,
-    handler: (this: Element, ev: HTMLElementEventMap[K]) => void
+    handler: (ev: HTMLElementEventMap[K]) => void
   ): void {
     const elementArray = Array.from(elements);
     elementArray.forEach(element => {
-      element.addEventListener(event, handler);
+      element.addEventListener(event, handler as EventListener);
     });
   }
 }

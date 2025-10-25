@@ -1,10 +1,29 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { CartProvider } from './application/context/CartContext';
+import { AuthProvider } from './application/context/AuthContext';
+import { ModalProvider } from './application/context/ModalContext';
+import HomePage from './presentation/pages/HomePage.tsx';
+import { AnimationManager } from './infrastructure/services/AnimationManager';
 
 function App() {
+  useEffect(() => {
+    // Inicializar animaciones cuando el DOM está listo
+    const animationManager = new AnimationManager();
+    
+    return () => {
+      // Cleanup si es necesario
+      animationManager.resetAnimations();
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <p>Start prompting (or editing) to see magic happen :)</p>
-    </div>
+    <AuthProvider>
+      <CartProvider>
+        <ModalProvider>
+          <HomePage />
+        </ModalProvider>
+      </CartProvider>
+    </AuthProvider>
   );
 }
 

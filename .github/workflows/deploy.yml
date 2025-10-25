@@ -2,7 +2,7 @@ name: Deploy Vite to GitHub Pages
 
 on:
   push:
-    branches: [ "main" ]  # se dispara al hacer push en main
+    branches: [ "develop" ]
 
 jobs:
   build-deploy:
