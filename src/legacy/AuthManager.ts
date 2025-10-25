@@ -1,5 +1,5 @@
 import { DOMUtils, ValidationUtils, StorageUtils } from '../utils';
-import { NotificationManager } from './NotificationManager';
+import { NotificationManager } from '../infrastructure/services/NotificationManager';
 import type { User, RegisterFormData, LoginFormData } from '../types';
 
 export class AuthManager {

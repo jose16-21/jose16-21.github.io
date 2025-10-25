@@ -1,5 +1,5 @@
 import { DOMUtils, ValidationUtils } from '../utils';
-import { NotificationManager } from './NotificationManager';
+import { NotificationManager } from '../infrastructure/services/NotificationManager';
 import type { ContactFormData } from '../types';
 
 export class ContactForm {

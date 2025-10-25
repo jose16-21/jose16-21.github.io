@@ -1,4 +1,4 @@
-import { DOMUtils, AnimationUtils, PerformanceUtils } from '../utils';
+import { DOMUtils, AnimationUtils, PerformanceUtils } from '../../utils';
 
 export class AnimationManager {
   private animatedElements: NodeListOf<Element>;

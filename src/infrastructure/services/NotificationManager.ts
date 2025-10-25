@@ -1,5 +1,5 @@
-import { DOMUtils } from '../utils';
-import type { NotificationOptions } from '../types';
+import { DOMUtils } from '../../utils';
+import type { NotificationOptions } from '../../types';
 
 export class NotificationManager {
   private container: HTMLElement;

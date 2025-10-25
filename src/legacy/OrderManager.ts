@@ -1,6 +1,6 @@
 import { DOMUtils, StorageUtils } from '../utils';
-import { NotificationManager } from './NotificationManager';
-import type { Order, User, PaginationOptions, PaginatedResult } from '../types';
+import { NotificationManager } from '../infrastructure/services/NotificationManager';
+import type { Order, CartItem, User, PaginationOptions, PaginatedResult } from '../types';
 
 export class OrderManager {
   private notificationManager: NotificationManager;
