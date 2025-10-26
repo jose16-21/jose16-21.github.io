@@ -57,81 +57,81 @@ const Services: React.FC = () => {
   };
 
   return (
-    <section className="services" id="servicios">
-      <div className="container">
-        <div className="section-header">
-          <h2>Servicios Especializados</h2>
-          <p>Ofrezco soluciones completas en desarrollo y consultoría tecnológica</p>
+    <section className="py-24 bg-white" id="servicios">
+      <div className="max-w-7xl mx-auto px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-dark mb-4">Servicios Especializados</h2>
+          <p className="text-lg text-gray-medium max-w-2xl mx-auto">Ofrezco soluciones completas en desarrollo y consultoría tecnológica</p>
         </div>
         
-        <div className="service-filters">
+        <div className="flex justify-center gap-4 mb-12 flex-wrap">
           <button 
-            className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
+            className={`px-6 py-3 border-2 rounded-lg font-medium transition-all ${filter === 'all' ? 'border-primary bg-primary text-white' : 'border-gray-light bg-transparent text-gray-dark hover:border-primary hover:bg-primary hover:text-white'}`}
             onClick={() => setFilter('all')}
           >
             Todos
           </button>
           <button 
-            className={`filter-btn ${filter === 'development' ? 'active' : ''}`}
+            className={`px-6 py-3 border-2 rounded-lg font-medium transition-all ${filter === 'development' ? 'border-primary bg-primary text-white' : 'border-gray-light bg-transparent text-gray-dark hover:border-primary hover:bg-primary hover:text-white'}`}
             onClick={() => setFilter('development')}
           >
             Desarrollo
           </button>
           <button 
-            className={`filter-btn ${filter === 'consulting' ? 'active' : ''}`}
+            className={`px-6 py-3 border-2 rounded-lg font-medium transition-all ${filter === 'consulting' ? 'border-primary bg-primary text-white' : 'border-gray-light bg-transparent text-gray-dark hover:border-primary hover:bg-primary hover:text-white'}`}
             onClick={() => setFilter('consulting')}
           >
             Consultoría
           </button>
           <button 
-            className={`filter-btn ${filter === 'training' ? 'active' : ''}`}
+            className={`px-6 py-3 border-2 rounded-lg font-medium transition-all ${filter === 'training' ? 'border-primary bg-primary text-white' : 'border-gray-light bg-transparent text-gray-dark hover:border-primary hover:bg-primary hover:text-white'}`}
             onClick={() => setFilter('training')}
           >
             Capacitación
           </button>
         </div>
 
-        <div className="services-grid">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map(product => (
             <div 
               key={product.id} 
-              className={`service-card product-card ${product.featured ? 'featured' : ''}`}
+              className={`bg-white rounded-2xl p-8 shadow-lg border border-gray-lighter transition-all relative overflow-hidden hover:-translate-y-2 hover:shadow-xl hover:border-primary ${product.featured ? 'border-2 border-primary scale-105' : ''}`}
             >
-              {product.featured && <div className="featured-badge">Más Popular</div>}
-              <div className="service-icon">
-                <i className={`fas ${getProductIcon(product.category)}`}></i>
+              {product.featured && <div className="absolute top-4 right-4 bg-gradient-primary text-white px-4 py-1 rounded-full text-sm font-semibold">Más Popular</div>}
+              <div className="w-15 h-15 bg-gradient-primary rounded-lg flex items-center justify-center mb-6">
+                <i className={`fas ${getProductIcon(product.category)} text-2xl text-white`}></i>
               </div>
-              <h3>{product.name}</h3>
-              <p>{product.description}</p>
-              <ul className="service-features">
+              <h3 className="text-2xl font-bold text-dark mb-4">{product.name}</h3>
+              <p className="text-gray-medium mb-6">{product.description}</p>
+              <ul className="list-none mb-8">
                 {product.features.slice(0, 4).map((feature, index) => (
-                  <li key={index}>{feature}</li>
+                  <li key={index} className="relative pl-6 mb-2 text-gray-medium before:content-['✓'] before:absolute before:left-0 before:text-success before:font-bold">{feature}</li>
                 ))}
                 {product.features.length > 4 && (
-                  <li className="more-features">+{product.features.length - 4} características más</li>
+                  <li className="italic text-primary">+{product.features.length - 4} características más</li>
                 )}
               </ul>
-              <div className="product-info">
-                <div className="service-price">${product.price.toLocaleString()} {product.currency}</div>
-                <div className="delivery-time">
+              <div className="mb-6">
+                <div className="text-2xl font-bold text-primary text-center p-4 bg-gray-lighter rounded-lg">${product.price.toLocaleString()} {product.currency}</div>
+                <div className="flex items-center gap-2 text-gray-medium text-sm mt-4 justify-center">
                   <i className="fas fa-clock"></i>
                   {product.deliveryTime}
                 </div>
               </div>
-              <div className="product-actions">
+              <div className="flex gap-2">
                 <button 
-                  className="btn btn-secondary"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-white text-primary font-semibold rounded-lg border-2 border-primary hover:bg-primary hover:text-white hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 text-sm"
                   onClick={() => handleShowDetails(product)}
                 >
                   <i className="fas fa-info-circle"></i>
                   Ver Detalles
                 </button>
                 <button 
-                  className="btn btn-primary"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-gradient-primary text-white font-semibold rounded-lg shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all duration-300 text-sm"
                   onClick={() => handleAddToCart(product)}
                 >
                   <i className="fas fa-shopping-cart"></i>
-                  Agregar al Carrito
+                  Agregar
                 </button>
               </div>
             </div>

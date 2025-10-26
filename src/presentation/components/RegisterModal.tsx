@@ -145,16 +145,16 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
   if (!isOpen) return null;
 
   return (
-    <div className="auth-modal active" onClick={handleClose}>
-      <div className="auth-modal-content" onClick={(e) => e.stopPropagation()}>
-        <div className="auth-modal-header">
-          <h2><i className="fas fa-user-plus"></i> Crear Cuenta</h2>
-          <button className="auth-modal-close" onClick={handleClose}>&times;</button>
+    <div className="fixed inset-0 bg-dark/80 backdrop-blur-sm flex items-center justify-center p-4 z-50" onClick={handleClose}>
+      <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center justify-between p-6 border-b border-gray-lighter sticky top-0 bg-white z-10">
+          <h2 className="text-2xl font-bold text-dark flex items-center gap-3"><i className="fas fa-user-plus text-primary"></i> Crear Cuenta</h2>
+          <button className="w-10 h-10 bg-gray-lighter hover:bg-gray-light rounded-full flex items-center justify-center text-gray-dark hover:text-dark transition-colors text-2xl" onClick={handleClose}>&times;</button>
         </div>
-        <form className="auth-form" onSubmit={handleSubmit}>
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="register-firstName">Nombre</label>
+        <form className="p-6 space-y-4" onSubmit={handleSubmit}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="register-firstName" className="block text-sm font-medium text-gray-dark mb-2">Nombre</label>
               <input
                 type="text"
                 id="register-firstName"
@@ -162,11 +162,12 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
                 value={formData.firstName}
                 onChange={handleChange}
                 required
+                className="w-full px-4 py-3 border border-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               />
-              {errors.firstName && <span className="error-message">{errors.firstName}</span>}
+              {errors.firstName && <span className="text-danger text-sm mt-1">{errors.firstName}</span>}
             </div>
-            <div className="form-group">
-              <label htmlFor="register-lastName">Apellido</label>
+            <div>
+              <label htmlFor="register-lastName" className="block text-sm font-medium text-gray-dark mb-2">Apellido</label>
               <input
                 type="text"
                 id="register-lastName"
@@ -174,12 +175,13 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
                 value={formData.lastName}
                 onChange={handleChange}
                 required
+                className="w-full px-4 py-3 border border-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               />
-              {errors.lastName && <span className="error-message">{errors.lastName}</span>}
+              {errors.lastName && <span className="text-danger text-sm mt-1">{errors.lastName}</span>}
             </div>
           </div>
-          <div className="form-group">
-            <label htmlFor="register-email">Email</label>
+          <div>
+            <label htmlFor="register-email" className="block text-sm font-medium text-gray-dark mb-2">Email</label>
             <input
               type="email"
               id="register-email"
@@ -187,12 +189,13 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
               value={formData.email}
               onChange={handleChange}
               required
+              className="w-full px-4 py-3 border border-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
             />
-            {errors.email && <span className="error-message">{errors.email}</span>}
+            {errors.email && <span className="text-danger text-sm mt-1">{errors.email}</span>}
           </div>
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="register-password">Contraseña</label>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="register-password" className="block text-sm font-medium text-gray-dark mb-2">Contraseña</label>
               <input
                 type="password"
                 id="register-password"
@@ -201,11 +204,12 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
                 onChange={handleChange}
                 required
                 minLength={6}
+                className="w-full px-4 py-3 border border-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               />
-              {errors.password && <span className="error-message">{errors.password}</span>}
+              {errors.password && <span className="text-danger text-sm mt-1">{errors.password}</span>}
             </div>
-            <div className="form-group">
-              <label htmlFor="register-confirmPassword">Confirmar Contraseña</label>
+            <div>
+              <label htmlFor="register-confirmPassword" className="block text-sm font-medium text-gray-dark mb-2">Confirmar Contraseña</label>
               <input
                 type="password"
                 id="register-confirmPassword"
@@ -213,23 +217,25 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 required
+                className="w-full px-4 py-3 border border-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               />
-              {errors.confirmPassword && <span className="error-message">{errors.confirmPassword}</span>}
+              {errors.confirmPassword && <span className="text-danger text-sm mt-1">{errors.confirmPassword}</span>}
             </div>
           </div>
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="register-company">Empresa (opcional)</label>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="register-company" className="block text-sm font-medium text-gray-dark mb-2">Empresa (opcional)</label>
               <input
                 type="text"
                 id="register-company"
                 name="company"
                 value={formData.company}
                 onChange={handleChange}
+                className="w-full px-4 py-3 border border-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="register-phone">Teléfono (opcional)</label>
+            <div>
+              <label htmlFor="register-phone" className="block text-sm font-medium text-gray-dark mb-2">Teléfono (opcional)</label>
               <input
                 type="tel"
                 id="register-phone"
@@ -237,24 +243,25 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="+502 3132-2197"
+                className="w-full px-4 py-3 border border-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               />
             </div>
           </div>
-          <div className="form-group">
+          <div>
             <div id="register-recaptcha-container" className="g-recaptcha"></div>
             {recaptchaError && (
-              <div id="register-recaptcha-error" className="error-message" style={{ display: 'block' }}>
+              <div id="register-recaptcha-error" className="text-danger text-sm mt-2">
                 Por favor, completa la verificación reCAPTCHA
               </div>
             )}
           </div>
-          <button type="submit" className="btn btn-primary btn-full">
+          <button type="submit" className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-primary text-white font-semibold rounded-lg shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all">
             <i className="fas fa-user-plus"></i>
             Crear Cuenta
           </button>
         </form>
-        <div className="auth-footer">
-          <p>¿Ya tienes cuenta? <a href="#" onClick={(e) => { e.preventDefault(); onShowLogin(); }}>Inicia sesión aquí</a></p>
+        <div className="p-6 pt-0 text-center">
+          <p className="text-gray-medium">¿Ya tienes cuenta? <a href="#" onClick={(e) => { e.preventDefault(); onShowLogin(); }} className="text-primary font-semibold hover:underline">Inicia sesión aquí</a></p>
         </div>
       </div>
     </div>

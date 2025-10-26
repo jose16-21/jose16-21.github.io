@@ -37,36 +37,36 @@ const Portfolio: React.FC = () => {
   ];
 
   return (
-    <section className="portfolio" id="portafolio">
-      <div className="container">
-        <div className="section-header">
-          <h2>Proyectos Destacados</h2>
-          <p>Algunos de los proyectos más relevantes en mi carrera</p>
+    <section className="py-24 bg-white" id="portafolio">
+      <div className="max-w-7xl mx-auto px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-dark mb-4">Proyectos Destacados</h2>
+          <p className="text-lg text-gray-medium max-w-2xl mx-auto">Algunos de los proyectos más relevantes en mi carrera</p>
         </div>
-        <div className="portfolio-grid">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project) => (
             <div 
               key={project.id} 
-              className="portfolio-item" 
+              className="bg-white rounded-2xl shadow-lg border border-gray-lighter overflow-hidden transition-all hover:-translate-y-2 hover:shadow-xl hover:border-primary group" 
               data-aos="fade-up" 
               data-aos-delay={project.delay}
             >
-              <div className="portfolio-image">
-                <div className="portfolio-placeholder">
-                  <i className={`fas ${project.icon}`}></i>
+              <div className="relative h-64 bg-gradient-primary flex items-center justify-center overflow-hidden">
+                <div className="w-24 h-24 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+                  <i className={`fas ${project.icon} text-6xl text-white`}></i>
                 </div>
-                <div className="portfolio-overlay">
-                  <a href="#" className="portfolio-link">
-                    <i className="fas fa-external-link-alt"></i>
+                <div className="absolute inset-0 bg-dark/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <a href="#" className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all">
+                    <i className="fas fa-external-link-alt text-xl"></i>
                   </a>
                 </div>
               </div>
-              <div className="portfolio-content">
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-                <div className="portfolio-tech">
+              <div className="p-8">
+                <h3 className="text-2xl font-bold text-dark mb-4">{project.title}</h3>
+                <p className="text-gray-medium mb-6">{project.description}</p>
+                <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech) => (
-                    <span key={tech}>{tech}</span>
+                    <span key={tech} className="px-3 py-1 bg-gray-lighter text-primary text-sm font-medium rounded-full border border-primary/20 hover:bg-primary hover:text-white transition-all">{tech}</span>
                   ))}
                 </div>
               </div>
