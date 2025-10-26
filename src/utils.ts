@@ -170,3 +170,47 @@ export class PerformanceUtils {
     };
   }
 }
+
+// Utilidades para portapapeles
+export class ClipboardUtils {
+  static async copyToClipboard(text: string): Promise<boolean> {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch (error) {
+      console.error('Error al copiar al portapapeles:', error);
+      // Fallback para navegadores más antiguos
+      return this.fallbackCopy(text);
+    }
+  }
+
+  private static fallbackCopy(text: string): boolean {
+    try {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      textArea.style.top = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      
+      const successful = document.execCommand('copy');
+      document.body.removeChild(textArea);
+      return successful;
+    } catch (error) {
+      console.error('Error en fallback de copia:', error);
+      return false;
+    }
+  }
+
+  static obfuscateEmail(email: string): string {
+    // Codifica el email para dificultar el scraping de bots
+    return email.split('').map(char => `&#${char.charCodeAt(0)};`).join('');
+  }
+
+  static obfuscatePhone(phone: string): string {
+    // Codifica el teléfono para dificultar el scraping de bots
+    return phone.split('').map(char => `&#${char.charCodeAt(0)};`).join('');
+  }
+}

@@ -2388,6 +2388,60 @@ p {
     color: var(--gray-medium);
 }
 
+/* Copyable fields */
+.copyable-field {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+}
+
+.copyable-field p {
+    margin: 0;
+    flex: 1;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.copyable-field p:hover {
+    color: var(--primary-color);
+}
+
+.copy-btn {
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+.copyable-field:hover .copy-btn {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.copy-btn:hover {
+    background: var(--secondary-color);
+    transform: scale(1.1);
+}
+
+.copy-btn i {
+    font-size: 0.875rem;
+}
+
+.copy-btn:active {
+    transform: scale(0.95);
+}
+
 .contact-form-container {
     background: var(--gray-lighter);
     padding: 2rem;
@@ -2517,6 +2571,58 @@ p {
     color: var(--white);
 }
 
+/* Footer contact item with copy button */
+.footer-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: space-between;
+}
+
+.footer-contact-item span {
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.footer-contact-item span:hover {
+    color: var(--primary-color);
+}
+
+.copy-btn-footer {
+    background: var(--gray-dark);
+    color: var(--gray-light);
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    opacity: 0;
+    transform: translateX(-5px);
+}
+
+.footer-contact-item:hover .copy-btn-footer {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.copy-btn-footer:hover {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.copy-btn-footer i {
+    font-size: 0.75rem;
+}
+
+.copy-btn-footer:active {
+    transform: scale(0.95);
+}
+
 .footer-bottom {
     border-top: 1px solid var(--gray-dark);
     padding-top: 2rem;
@@ -2532,6 +2638,17 @@ p {
     .footer-content {
         grid-template-columns: 1fr;
         text-align: center;
+    }
+    
+    /* Make copy buttons always visible on mobile */
+    .copy-btn,
+    .copy-btn-footer {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    
+    .footer-contact-item {
+        justify-content: center;
     }
 }
 

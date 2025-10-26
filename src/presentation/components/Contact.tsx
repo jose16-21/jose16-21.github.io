@@ -1,4 +1,5 @@
 import React, { useState, FormEvent } from 'react';
+import { ClipboardUtils } from '../../utils';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,15 @@ const Contact: React.FC = () => {
   });
 
   const [recaptchaError, setRecaptchaError] = useState(false);
+  const [copiedField, setCopiedField] = useState<string | null>(null);
+
+  const copyToClipboard = async (text: string, field: string) => {
+    const success = await ClipboardUtils.copyToClipboard(text);
+    if (success) {
+      setCopiedField(field);
+      setTimeout(() => setCopiedField(null), 2000);
+    }
+  };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -86,7 +96,24 @@ const Contact: React.FC = () => {
                 </div>
                 <div className="contact-details">
                   <h4>{item.title}</h4>
-                  <p>{item.value}</p>
+                  {(item.title === 'Email' || item.title === 'Teléfono') ? (
+                    <div className="copyable-field">
+                      <p>{item.value}</p>
+                      <button
+                        className="copy-btn"
+                        onClick={() => copyToClipboard(item.value, item.title)}
+                        title={`Copiar ${item.title.toLowerCase()}`}
+                      >
+                        {copiedField === item.title ? (
+                          <i className="fas fa-check"></i>
+                        ) : (
+                          <i className="fas fa-copy"></i>
+                        )}
+                      </button>
+                    </div>
+                  ) : (
+                    <p>{item.value}</p>
+                  )}
                 </div>
               </div>
             ))}
