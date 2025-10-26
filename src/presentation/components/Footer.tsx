@@ -1,6 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { ClipboardUtils } from '../../utils';
 
 const Footer: React.FC = () => {
+  const [copiedField, setCopiedField] = useState<string | null>(null);
+
+  const copyToClipboard = async (text: string, field: string) => {
+    const success = await ClipboardUtils.copyToClipboard(text);
+    if (success) {
+      setCopiedField(field);
+      setTimeout(() => setCopiedField(null), 2000);
+    }
+  };
   const footerSections = [
     {
       title: 'Servicios',
@@ -23,9 +33,9 @@ const Footer: React.FC = () => {
     {
       title: 'Contacto',
       links: [
-        { icon: 'fas fa-envelope', text: 'ju16jo@gmail.com', href: 'mailto:ju16jo@gmail.com' },
-        { icon: 'fas fa-phone', text: '+502 3132-2197', href: 'tel:+50231322197' },
-        { icon: 'fas fa-map-marker-alt', text: 'Guatemala', href: '#' }
+        { icon: 'fas fa-envelope', text: 'ju16jo@gmail.com', href: 'mailto:ju16jo@gmail.com', copyable: true },
+        { icon: 'fas fa-phone', text: '+502 3132-2197', href: 'tel:+50231322197', copyable: true },
+        { icon: 'fas fa-map-marker-alt', text: 'Guatemala', href: '#', copyable: false }
       ]
     }
   ];
@@ -56,7 +66,24 @@ const Footer: React.FC = () => {
                 {section.links.map((link, index) => (
                   <li key={index}>
                     {'icon' in link ? (
-                      <><i className={link.icon}></i> {link.text}</>
+                      <div className="footer-contact-item">
+                        <span>
+                          <i className={link.icon}></i> {link.text}
+                        </span>
+                        {link.copyable && (
+                          <button
+                            className="copy-btn-footer"
+                            onClick={() => copyToClipboard(link.text, `${section.title}-${index}`)}
+                            title={`Copiar ${link.text}`}
+                          >
+                            {copiedField === `${section.title}-${index}` ? (
+                              <i className="fas fa-check"></i>
+                            ) : (
+                              <i className="fas fa-copy"></i>
+                            )}
+                          </button>
+                        )}
+                      </div>
                     ) : (
                       <a href={link.href}>{link.text}</a>
                     )}
