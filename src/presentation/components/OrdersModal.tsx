@@ -28,47 +28,47 @@ const OrdersModal: React.FC<OrdersModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen || !user) return null;
 
   return (
-    <div className="auth-modal active" onClick={onClose}>
-      <div className="auth-modal-content orders-modal-content" onClick={(e) => e.stopPropagation()}>
-        <div className="auth-modal-header">
-          <h2><i className="fas fa-shopping-bag"></i> Mis Órdenes</h2>
-          <button className="auth-modal-close" onClick={onClose}>&times;</button>
+    <div className="fixed inset-0 bg-dark/80 backdrop-blur-sm flex items-center justify-center p-4 z-50" onClick={onClose}>
+      <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] flex flex-col" onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center justify-between p-6 border-b border-gray-lighter">
+          <h2 className="text-2xl font-bold text-dark flex items-center gap-3"><i className="fas fa-shopping-bag text-primary"></i> Mis Órdenes</h2>
+          <button className="w-10 h-10 bg-gray-lighter hover:bg-gray-light rounded-full flex items-center justify-center text-gray-dark hover:text-dark transition-colors text-2xl" onClick={onClose}>&times;</button>
         </div>
         
-        <div className="orders-content">
+        <div className="flex-1 overflow-y-auto p-6">
           {orders.length === 0 ? (
-            <div className="empty-state">
-              <i className="fas fa-shopping-bag" style={{ fontSize: '4rem', color: 'var(--gray-light)', marginBottom: '1rem' }}></i>
-              <h3>No tienes órdenes aún</h3>
-              <p>Cuando realices tu primera compra, aparecerá aquí.</p>
-              <button className="btn btn-primary" onClick={onClose}>
+            <div className="flex flex-col items-center justify-center py-12 text-center">
+              <i className="fas fa-shopping-bag text-8xl text-gray-light mb-6"></i>
+              <h3 className="text-2xl font-bold text-dark mb-2">No tienes órdenes aún</h3>
+              <p className="text-gray-medium mb-6">Cuando realices tu primera compra, aparecerá aquí.</p>
+              <button className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-primary text-white font-semibold rounded-lg shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all" onClick={onClose}>
                 Explorar Servicios
               </button>
             </div>
           ) : (
-            <div className="orders-list">
+            <div className="flex flex-col gap-4">
               {orders.map((order) => (
-                <div key={order.id} className="order-card">
-                  <div className="order-header">
-                    <div className="order-number">
-                      <strong>Orden #{order.id}</strong>
-                      <span className="order-date">{new Date(order.createdAt).toLocaleDateString('es-ES')}</span>
+                <div key={order.id} className="bg-gray-lighter rounded-lg border border-gray-light p-6">
+                  <div className="flex justify-between items-start mb-4 pb-4 border-b border-gray-light">
+                    <div>
+                      <strong className="text-lg text-dark block mb-1">Orden #{order.id}</strong>
+                      <span className="text-gray-medium text-sm">{new Date(order.createdAt).toLocaleDateString('es-ES')}</span>
                     </div>
-                    <span className={`order-status status-${order.status.toLowerCase()}`}>
+                    <span className={`px-4 py-1 rounded-full text-sm font-semibold ${order.status === 'completed' ? 'bg-success/20 text-success' : order.status === 'cancelled' ? 'bg-danger/20 text-danger' : 'bg-warning/20 text-warning'}`}>
                       {order.status}
                     </span>
                   </div>
-                  <div className="order-items">
+                  <div className="space-y-2 mb-4">
                     {order.items.map((item: OrderItem, index: number) => (
-                      <div key={index} className="order-item">
+                      <div key={index} className="flex justify-between text-gray-dark">
                         <span>{item.name}</span>
-                        <span>${item.price.toLocaleString()}</span>
+                        <span className="font-semibold">${item.price.toLocaleString()}</span>
                       </div>
                     ))}
                   </div>
-                  <div className="order-footer">
-                    <strong>Total: ${order.total.toLocaleString()} USD</strong>
-                    <button className="btn btn-secondary btn-sm">
+                  <div className="flex justify-between items-center pt-4 border-t border-gray-light">
+                    <strong className="text-lg text-dark">Total: ${order.total.toLocaleString()} USD</strong>
+                    <button className="inline-flex items-center gap-2 px-4 py-2 bg-white text-primary font-semibold rounded-lg border-2 border-primary hover:bg-primary hover:text-white transition-all text-sm">
                       Ver Detalles
                     </button>
                   </div>

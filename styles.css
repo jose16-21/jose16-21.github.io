@@ -56,27 +56,27 @@ body {
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
-    line-height: 1.2;
-    font-weight: 700;
-    color: var(--dark-color);
+    line-height: 1.2 !important;
+    font-weight: 700 !important;
+    color: var(--dark-color) !important;
 }
 
-h1 { font-size: 3rem; }
-h2 { font-size: 2.5rem; }
-h3 { font-size: 2rem; }
-h4 { font-size: 1.5rem; }
-h5 { font-size: 1.25rem; }
-h6 { font-size: 1rem; }
+h1 { font-size: 3rem !important; }
+h2 { font-size: 2.5rem !important; }
+h3 { font-size: 2rem !important; }
+h4 { font-size: 1.5rem !important; }
+h5 { font-size: 1.25rem !important; }
+h6 { font-size: 1rem !important; }
 
 @media (max-width: 768px) {
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 2rem; }
-    h3 { font-size: 1.75rem; }
+    h1 { font-size: 2.5rem !important; }
+    h2 { font-size: 2rem !important; }
+    h3 { font-size: 1.75rem !important; }
 }
 
 p {
-    margin-bottom: 1rem;
-    color: var(--gray-medium);
+    margin-bottom: 1rem !important;
+    color: var(--gray-medium) !important;
 }
 
 /* Buttons */
@@ -2378,11 +2378,13 @@ p {
     color: var(--white);
 }
 
+.contact .contact-details h4,
 .contact-details h4 {
     margin-bottom: 0.25rem;
     color: var(--dark-color);
 }
 
+.contact .contact-details p,
 .contact-details p {
     margin: 0;
     color: var(--gray-medium);

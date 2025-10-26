@@ -53,28 +53,28 @@ const Technologies: React.FC = () => {
   ];
 
   return (
-    <section className="technologies" id="tecnologias">
-      <div className="container">
-        <div className="section-header">
-          <h2>Stack Tecnológico</h2>
-          <p>Dominio amplio en tecnologías modernas de desarrollo</p>
+    <section className="py-24 bg-gray-lighter" id="tecnologias">
+      <div className="max-w-7xl mx-auto px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-dark mb-4">Stack Tecnológico</h2>
+          <p className="text-lg text-gray-medium max-w-2xl mx-auto">Dominio amplio en tecnologías modernas de desarrollo</p>
         </div>
-        <div className="tech-categories">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {techCategories.map((category, index) => (
             <div 
               key={category.title} 
-              className="tech-category" 
+              className="bg-white rounded-2xl p-8 shadow-lg border border-gray-lighter transition-all hover:-translate-y-2 hover:shadow-xl hover:border-primary" 
               data-aos="fade-up" 
               data-aos-delay={index * 100}
             >
-              <h3>
-                <i className={`fas ${category.icon}`}></i> {category.title}
+              <h3 className="text-2xl font-bold text-dark mb-6 flex items-center gap-3">
+                <i className={`fas ${category.icon} text-primary`}></i> {category.title}
               </h3>
-              <div className="tech-grid">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {category.technologies.map((tech) => (
-                  <div key={tech.name} className="tech-item">
-                    <i className={tech.icon}></i>
-                    <span>{tech.name}</span>
+                  <div key={tech.name} className="flex flex-col items-center gap-2 p-4 bg-gray-lighter rounded-lg hover:bg-gradient-primary hover:text-white hover:-translate-y-1 hover:shadow-md transition-all group">
+                    <i className={`${tech.icon} text-2xl text-primary group-hover:text-white transition-colors`}></i>
+                    <span className="text-sm font-medium text-gray-dark group-hover:text-white transition-colors text-center">{tech.name}</span>
                   </div>
                 ))}
               </div>

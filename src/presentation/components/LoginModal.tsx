@@ -84,15 +84,15 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onShowRegister
   if (!isOpen) return null;
 
   return (
-    <div className="auth-modal active" onClick={handleClose}>
-      <div className="auth-modal-content" onClick={(e) => e.stopPropagation()}>
-        <div className="auth-modal-header">
-          <h2><i className="fas fa-sign-in-alt"></i> Iniciar Sesión</h2>
-          <button className="auth-modal-close" onClick={handleClose}>&times;</button>
+    <div className="fixed inset-0 bg-dark/80 backdrop-blur-sm flex items-center justify-center p-4 z-50" onClick={handleClose}>
+      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full" onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center justify-between p-6 border-b border-gray-lighter">
+          <h2 className="text-2xl font-bold text-dark flex items-center gap-3"><i className="fas fa-sign-in-alt text-primary"></i> Iniciar Sesión</h2>
+          <button className="w-10 h-10 bg-gray-lighter hover:bg-gray-light rounded-full flex items-center justify-center text-gray-dark hover:text-dark transition-colors text-2xl" onClick={handleClose}>&times;</button>
         </div>
-        <form className="auth-form" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="login-email">Email</label>
+        <form className="p-6 space-y-4" onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="login-email" className="block text-sm font-medium text-gray-dark mb-2">Email</label>
             <input
               type="email"
               id="login-email"
@@ -100,10 +100,11 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onShowRegister
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              className="w-full px-4 py-3 border border-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="login-password">Contraseña</label>
+          <div>
+            <label htmlFor="login-password" className="block text-sm font-medium text-gray-dark mb-2">Contraseña</label>
             <input
               type="password"
               id="login-password"
@@ -111,23 +112,24 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onShowRegister
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              className="w-full px-4 py-3 border border-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
             />
           </div>
-          <div className="form-group">
+          <div>
             <div id="login-recaptcha-container" className="g-recaptcha"></div>
             {recaptchaError && (
-              <div id="login-recaptcha-error" className="error-message" style={{ display: 'block' }}>
+              <div id="login-recaptcha-error" className="text-danger text-sm mt-2">
                 Por favor, completa la verificación reCAPTCHA
               </div>
             )}
           </div>
-          <button type="submit" className="btn btn-primary btn-full">
+          <button type="submit" className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-primary text-white font-semibold rounded-lg shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all">
             <i className="fas fa-sign-in-alt"></i>
             Iniciar Sesión
           </button>
         </form>
-        <div className="auth-footer">
-          <p>¿No tienes cuenta? <a href="#" onClick={(e) => { e.preventDefault(); onShowRegister(); }}>Regístrate aquí</a></p>
+        <div className="p-6 pt-0 text-center">
+          <p className="text-gray-medium">¿No tienes cuenta? <a href="#" onClick={(e) => { e.preventDefault(); onShowRegister(); }} className="text-primary font-semibold hover:underline">Regístrate aquí</a></p>
         </div>
       </div>
     </div>
