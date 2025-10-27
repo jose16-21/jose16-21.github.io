@@ -425,9 +425,66 @@ export const servicesData: Service[] = [
       currency: 'USD',
       period: 'por auditoría'
     },
-    deliveryTime: '4-6 semanas',
-    featured: true,
+    deliveryTime: '2-3 semanas',
+    featured: false,
     available: true,
     imageUrl: '/images/cybersecurity.jpg'
+  },
+  // Migrados de products.ts
+  {
+    id: 'database-design',
+    title: 'Diseño de Base de Datos',
+    shortDescription: 'Diseño e implementación de bases de datos escalables',
+    description: 'Diseño e implementación de bases de datos escalables con modelado de datos optimizado, implementación SQL/NoSQL, índices y optimización de rendimiento.',
+    category: 'consulting',
+    icon: 'fa-database',
+    features: [
+      'Modelado de datos optimizado',
+      'Implementación SQL/NoSQL',
+      'Índices y optimización',
+      'Procedimientos almacenados',
+      'Sistema de backup',
+      'Documentación del esquema',
+      'Scripts de migración',
+      'Capacitación del equipo'
+    ],
+    technologies: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis', 'SQL'],
+    price: {
+      type: 'project',
+      amount: 800,
+      currency: 'USD'
+    },
+    deliveryTime: '2-3 semanas',
+    featured: false,
+    available: true,
+    imageUrl: '/images/database.jpg'
+  },
+  {
+    id: 'technical-training',
+    title: 'Capacitación Técnica',
+    shortDescription: 'Formación personalizada para equipos de desarrollo',
+    description: 'Formación personalizada para equipos de desarrollo con workshops personalizados, material didáctico incluido, ejercicios prácticos y certificado de participación.',
+    category: 'training',
+    icon: 'fa-chalkboard-teacher',
+    features: [
+      'Workshops personalizados',
+      'Material didáctico incluido',
+      'Ejercicios prácticos',
+      'Evaluación de competencias',
+      'Certificado de participación',
+      'Sesiones de Q&A',
+      'Recursos adicionales',
+      'Seguimiento post-capacitación'
+    ],
+    technologies: ['React', 'Node.js', 'TypeScript', 'AWS', 'DevOps'],
+    price: {
+      type: 'project',
+      amount: 600,
+      currency: 'USD'
+    },
+    deliveryTime: '1-2 semanas',
+    featured: false,
+    available: true,
+    imageUrl: '/images/training.jpg'
   }
 ];

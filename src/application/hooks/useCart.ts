@@ -1,13 +1,13 @@
 import { useContext } from 'react';
 import { CartItem } from '../../domain/entities/Cart';
-import { Product } from '../../domain/entities/Product';
+import { Service } from '../../domain/entities/Service';
 import { createContext } from 'react';
 
 export interface CartContextValue {
   items: CartItem[];
   itemCount: number;
   totalAmount: number;
-  addToCart: (product: Product, quantity?: number, customizations?: string) => void;
+  addToCart: (product: Service, quantity?: number, customizations?: string) => void;
   removeFromCart: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
   clearCart: () => void;
