@@ -3,17 +3,14 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 interface ModalContextValue {
   isLoginOpen: boolean;
   isRegisterOpen: boolean;
-  isCartOpen: boolean;
   isProfileOpen: boolean;
   isOrdersOpen: boolean;
   openLogin: () => void;
   openRegister: () => void;
-  openCart: () => void;
   openProfile: () => void;
   openOrders: () => void;
   closeLogin: () => void;
   closeRegister: () => void;
-  closeCart: () => void;
   closeProfile: () => void;
   closeOrders: () => void;
   switchToRegister: () => void;
@@ -37,7 +34,6 @@ interface ModalProviderProps {
 export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isOrdersOpen, setIsOrdersOpen] = useState(false);
 
@@ -49,11 +45,6 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
   const openRegister = () => {
     console.log('🔵 openRegister called');
     setIsRegisterOpen(true);
-  };
-  
-  const openCart = () => {
-    console.log('🔵 openCart called');
-    setIsCartOpen(true);
   };
 
   const openProfile = () => {
@@ -74,11 +65,6 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
   const closeRegister = () => {
     console.log('🔴 closeRegister called');
     setIsRegisterOpen(false);
-  };
-  
-  const closeCart = () => {
-    console.log('🔴 closeCart called');
-    setIsCartOpen(false);
   };
 
   const closeProfile = () => {
@@ -105,17 +91,14 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
     <ModalContext.Provider value={{
       isLoginOpen,
       isRegisterOpen,
-      isCartOpen,
       isProfileOpen,
       isOrdersOpen,
       openLogin,
       openRegister,
-      openCart,
       openProfile,
       openOrders,
       closeLogin,
       closeRegister,
-      closeCart,
       closeProfile,
       closeOrders,
       switchToRegister,

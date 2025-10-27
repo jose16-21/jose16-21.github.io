@@ -122,15 +122,3 @@ export const products: Product[] = [
     featured: false
   }
 ];
-
-export const getProductById = (id: string): Product | undefined => {
-  return products.find(product => product.id === id);
-};
-
-export const getProductsByCategory = (category: Product['category']): Product[] => {
-  return products.filter(product => product.category === category);
-};
-
-export const getFeaturedProducts = (): Product[] => {
-  return products.filter(product => product.featured);
-};

@@ -2,7 +2,7 @@ import { Product, ProductCategory } from '../../domain/entities/Product';
 import { ProductRepository } from '../../domain/repositories/ProductRepository';
 import { products } from '../../data/products';
 
-export class LocalProductRepository implements ProductRepository {
+export class ProductRepositoryImpl implements ProductRepository {
   async getAll(): Promise<Product[]> {
     return Promise.resolve(products);
   }

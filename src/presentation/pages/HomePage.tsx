@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Navigation from '../components/Navigation.tsx';
 import Hero from '../components/Hero.tsx';
 import Services from '../components/Services.tsx';
@@ -7,7 +8,6 @@ import Portfolio from '../components/Portfolio.tsx';
 import Experience from '../components/Experience.tsx';
 import Contact from '../components/Contact.tsx';
 import Footer from '../components/Footer.tsx';
-import CartModal from '../components/CartModal.tsx';
 import LoginModal from '../components/LoginModal.tsx';
 import RegisterModal from '../components/RegisterModal.tsx';
 import ProfileModal from '../components/ProfileModal.tsx';
@@ -15,25 +15,39 @@ import OrdersModal from '../components/OrdersModal.tsx';
 import { useModal } from '../../application/context/ModalContext';
 
 const HomePage: React.FC = () => {
+  const location = useLocation();
   const { 
     isLoginOpen, 
     isRegisterOpen, 
-    isCartOpen,
     isProfileOpen,
     isOrdersOpen,
     closeLogin, 
     closeRegister, 
-    closeCart,
     closeProfile,
     closeOrders,
     switchToRegister,
-    switchToLogin,
-    openCart 
+    switchToLogin
   } = useModal();
+
+  useEffect(() => {
+    // Si venimos con un hash, hacer scroll a esa sección
+    if (location.hash) {
+      setTimeout(() => {
+        const element = document.querySelector(location.hash);
+        if (element) {
+          const offsetTop = element.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // Si no hay hash, hacer scroll al inicio
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [location]);
 
   return (
     <div>
-      <Navigation onOpenCart={openCart} />
+      <Navigation />
       <Hero />
       <Services />
       <Technologies />
@@ -43,7 +57,6 @@ const HomePage: React.FC = () => {
       <Footer />
       
       {/* Modals */}
-      <CartModal isOpen={isCartOpen} onClose={closeCart} />
       <LoginModal isOpen={isLoginOpen} onClose={closeLogin} onShowRegister={switchToRegister} />
       <RegisterModal isOpen={isRegisterOpen} onClose={closeRegister} onShowLogin={switchToLogin} />
       <ProfileModal isOpen={isProfileOpen} onClose={closeProfile} />
