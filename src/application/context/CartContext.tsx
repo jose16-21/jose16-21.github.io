@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ReactNode } from 'react';
 import { CartItem } from '../../domain/entities/Cart';
-import { Product } from '../../domain/entities/Product';
+import { Service } from '../../domain/entities/Service';
 import { CartRepository } from '../../domain/repositories/CartRepository';
 import { LocalStorageCartRepository } from '../../infrastructure/repositories/LocalStorageCartRepository';
 import { AddToCartUseCase } from '../../domain/use-cases/AddToCartUseCase';
@@ -26,7 +26,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({
     setItems(loadedItems);
   }, [repository]);
 
-  const addToCart = (product: Product, quantity: number = 1, customizations?: string) => {
+  const addToCart = (product: Service, quantity: number = 1, customizations?: string) => {
     addToCartUseCase.execute(product, quantity, customizations);
     setItems(repository.getItems());
   };
@@ -57,7 +57,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({
   };
 
   const itemCount = items.reduce((count, item) => count + item.quantity, 0);
-  const totalAmount = items.reduce((total, item) => total + (item.product.price * item.quantity), 0);
+  const totalAmount = items.reduce((total, item) => total + (item.product.price.amount * item.quantity), 0);
 
   return (
     <CartContext.Provider value={{

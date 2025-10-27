@@ -149,10 +149,10 @@ const CartPage: React.FC = () => {
                         <div className="flex-1 min-w-0">
                           <div className="flex items-start justify-between mb-3">
                             <div className="flex-1">
-                              <h3 className="text-xl font-bold text-dark mb-2">{item.product.name}</h3>
-                              {item.product.description && (
+                              <h3 className="text-xl font-bold text-dark mb-2">{item.product.title}</h3>
+                              {item.product.shortDescription && (
                                 <p className="text-sm text-gray-600 leading-relaxed mb-3">
-                                  {item.product.description}
+                                  {item.product.shortDescription}
                                 </p>
                               )}
                             </div>
@@ -163,7 +163,7 @@ const CartPage: React.FC = () => {
                               onClick={() => {
                                 removeFromCart(item.product.id);
                                 notificationManager.show({
-                                  message: `${item.product.name} eliminado del carrito`,
+                                  message: `${item.product.title} eliminado del carrito`,
                                   type: 'success'
                                 });
                               }}
@@ -232,11 +232,11 @@ const CartPage: React.FC = () => {
                             <div className="text-right">
                               <div className="text-xs text-gray-medium mb-1">Precio unitario</div>
                               <div className="text-2xl font-bold text-primary">
-                                ${item.product.price.toLocaleString()} <span className="text-base font-normal">{item.product.currency}</span>
+                                ${item.product.price.amount.toLocaleString()} <span className="text-base font-normal">{item.product.price.currency}</span>
                               </div>
                               {item.quantity > 1 && (
                                 <div className="text-sm text-gray-medium mt-1 font-semibold">
-                                  Subtotal: ${(item.product.price * item.quantity).toLocaleString()} {item.product.currency}
+                                  Subtotal: ${(item.product.price.amount * item.quantity).toLocaleString()} {item.product.price.currency}
                                 </div>
                               )}
                             </div>

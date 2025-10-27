@@ -1,7 +1,7 @@
-import { Product } from './Product';
+import { Service } from './Service';
 
 export interface CartItem {
-  product: Product;
+  product: Service;
   quantity: number;
   customizations?: string;
 }
@@ -9,7 +9,7 @@ export interface CartItem {
 export class CartEntity {
   constructor(private items: CartItem[] = []) {}
 
-  addItem(product: Product, quantity: number = 1, customizations?: string): void {
+  addItem(product: Service, quantity: number = 1, customizations?: string): void {
     const existingItem = this.items.find(item => item.product.id === product.id);
 
     if (existingItem) {
@@ -47,7 +47,7 @@ export class CartEntity {
 
   getTotalAmount(): number {
     return this.items.reduce((total, item) => {
-      return total + (item.product.price * item.quantity);
+      return total + (item.product.price.amount * item.quantity);
     }, 0);
   }
 

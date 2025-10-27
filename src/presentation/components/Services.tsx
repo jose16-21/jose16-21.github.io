@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Service, ServiceCategory } from '../../domain/entities/Service';
 import { ServiceRepositoryImpl } from '../../infrastructure/repositories/ServiceRepositoryImpl';
 import { GetServicesUseCase } from '../../domain/use-cases/GetServicesUseCase';
-import { Product } from '../../domain/entities/Product';
 import { useCart } from '../../application/hooks/useCart';
 import { NotificationManager } from '../../infrastructure/services/NotificationManager';
 import ServiceDetailModal from './ServiceDetailModal';
@@ -61,20 +60,7 @@ const Services: React.FC = () => {
   };
 
   const handleAddToCart = (service: Service) => {
-    // Convertir Service a Product para el carrito
-    const product: Product = {
-      id: service.id,
-      name: service.title,
-      description: service.shortDescription,
-      price: service.price.amount,
-      currency: service.price.currency,
-      category: 'consulting', // Mapear según corresponda
-      features: service.features,
-      deliveryTime: service.deliveryTime || 'A consultar',
-      featured: service.featured || false
-    };
-
-    addToCart(product);
+    addToCart(service);
     notificationManager.show({
       message: `${service.title} agregado al carrito`,
       type: 'success'

@@ -1,10 +1,10 @@
-import { Product } from '../entities/Product';
+import { Service } from '../entities/Service';
 import { CartRepository } from '../repositories/CartRepository';
 
 export class AddToCartUseCase {
   constructor(private cartRepository: CartRepository) {}
 
-  execute(product: Product, quantity: number = 1, customizations?: string): void {
+  execute(product: Service, quantity: number = 1, customizations?: string): void {
     const items = this.cartRepository.getItems();
     const existingItem = items.find(item => item.product.id === product.id);
 
