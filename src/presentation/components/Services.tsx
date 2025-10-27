@@ -6,10 +6,11 @@ import { Product } from '../../domain/entities/Product';
 import { useCart } from '../../application/hooks/useCart';
 import { NotificationManager } from '../../infrastructure/services/NotificationManager';
 import ServiceDetailModal from './ServiceDetailModal';
+import { CategoryConfig } from '../../domain/repositories/ServiceRepository';
 
 const Services: React.FC = () => {
   const [services, setServices] = useState<Service[]>([]);
-  const [categories, setCategories] = useState<ServiceCategory[]>([]);
+  const [categoryConfigs, setCategoryConfigs] = useState<CategoryConfig[]>([]);
   const [filter, setFilter] = useState<ServiceCategory | 'all'>('all');
   const [loading, setLoading] = useState(true);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
@@ -36,8 +37,8 @@ const Services: React.FC = () => {
 
   const loadCategories = async () => {
     try {
-      const fetchedCategories = await getServicesUseCase.executeGetCategories();
-      setCategories(fetchedCategories);
+      const configs = await getServicesUseCase.executeGetCategoryConfigs();
+      setCategoryConfigs(configs);
     } catch (error) {
       console.error('Error loading categories:', error);
     }
@@ -90,46 +91,47 @@ const Services: React.FC = () => {
           </p>
         </div>
         
-        <div className="flex justify-center gap-2 mb-12 flex-wrap">
-          <button 
-            className={`px-4 py-2 rounded-lg font-medium transition-all text-sm flex items-center gap-2 ${
-              filter === 'all' 
-                ? 'bg-gradient-primary text-white shadow-lg scale-105' 
-                : 'bg-gray-100 text-gray-dark hover:bg-gray-200'
-            }`}
-            onClick={() => setFilter('all')}
-          >
-            <i className="fas fa-th text-xs"></i>
-            <span>Todos</span>
-          </button>
-          
-          {categories.map((category) => {
-            const categoryConfig: Record<ServiceCategory, { icon: string; label: string }> = {
-              'web-development': { icon: 'fa-code', label: 'Web' },
-              'mobile-development': { icon: 'fa-mobile-alt', label: 'Móvil' },
-              'devops': { icon: 'fa-infinity', label: 'DevOps' },
-              'cloud-architecture': { icon: 'fa-cloud', label: 'Cloud' },
-              'consulting': { icon: 'fa-lightbulb', label: 'Consultoría' },
-              'training': { icon: 'fa-graduation-cap', label: 'Formación' }
-            };
-            
-            const config = categoryConfig[category];
-            
-            return (
+        {/* Categorías con scroll horizontal en móvil */}
+        <div className="mb-12 relative">
+          <div className="overflow-x-auto scrollbar-hide">
+            <div className="flex gap-2 pb-2 px-4 md:px-0 md:justify-center min-w-max md:min-w-0 md:flex-wrap">
               <button 
-                key={category}
-                className={`px-4 py-2 rounded-lg font-medium transition-all text-sm flex items-center gap-2 ${
-                  filter === category 
+                className={`px-3 md:px-4 py-2 rounded-lg font-medium transition-all text-sm flex items-center gap-2 whitespace-nowrap flex-shrink-0 ${
+                  filter === 'all' 
                     ? 'bg-gradient-primary text-white shadow-lg scale-105' 
                     : 'bg-gray-100 text-gray-dark hover:bg-gray-200'
                 }`}
-                onClick={() => setFilter(category)}
+                onClick={() => setFilter('all')}
               >
-                <i className={`fas ${config.icon} text-xs`}></i>
-                <span>{config.label}</span>
+                <i className="fas fa-th text-xs"></i>
+                <span className="hidden sm:inline">Todos</span>
               </button>
-            );
-          })}
+              
+              {categoryConfigs.map((config) => (
+                <button 
+                  key={config.id}
+                  className={`px-3 md:px-4 py-2 rounded-lg font-medium transition-all text-sm flex items-center gap-2 whitespace-nowrap flex-shrink-0 ${
+                    filter === config.id 
+                      ? 'bg-gradient-primary text-white shadow-lg scale-105' 
+                      : 'bg-gray-100 text-gray-dark hover:bg-gray-200'
+                  }`}
+                  onClick={() => setFilter(config.id)}
+                  title={config.label}
+                >
+                  <i className={`fas ${config.icon} text-xs`}></i>
+                  <span className="hidden sm:inline">{config.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+          {/* Indicador de scroll en móvil */}
+          <div className="md:hidden text-center mt-2">
+            <span className="text-xs text-gray-medium">
+              <i className="fas fa-chevron-left mr-1"></i>
+              Desliza para ver más
+              <i className="fas fa-chevron-right ml-1"></i>
+            </span>
+          </div>
         </div>
 
         {loading ? (
@@ -137,14 +139,16 @@ const Services: React.FC = () => {
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="relative">
+            {/* Grid normal en desktop, scroll horizontal en móvil */}
+            <div className="md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 flex md:flex-none overflow-x-auto snap-x snap-mandatory gap-4 pb-4 px-4 md:px-0 scrollbar-hide">
             {services.map(service => (
               <div 
                 key={service.id} 
-                className="group bg-white rounded-2xl shadow-lg border border-gray-200 transition-all relative overflow-hidden hover:-translate-y-2 hover:shadow-2xl hover:border-primary/50"
+                className="group bg-white rounded-2xl shadow-lg border border-gray-200 transition-all relative overflow-hidden hover:-translate-y-2 hover:shadow-2xl hover:border-primary/50 snap-center flex-shrink-0 w-[85vw] md:w-auto"
               >
-                {/* Header con gradiente e icono */}
-                <div className="relative h-32 bg-gradient-to-br from-primary via-secondary to-accent p-6 flex items-center justify-between overflow-hidden">
+                {/* Header con gradiente e icono - Más compacto en móvil */}
+                <div className="relative h-24 md:h-32 bg-gradient-to-br from-primary via-secondary to-accent p-4 md:p-6 flex items-center justify-between overflow-hidden">
                   {/* Patrón de fondo sutil */}
                   <div className="absolute inset-0 opacity-10">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-white rounded-full -translate-y-1/2 translate-x-1/2"></div>
@@ -152,8 +156,8 @@ const Services: React.FC = () => {
                   </div>
                   
                   <div className="relative z-10 flex-1">
-                    <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/30 shadow-lg">
-                      <i className={`fas ${service.icon} text-2xl text-white`}></i>
+                    <div className="w-10 h-10 md:w-14 md:h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/30 shadow-lg">
+                      <i className={`fas ${service.icon} text-xl md:text-2xl text-white`}></i>
                     </div>
                   </div>
                   
@@ -165,35 +169,35 @@ const Services: React.FC = () => {
                   )}
                 </div>
 
-                {/* Contenido */}
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-dark mb-2 line-clamp-2 min-h-[3.5rem]">
+                {/* Contenido - Más compacto en móvil */}
+                <div className="p-4 md:p-6">
+                  <h3 className="text-lg md:text-xl font-bold text-dark mb-2 line-clamp-2 min-h-[2.5rem] md:min-h-[3.5rem]">
                     {service.title}
                   </h3>
-                  <p className="text-gray-medium text-sm mb-5 line-clamp-2 min-h-[2.5rem]">
+                  <p className="text-gray-medium text-xs md:text-sm mb-4 md:mb-5 line-clamp-2 min-h-[2rem] md:min-h-[2.5rem]">
                     {service.shortDescription}
                   </p>
                   
                   {/* Features - Solo las primeras 3 */}
-                  <ul className="list-none mb-6 space-y-2">
+                  <ul className="list-none mb-4 md:mb-6 space-y-1.5 md:space-y-2">
                     {service.features.slice(0, 3).map((feature, index) => (
                       <li 
                         key={index} 
-                        className="flex items-start gap-2 text-sm text-gray-dark"
+                        className="flex items-start gap-2 text-xs md:text-sm text-gray-dark"
                       >
-                        <i className="fas fa-check text-success mt-1 text-xs flex-shrink-0"></i>
+                        <i className="fas fa-check text-success mt-0.5 md:mt-1 text-xs flex-shrink-0"></i>
                         <span className="line-clamp-1">{feature}</span>
                       </li>
                     ))}
                   </ul>
 
                   {/* Precio y tiempo - Container con hover overlay */}
-                  <div className="relative h-16">
+                  <div className="relative h-14 md:h-16">
                     {/* Precio normal - siempre visible */}
-                    <div className="absolute inset-0 bg-gray-50 rounded-xl p-3 border border-gray-100 transition-opacity group-hover:opacity-0">
+                    <div className="absolute inset-0 bg-gray-50 rounded-xl p-2 md:p-3 border border-gray-100 transition-opacity md:group-hover:opacity-0">
                       <div className="flex items-center justify-between h-full">
                         <div>
-                          <div className="text-xl font-bold text-primary leading-tight">
+                          <div className="text-lg md:text-xl font-bold text-primary leading-tight">
                             ${service.price.amount.toLocaleString()}
                           </div>
                           <div className="text-xs text-gray-medium">
@@ -201,16 +205,16 @@ const Services: React.FC = () => {
                           </div>
                         </div>
                         {service.deliveryTime && (
-                          <div className="flex items-center gap-1.5 text-gray-medium text-xs bg-white px-2 py-1 rounded-lg border border-gray-200">
-                            <i className="fas fa-clock"></i>
-                            <span>{service.deliveryTime}</span>
+                          <div className="flex items-center gap-1 md:gap-1.5 text-gray-medium text-xs bg-white px-1.5 md:px-2 py-1 rounded-lg border border-gray-200">
+                            <i className="fas fa-clock text-xs"></i>
+                            <span className="hidden sm:inline">{service.deliveryTime}</span>
                           </div>
                         )}
                       </div>
                     </div>
                     
-                    {/* Botones de acción - aparecen en hover */}
-                    <div className="absolute inset-0 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
+                    {/* Botones de acción - aparecen en hover (solo desktop) */}
+                    <div className="hidden md:flex absolute inset-0 gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
                       <button 
                         className="flex-1 bg-white text-primary font-semibold rounded-lg border-2 border-primary hover:bg-primary hover:text-white transition-colors text-xs"
                         onClick={() => handleViewDetails(service)}
@@ -225,12 +229,42 @@ const Services: React.FC = () => {
                       </button>
                     </div>
                   </div>
+                  
+                  {/* Botones de acción móvil - siempre visibles */}
+                  <div className="md:hidden flex gap-2 mt-3">
+                    <button 
+                      className="flex-1 bg-white text-primary font-semibold rounded-lg border-2 border-primary py-2 text-xs"
+                      onClick={() => handleViewDetails(service)}
+                    >
+                      <i className="fas fa-info-circle mr-1"></i>
+                      Detalles
+                    </button>
+                    <button 
+                      className="flex-1 bg-gradient-primary text-white font-semibold rounded-lg py-2 text-xs"
+                      onClick={() => handleAddToCart(service)}
+                    >
+                      <i className="fas fa-cart-plus mr-1"></i>
+                      Agregar
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
+            </div>
+            
+            {/* Indicador de scroll en móvil */}
+            {!loading && services.length > 0 && (
+              <div className="md:hidden flex justify-center gap-1 mt-4">
+                {services.map((_, index) => (
+                  <div 
+                    key={index}
+                    className="w-2 h-2 rounded-full bg-gray-300"
+                  ></div>
+                ))}
+              </div>
+            )}
           </div>
         )}
-
         {!loading && services.length === 0 && (
           <div className="text-center py-12">
             <i className="fas fa-inbox text-6xl text-gray-light mb-4"></i>

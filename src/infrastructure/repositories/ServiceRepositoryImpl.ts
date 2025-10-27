@@ -1,6 +1,6 @@
 import { Service, ServiceCategory } from '../../domain/entities/Service';
-import { ServiceRepository } from '../../domain/repositories/ServiceRepository';
-import { servicesData, serviceCategories } from '../../data/services';
+import { ServiceRepository, CategoryConfig } from '../../domain/repositories/ServiceRepository';
+import { servicesData, serviceCategories, categoryConfigs } from '../../data/services';
 
 export class ServiceRepositoryImpl implements ServiceRepository {
   async getAll(): Promise<Service[]> {
@@ -24,5 +24,9 @@ export class ServiceRepositoryImpl implements ServiceRepository {
 
   async getCategories(): Promise<ServiceCategory[]> {
     return Promise.resolve(serviceCategories);
+  }
+
+  async getCategoryConfigs(): Promise<CategoryConfig[]> {
+    return Promise.resolve(categoryConfigs);
   }
 }
