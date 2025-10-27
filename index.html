@@ -24,8 +24,19 @@
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-  <script type="module" crossorigin src="/assets/main-DzIO4Vpx.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/main-BTC_KirU.css">
+    
+    <!-- GitHub Pages SPA redirect script -->
+    <script>
+      (function() {
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect != location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
+  <script type="module" crossorigin src="/assets/main-CiDAkpzX.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-BcsnIp5r.css">
 </head>
 <body>
     <div id="root"></div>
