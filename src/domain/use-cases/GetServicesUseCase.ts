@@ -1,5 +1,5 @@
 import { Service, ServiceCategory } from '../entities/Service';
-import { ServiceRepository } from '../repositories/ServiceRepository';
+import { ServiceRepository, CategoryConfig } from '../repositories/ServiceRepository';
 
 export class GetServicesUseCase {
   constructor(private serviceRepository: ServiceRepository) {}
@@ -21,5 +21,9 @@ export class GetServicesUseCase {
 
   async executeGetCategories(): Promise<ServiceCategory[]> {
     return await this.serviceRepository.getCategories();
+  }
+
+  async executeGetCategoryConfigs(): Promise<CategoryConfig[]> {
+    return await this.serviceRepository.getCategoryConfigs();
   }
 }

@@ -1,13 +1,21 @@
 import { Service, ServiceCategory } from '../domain/entities/Service';
 
-export const serviceCategories: ServiceCategory[] = [
-  'web-development',
-  'mobile-development',
-  'devops',
-  'cloud-architecture',
-  'consulting',
-  'training'
+export interface CategoryConfig {
+  id: ServiceCategory;
+  icon: string;
+  label: string;
+}
+
+export const categoryConfigs: CategoryConfig[] = [
+  { id: 'web-development', icon: 'fa-code', label: 'Web' },
+  { id: 'mobile-development', icon: 'fa-mobile-alt', label: 'Móvil' },
+  { id: 'devops', icon: 'fa-infinity', label: 'DevOps' },
+  { id: 'cloud-architecture', icon: 'fa-cloud', label: 'Cloud' },
+  { id: 'consulting', icon: 'fa-lightbulb', label: 'Consultoría' },
+  { id: 'training', icon: 'fa-graduation-cap', label: 'Formación' }
 ];
+
+export const serviceCategories: ServiceCategory[] = categoryConfigs.map(c => c.id);
 
 export const servicesData: Service[] = [
   {
