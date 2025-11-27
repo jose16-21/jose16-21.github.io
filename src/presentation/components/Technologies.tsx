@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { 
   SiReact, 
   SiTypescript, 
@@ -28,6 +29,7 @@ interface Technology {
 }
 
 const Technologies: React.FC = () => {
+  const { t } = useTranslation();
   const technologies: Technology[] = [
     { name: 'React', icon: <SiReact className="w-8 h-8" />, color: '#61DAFB' },
     { name: 'TypeScript', icon: <SiTypescript className="w-8 h-8" />, color: '#3178C6' },
@@ -63,8 +65,8 @@ const Technologies: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4">Stack Tecnológico</h2>
-          <p className="text-base sm:text-lg lg:text-xl text-gray-400 px-4">Mi arsenal de herramientas para crear soluciones digitales</p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4">{t('technologies.title')}</h2>
+          <p className="text-base sm:text-lg lg:text-xl text-gray-400 px-4">{t('technologies.subtitle')}</p>
         </div>
 
         <div className="flex flex-col items-center justify-center gap-8 sm:gap-10 lg:gap-12 mb-12 sm:mb-16 lg:mb-20 relative">

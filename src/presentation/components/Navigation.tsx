@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useCart } from '../../application/hooks/useCart';
 import { useAuth } from '../../application/hooks/useAuth';
 import { useModal } from '../../application/context/ModalContext';
+import LanguageSelector from './LanguageSelector';
 
 const Navigation: React.FC = () => {
+  const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [showLogo, setShowLogo] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -63,37 +66,45 @@ const Navigation: React.FC = () => {
           {/* Menú móvil desplegable */}
           <div className={`${isMenuOpen ? 'block' : 'hidden'} lg:hidden absolute top-full left-0 w-full bg-white border-t border-gray-200 shadow-lg max-h-[calc(100vh-5rem)] overflow-y-auto`}>
             <ul className="list-none flex flex-col p-4 gap-2">
-              <li><a href="#inicio" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2.5 px-3 rounded-lg hover:bg-gray-lighter" onClick={(e) => handleNavClick(e, '#inicio')}>Inicio</a></li>
-              <li><a href="#servicios" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2.5 px-3 rounded-lg hover:bg-gray-lighter" onClick={(e) => handleNavClick(e, '#servicios')}>Servicios</a></li>
-              <li><a href="#tecnologias" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2.5 px-3 rounded-lg hover:bg-gray-lighter" onClick={(e) => handleNavClick(e, '#tecnologias')}>Tecnologías</a></li>
-              <li><a href="#portafolio" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2.5 px-3 rounded-lg hover:bg-gray-lighter" onClick={(e) => handleNavClick(e, '#portafolio')}>Portafolio</a></li>
-              <li><a href="#experiencia" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2.5 px-3 rounded-lg hover:bg-gray-lighter" onClick={(e) => handleNavClick(e, '#experiencia')}>Experiencia</a></li>
-              <li><a href="#contacto" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2.5 px-3 rounded-lg hover:bg-gray-lighter" onClick={(e) => handleNavClick(e, '#contacto')}>Contacto</a></li>
+              <li><a href="#inicio" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2.5 px-3 rounded-lg hover:bg-gray-lighter" onClick={(e) => handleNavClick(e, '#inicio')}>{t('nav.home')}</a></li>
+              <li><a href="#servicios" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2.5 px-3 rounded-lg hover:bg-gray-lighter" onClick={(e) => handleNavClick(e, '#servicios')}>{t('nav.services')}</a></li>
+              <li><a href="#tecnologias" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2.5 px-3 rounded-lg hover:bg-gray-lighter" onClick={(e) => handleNavClick(e, '#tecnologias')}>{t('nav.technologies')}</a></li>
+              <li><a href="#portafolio" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2.5 px-3 rounded-lg hover:bg-gray-lighter" onClick={(e) => handleNavClick(e, '#portafolio')}>{t('nav.portfolio')}</a></li>
+              <li><a href="#experiencia" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2.5 px-3 rounded-lg hover:bg-gray-lighter" onClick={(e) => handleNavClick(e, '#experiencia')}>{t('nav.experience')}</a></li>
+              <li><a href="#contacto" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2.5 px-3 rounded-lg hover:bg-gray-lighter" onClick={(e) => handleNavClick(e, '#contacto')}>{t('nav.contact')}</a></li>
             </ul>
+
+            <div className="flex items-center justify-center p-4 border-t border-gray-200">
+              <LanguageSelector />
+            </div>
 
             {!isAuthenticated && (
               <div className="flex items-center gap-2 p-4 border-t border-gray-200">
-                <button className="flex-1 px-4 py-2.5 text-sm font-semibold rounded-lg text-gray-dark border border-gray-light hover:border-primary hover:text-primary transition-all" onClick={() => { openLogin(); setIsMenuOpen(false); }}>Iniciar Sesión</button>
-                <button className="flex-1 px-4 py-2.5 text-sm font-semibold rounded-lg bg-gradient-primary text-white hover:shadow-lg transition-all" onClick={() => { openRegister(); setIsMenuOpen(false); }}>Registrarse</button>
+                <button className="flex-1 px-4 py-2.5 text-sm font-semibold rounded-lg text-gray-dark border border-gray-light hover:border-primary hover:text-primary transition-all" onClick={() => { openLogin(); setIsMenuOpen(false); }}>{t('nav.login')}</button>
+                <button className="flex-1 px-4 py-2.5 text-sm font-semibold rounded-lg bg-gradient-primary text-white hover:shadow-lg transition-all" onClick={() => { openRegister(); setIsMenuOpen(false); }}>{t('nav.register')}</button>
               </div>
             )}
           </div>
 
           {/* Menú desktop */}
           <ul className="hidden lg:flex list-none gap-6">
-            <li><a href="#inicio" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2" onClick={(e) => handleNavClick(e, '#inicio')}>Inicio</a></li>
-            <li><a href="#servicios" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2" onClick={(e) => handleNavClick(e, '#servicios')}>Servicios</a></li>
-            <li><a href="#tecnologias" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2" onClick={(e) => handleNavClick(e, '#tecnologias')}>Tecnologías</a></li>
-            <li><a href="#portafolio" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2" onClick={(e) => handleNavClick(e, '#portafolio')}>Portafolio</a></li>
-            <li><a href="#experiencia" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2" onClick={(e) => handleNavClick(e, '#experiencia')}>Experiencia</a></li>
-            <li><a href="#contacto" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2" onClick={(e) => handleNavClick(e, '#contacto')}>Contacto</a></li>
+            <li><a href="#inicio" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2" onClick={(e) => handleNavClick(e, '#inicio')}>{t('nav.home')}</a></li>
+            <li><a href="#servicios" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2" onClick={(e) => handleNavClick(e, '#servicios')}>{t('nav.services')}</a></li>
+            <li><a href="#tecnologias" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2" onClick={(e) => handleNavClick(e, '#tecnologias')}>{t('nav.technologies')}</a></li>
+            <li><a href="#portafolio" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2" onClick={(e) => handleNavClick(e, '#portafolio')}>{t('nav.portfolio')}</a></li>
+            <li><a href="#experiencia" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2" onClick={(e) => handleNavClick(e, '#experiencia')}>{t('nav.experience')}</a></li>
+            <li><a href="#contacto" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2" onClick={(e) => handleNavClick(e, '#contacto')}>{t('nav.contact')}</a></li>
           </ul>
 
           <div className="flex items-center gap-3">
+            <div className="hidden lg:block">
+              <LanguageSelector />
+            </div>
+
             {!isAuthenticated ? (
               <div className="hidden lg:flex items-center gap-2">
-                <button className="px-4 py-2 text-sm font-semibold rounded-lg text-gray-dark border border-gray-light hover:border-primary hover:text-primary transition-all" onClick={openLogin}>Iniciar Sesión</button>
-                <button className="px-4 py-2 text-sm font-semibold rounded-lg bg-gradient-primary text-white hover:shadow-lg transition-all" onClick={openRegister}>Registrarse</button>
+                <button className="px-4 py-2 text-sm font-semibold rounded-lg text-gray-dark border border-gray-light hover:border-primary hover:text-primary transition-all" onClick={openLogin}>{t('nav.login')}</button>
+                <button className="px-4 py-2 text-sm font-semibold rounded-lg bg-gradient-primary text-white hover:shadow-lg transition-all" onClick={openRegister}>{t('nav.register')}</button>
               </div>
             ) : (
               <div className="relative hidden lg:block">
@@ -105,13 +116,13 @@ const Navigation: React.FC = () => {
                 {isUserMenuOpen && (
                   <div className="absolute top-full right-0 bg-white border border-gray-200 rounded-lg shadow-xl min-w-[200px] mt-2 overflow-hidden">
                     <a href="#profile" className="flex items-center gap-3 px-4 py-3 text-gray-dark no-underline transition-all border-b border-gray-lighter font-medium text-sm hover:bg-gray-lighter hover:text-primary" onClick={(e) => { e.preventDefault(); openProfile(); setIsUserMenuOpen(false); }}>
-                      <i className="fas fa-user w-4"></i>Mi Perfil
+                      <i className="fas fa-user w-4"></i>{t('nav.profile')}
                     </a>
                     <a href="#orders" className="flex items-center gap-3 px-4 py-3 text-gray-dark no-underline transition-all border-b border-gray-lighter font-medium text-sm hover:bg-gray-lighter hover:text-primary" onClick={(e) => { e.preventDefault(); openOrders(); setIsUserMenuOpen(false); }}>
-                      <i className="fas fa-shopping-bag w-4"></i>Mis Órdenes
+                      <i className="fas fa-shopping-bag w-4"></i>{t('nav.orders')}
                     </a>
                     <a href="#logout" className="flex items-center gap-3 px-4 py-3 text-gray-dark no-underline transition-all font-medium text-sm hover:bg-gray-lighter hover:text-error" onClick={(e) => { e.preventDefault(); logout(); setIsUserMenuOpen(false); }}>
-                      <i className="fas fa-sign-out-alt w-4"></i>Cerrar Sesión
+                      <i className="fas fa-sign-out-alt w-4"></i>{t('nav.logout')}
                     </a>
                   </div>
                 )}

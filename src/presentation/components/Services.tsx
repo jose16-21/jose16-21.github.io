@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Service, ServiceCategory } from '../../domain/entities/Service';
 import { ServiceRepositoryImpl } from '../../infrastructure/repositories/ServiceRepositoryImpl';
 import { GetServicesUseCase } from '../../domain/use-cases/GetServicesUseCase';
@@ -8,6 +9,7 @@ import ServiceDetailModal from './ServiceDetailModal';
 import { CategoryConfig } from '../../domain/repositories/ServiceRepository';
 
 const Services: React.FC = () => {
+  const { t } = useTranslation();
   const [services, setServices] = useState<Service[]>([]);
   const [categoryConfigs, setCategoryConfigs] = useState<CategoryConfig[]>([]);
   const [filter, setFilter] = useState<ServiceCategory | 'all'>('all');
@@ -62,7 +64,7 @@ const Services: React.FC = () => {
   const handleAddToCart = (service: Service) => {
     addToCart(service);
     notificationManager.show({
-      message: `${service.title} agregado al carrito`,
+      message: `${service.title} ${t('cart.added')}`,
       type: 'success'
     });
   };
@@ -71,9 +73,9 @@ const Services: React.FC = () => {
     <section className="py-24 bg-white" id="servicios">
       <div className="max-w-7xl mx-auto px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-dark mb-4">Servicios Profesionales</h2>
+          <h2 className="text-4xl font-bold text-dark mb-4">{t('services.title')}</h2>
           <p className="text-lg text-gray-medium max-w-2xl mx-auto">
-            Soluciones tecnológicas completas para impulsar tu negocio al siguiente nivel
+            {t('services.subtitle')}
           </p>
         </div>
 
@@ -89,7 +91,7 @@ const Services: React.FC = () => {
                 onClick={() => setFilter('all')}
               >
                 <i className="fas fa-th text-xs"></i>
-                <span className="hidden sm:inline">Todos</span>
+                <span className="hidden sm:inline">{t('services.categories.all')}</span>
               </button>
 
               {categoryConfigs.map((config) => (
@@ -112,7 +114,7 @@ const Services: React.FC = () => {
           <div className="md:hidden text-center mt-2">
             <span className="text-xs text-gray-medium">
               <i className="fas fa-chevron-left mr-1"></i>
-              Desliza para ver más
+              {t('services.swipeMore')}
               <i className="fas fa-chevron-right ml-1"></i>
             </span>
           </div>
@@ -152,7 +154,7 @@ const Services: React.FC = () => {
                       {service.featured && (
                         <div className="bg-accent/90 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-lg">
                           <i className="fas fa-star text-[10px]"></i>
-                          Popular
+                          {t('services.popular')}
                         </div>
                       )}
                     </div>
@@ -208,13 +210,13 @@ const Services: React.FC = () => {
                           className="flex-1 bg-white text-primary font-semibold rounded-lg border-2 border-primary hover:bg-primary hover:text-white transition-colors text-xs"
                           onClick={() => handleViewDetails(service)}
                         >
-                          Detalles
+                          {t('services.details')}
                         </button>
                         <button
                           className="flex-1 bg-gradient-primary text-white font-semibold rounded-lg text-xs"
                           onClick={() => handleAddToCart(service)}
                         >
-                          Agregar
+                          {t('services.addToCart')}
                         </button>
                       </div>
                     </div>
@@ -226,14 +228,14 @@ const Services: React.FC = () => {
                         onClick={() => handleViewDetails(service)}
                       >
                         <i className="fas fa-info-circle mr-1"></i>
-                        Detalles
+                        {t('services.details')}
                       </button>
                       <button
                         className="flex-1 bg-gradient-primary text-white font-semibold rounded-lg py-2 text-xs"
                         onClick={() => handleAddToCart(service)}
                       >
                         <i className="fas fa-cart-plus mr-1"></i>
-                        Agregar
+                        {t('services.addToCart')}
                       </button>
                     </div>
                   </div>
@@ -257,7 +259,7 @@ const Services: React.FC = () => {
         {!loading && services.length === 0 && (
           <div className="text-center py-12">
             <i className="fas fa-inbox text-6xl text-gray-light mb-4"></i>
-            <p className="text-xl text-gray-medium">No hay servicios disponibles en esta categoría</p>
+            <p className="text-xl text-gray-medium">{t('services.noServices')}</p>
           </div>
         )}
       </div>

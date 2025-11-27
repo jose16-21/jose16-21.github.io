@@ -1,0 +1,242 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "technologies": "Technologies",
+    "portfolio": "Portfolio",
+    "experience": "Experience",
+    "contact": "Contact",
+    "login": "Sign In",
+    "register": "Sign Up",
+    "logout": "Sign Out",
+    "profile": "Profile",
+    "orders": "My Orders"
+  },
+  "hero": {
+    "available": "Available for new projects",
+    "title": "I transform ideas",
+    "titleHighlight": "into digital solutions",
+    "description": "Over 10 years designing scalable architectures, leading technical teams and delivering products that generate real impact in companies across Latin America.",
+    "explore": "Explore",
+    "cta": {
+      "startProject": "Start project",
+      "viewWork": "View work",
+      "services": "View Services",
+      "contact": "Contact Me"
+    },
+    "stats": {
+      "experience": "Years experience",
+      "projects": "Projects delivered",
+      "countries": "Countries"
+    },
+    "specialties": {
+      "architecture": "Software Architecture",
+      "devops": "DevOps & Cloud (AWS/Azure)",
+      "leadership": "Technical Leadership"
+    }
+  },
+  "services": {
+    "title": "Professional Services",
+    "subtitle": "Complete technological solutions to take your business to the next level",
+    "details": "Details",
+    "addToCart": "Add",
+    "popular": "Popular",
+    "weeks": "weeks",
+    "swipeMore": "Swipe for more",
+    "noServices": "No services available in this category",
+    "categories": {
+      "all": "All",
+      "web-development": "Web Development",
+      "cloud-devops": "Cloud & DevOps",
+      "consulting": "Consulting"
+    }
+  },
+  "technologies": {
+    "title": "Technology Stack",
+    "subtitle": "My arsenal of tools to create digital solutions"
+  },
+  "portfolio": {
+    "title": "Featured Projects",
+    "subtitle": "A selection of my most relevant work",
+    "viewProject": "View Project",
+    "private": "Private"
+  },
+  "experience": {
+    "title": "Professional Experience",
+    "subtitle": "My career path in the technology industry",
+    "present": "Present"
+  },
+  "contact": {
+    "title": "Ready to Work Together?",
+    "subtitle": "Let's talk about your next technology project",
+    "info": {
+      "email": "Email",
+      "phone": "Phone",
+      "location": "Location",
+      "availability": "Availability",
+      "schedule": "Mon - Fri, 9:00 AM - 6:00 PM"
+    },
+    "form": {
+      "name": "Full name",
+      "email": "Email",
+      "company": "Company",
+      "budget": "Estimated budget",
+      "budgetPlaceholder": "Select range",
+      "service": "Service of interest",
+      "servicePlaceholder": "Select service",
+      "message": "Describe your project",
+      "messagePlaceholder": "Tell me about your project, goals and expected timeline...",
+      "submit": "Send Proposal",
+      "sending": "Sending...",
+      "success": "Message sent successfully! I'll contact you soon.",
+      "error": "Error sending message. Please try again.",
+      "recaptchaError": "Please complete the reCAPTCHA verification"
+    },
+    "serviceOptions": {
+      "web": "Full-Stack Web Development",
+      "mobile": "Mobile App Development",
+      "consulting": "Consulting and Architecture",
+      "database": "Database Systems",
+      "devops": "Security and DevOps",
+      "training": "Technical Training"
+    },
+    "budgetRanges": {
+      "range1": "$1,000 - $5,000",
+      "range2": "$5,000 - $15,000",
+      "range3": "$15,000 - $50,000",
+      "range4": "$50,000+"
+    }
+  },
+  "footer": {
+    "description": "Consultant specialized in technological development and digital transformation. Turning innovative ideas into successful technological solutions.",
+    "services": "Services",
+    "technologies": "Technologies",
+    "contact": "Contact",
+    "quickLinks": "Quick Links",
+    "rights": "All rights reserved.",
+    "builtWith": "Built with",
+    "links": {
+      "webDev": "Web Development",
+      "mobileApps": "Mobile Apps",
+      "consulting": "Consulting",
+      "database": "Database",
+      "reactAngular": "React & Angular",
+      "nodePython": "Node.js & Python",
+      "awsCloud": "AWS & Cloud",
+      "databases": "Databases"
+    }
+  },
+  "cart": {
+    "title": "My Shopping Cart",
+    "empty": "Your cart is empty",
+    "emptyDescription": "Explore our professional services and start building your project",
+    "explore": "Explore Services",
+    "back": "Back to services",
+    "servicesInCart": "services in your cart",
+    "serviceInCart": "service in your cart",
+    "clearCart": "Empty cart",
+    "confirmClear": "Are you sure you want to empty the cart?",
+    "selectedServices": "Selected Services",
+    "featuresIncluded": "Features included:",
+    "deliveryTime": "Delivery time:",
+    "customization": "Customization:",
+    "quantity": "Quantity:",
+    "unitPrice": "Unit price",
+    "summary": "Summary",
+    "totalProducts": "Total products",
+    "uniqueServices": "Unique services",
+    "total": "Total:",
+    "comments": "Comments",
+    "commentsOptional": "(Optional)",
+    "commentsPlaceholder": "Special requirements, technology preferences, specific deadlines...",
+    "quoteMode": "Request free quote",
+    "quoteModeDescription": "We'll contact you with personalized prices and project details.",
+    "loginRequired": "Sign in to proceed with the purchase",
+    "proceedPayment": "Proceed to Payment",
+    "requestQuote": "Request Quote",
+    "processing": "Processing...",
+    "securePayment": "Secure payment - Simulation",
+    "quoteByEmail": "Quote by email",
+    "quote": "Quote",
+    "removed": "removed from cart",
+    "cleared": "Cart emptied",
+    "added": "added to cart"
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome",
+      "subtitle": "Sign in to continue",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign In",
+      "submitting": "Signing in...",
+      "noAccount": "Don't have an account?",
+      "registerHere": "Sign up here",
+      "success": "Successfully signed in!",
+      "error": "Error signing in. Please try again."
+    },
+    "register": {
+      "title": "Create Account",
+      "subtitle": "Sign up to continue",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm",
+      "company": "Company",
+      "phone": "Phone",
+      "optional": "(optional)",
+      "submit": "Create Account",
+      "submitting": "Creating account...",
+      "hasAccount": "Already have an account?",
+      "loginHere": "Sign in here",
+      "success": "Account created successfully!",
+      "error": "Error creating account. Please try again.",
+      "validation": {
+        "required": "Required",
+        "invalidEmail": "Invalid email",
+        "minPassword": "Min. 6 characters",
+        "passwordMismatch": "Passwords don't match"
+      }
+    }
+  },
+  "profile": {
+    "title": "My Profile",
+    "subtitle": "Manage your personal information",
+    "update": "Update Profile",
+    "cancel": "Cancel",
+    "success": "Profile updated successfully!",
+    "error": "Error updating profile."
+  },
+  "orders": {
+    "title": "My Orders",
+    "empty": "You don't have orders yet",
+    "emptyDescription": "When you make a purchase, your orders will appear here",
+    "explore": "Explore Services"
+  },
+  "serviceDetail": {
+    "description": "Detailed Description",
+    "features": "Features Included",
+    "technologies": "Technologies Used",
+    "price": "per project",
+    "delivery": "Delivery:",
+    "addToCart": "Add to Cart",
+    "contactNow": "Contact Now",
+    "available": "Available Now",
+    "unavailable": "Not Available"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No",
+    "copied": "Copied!"
+  }
+}
