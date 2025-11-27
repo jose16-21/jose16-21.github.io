@@ -4,11 +4,21 @@ import { useAuth } from '../../application/hooks/useAuth';
 import { useModal } from '../../application/context/ModalContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { NotificationManager } from '../../infrastructure/services/NotificationManager';
+import LoginModal from '../components/LoginModal';
+import RegisterModal from '../components/RegisterModal';
 
 const CartPage: React.FC = () => {
   const { items, totalAmount, updateQuantity, removeFromCart, clearCart } = useCart();
   const { isAuthenticated, user } = useAuth();
-  const { openLogin } = useModal();
+  const { 
+    openLogin, 
+    isLoginOpen, 
+    isRegisterOpen, 
+    closeLogin, 
+    closeRegister, 
+    switchToRegister, 
+    switchToLogin 
+  } = useModal();
   const navigate = useNavigate();
   const [isProcessing, setIsProcessing] = useState(false);
   const [comments, setComments] = useState('');
@@ -385,6 +395,10 @@ const CartPage: React.FC = () => {
           </div>
         )}
       </div>
+      
+      {/* Modals para Login/Register */}
+      <LoginModal isOpen={isLoginOpen} onClose={closeLogin} onShowRegister={switchToRegister} />
+      <RegisterModal isOpen={isRegisterOpen} onClose={closeRegister} onShowLogin={switchToLogin} />
     </div>
   );
 };

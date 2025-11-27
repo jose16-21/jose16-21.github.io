@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useCallback, useMemo } from 'react';
 
 interface ModalContextValue {
   isLoginOpen: boolean;
@@ -37,73 +37,82 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isOrdersOpen, setIsOrdersOpen] = useState(false);
 
-  const openLogin = () => {
-    console.log('🔵 openLogin called');
+  const openLogin = useCallback(() => {
     setIsLoginOpen(true);
-  };
+  }, []);
   
-  const openRegister = () => {
-    console.log('🔵 openRegister called');
+  const openRegister = useCallback(() => {
     setIsRegisterOpen(true);
-  };
+  }, []);
 
-  const openProfile = () => {
-    console.log('🔵 openProfile called');
+  const openProfile = useCallback(() => {
     setIsProfileOpen(true);
-  };
+  }, []);
 
-  const openOrders = () => {
-    console.log('🔵 openOrders called');
+  const openOrders = useCallback(() => {
     setIsOrdersOpen(true);
-  };
+  }, []);
   
-  const closeLogin = () => {
-    console.log('🔴 closeLogin called');
+  const closeLogin = useCallback(() => {
     setIsLoginOpen(false);
-  };
+  }, []);
   
-  const closeRegister = () => {
-    console.log('🔴 closeRegister called');
+  const closeRegister = useCallback(() => {
     setIsRegisterOpen(false);
-  };
+  }, []);
 
-  const closeProfile = () => {
-    console.log('🔴 closeProfile called');
+  const closeProfile = useCallback(() => {
     setIsProfileOpen(false);
-  };
+  }, []);
 
-  const closeOrders = () => {
-    console.log('🔴 closeOrders called');
+  const closeOrders = useCallback(() => {
     setIsOrdersOpen(false);
-  };
+  }, []);
 
-  const switchToRegister = () => {
+  const switchToRegister = useCallback(() => {
     setIsLoginOpen(false);
     setIsRegisterOpen(true);
-  };
+  }, []);
 
-  const switchToLogin = () => {
+  const switchToLogin = useCallback(() => {
     setIsRegisterOpen(false);
     setIsLoginOpen(true);
-  };
+  }, []);
+
+  const value = useMemo(() => ({
+    isLoginOpen,
+    isRegisterOpen,
+    isProfileOpen,
+    isOrdersOpen,
+    openLogin,
+    openRegister,
+    openProfile,
+    openOrders,
+    closeLogin,
+    closeRegister,
+    closeProfile,
+    closeOrders,
+    switchToRegister,
+    switchToLogin,
+  }), [
+    isLoginOpen,
+    isRegisterOpen,
+    isProfileOpen,
+    isOrdersOpen,
+    openLogin,
+    openRegister,
+    openProfile,
+    openOrders,
+    closeLogin,
+    closeRegister,
+    closeProfile,
+    closeOrders,
+    switchToRegister,
+    switchToLogin,
+  ]);
 
   return (
-    <ModalContext.Provider value={{
-      isLoginOpen,
-      isRegisterOpen,
-      isProfileOpen,
-      isOrdersOpen,
-      openLogin,
-      openRegister,
-      openProfile,
-      openOrders,
-      closeLogin,
-      closeRegister,
-      closeProfile,
-      closeOrders,
-      switchToRegister,
-      switchToLogin,
-    }}>
+    <ModalContext.Provider value={value}>
       {children}
     </ModalContext.Provider>
   );

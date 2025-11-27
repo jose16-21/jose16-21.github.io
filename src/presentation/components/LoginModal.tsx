@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../../application/hooks/useAuth';
 import { NotificationManager } from '../../infrastructure/services/NotificationManager';
 
@@ -11,41 +11,13 @@ interface LoginModalProps {
 const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onShowRegister }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [recaptchaError, setRecaptchaError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
   const notificationManager = new NotificationManager();
 
-  useEffect(() => {
-    if (isOpen && window.grecaptcha) {
-      // Render reCAPTCHA when modal opens
-      setTimeout(() => {
-        const container = document.getElementById('login-recaptcha-container');
-        if (container && container.children.length === 0 && window.grecaptcha) {
-          try {
-            window.grecaptcha.render('login-recaptcha-container', {
-              sitekey: import.meta.env.VITE_RECAPTCHA_SITE_KEY || '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
-            });
-          } catch {
-            console.log('reCAPTCHA not loaded yet');
-          }
-        }
-      }, 100);
-    }
-  }, [isOpen]);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Validate reCAPTCHA only if it's loaded
-    if (window.grecaptcha) {
-      const recaptchaResponse = window.grecaptcha.getResponse();
-      if (!recaptchaResponse) {
-        setRecaptchaError(true);
-        return;
-      }
-    }
-    
-    setRecaptchaError(false);
+    setIsLoading(true);
 
     try {
       await login(email, password);
@@ -53,83 +25,136 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onShowRegister
         message: '¡Sesión iniciada exitosamente!',
         type: 'success'
       });
-      onClose();
-      // Reset form
-      setEmail('');
-      setPassword('');
-      if (window.grecaptcha) {
-        window.grecaptcha.reset();
-      }
+      handleClose();
     } catch (error) {
       console.error('Login error:', error);
       notificationManager.show({
         message: 'Error al iniciar sesión. Intenta de nuevo.',
         type: 'error'
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleClose = () => {
     setEmail('');
     setPassword('');
-    setRecaptchaError(false);
-    if (window.grecaptcha) {
-      window.grecaptcha.reset();
-    }
     onClose();
   };
 
-  console.log('🔷 LoginModal render - isOpen:', isOpen);
+  const handleSwitchToRegister = () => {
+    handleClose();
+    onShowRegister();
+  };
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-dark/80 backdrop-blur-sm flex items-center justify-center p-4 z-50" onClick={handleClose}>
-      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full" onClick={(e) => e.stopPropagation()}>
-        <div className="flex items-center justify-between p-6 border-b border-gray-lighter">
-          <h2 className="text-2xl font-bold text-dark flex items-center gap-3"><i className="fas fa-sign-in-alt text-primary"></i> Iniciar Sesión</h2>
-          <button className="w-10 h-10 bg-gray-lighter hover:bg-gray-light rounded-full flex items-center justify-center text-gray-dark hover:text-dark transition-colors text-2xl" onClick={handleClose}>&times;</button>
-        </div>
-        <form className="p-6 space-y-4" onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="login-email" className="block text-sm font-medium text-gray-dark mb-2">Email</label>
-            <input
-              type="email"
-              id="login-email"
-              name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="w-full px-4 py-3 border border-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 animate-fade-in">
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={handleClose} />
+
+      {/* Modal */}
+      <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden animate-slide-up">
+        {/* Header con imagen de fondo */}
+        <div className="relative h-40 w-full overflow-hidden">
+          <div className="absolute inset-0 bg-gray-900">
+            <img
+              src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80"
+              alt="Login background"
+              className="w-full h-full object-cover opacity-60"
             />
           </div>
-          <div>
-            <label htmlFor="login-password" className="block text-sm font-medium text-gray-dark mb-2">Contraseña</label>
-            <input
-              type="password"
-              id="login-password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full px-4 py-3 border border-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-            />
-          </div>
-          <div>
-            <div id="login-recaptcha-container" className="g-recaptcha"></div>
-            {recaptchaError && (
-              <div id="login-recaptcha-error" className="text-danger text-sm mt-2">
-                Por favor, completa la verificación reCAPTCHA
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>
+          
+          <div className="absolute bottom-0 left-0 w-full p-6 z-10">
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/20 shadow-2xl">
+                <i className="fas fa-sign-in-alt text-2xl text-white"></i>
               </div>
-            )}
+              <div>
+                <h2 className="text-2xl font-bold text-white">Bienvenido</h2>
+                <p className="text-gray-300 text-sm">Inicia sesión para continuar</p>
+              </div>
+            </div>
           </div>
-          <button type="submit" className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-primary text-white font-semibold rounded-lg shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all">
-            <i className="fas fa-sign-in-alt"></i>
-            Iniciar Sesión
+
+          {/* Botón cerrar */}
+          <button
+            onClick={handleClose}
+            className="absolute top-4 right-4 w-10 h-10 bg-black/20 hover:bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center transition-all text-white border border-white/10 z-20"
+          >
+            <i className="fas fa-times text-lg"></i>
+          </button>
+        </div>
+
+        {/* Form */}
+        <form className="p-6 space-y-5" onSubmit={handleSubmit}>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">Email</label>
+            <div className="relative">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                <i className="fas fa-envelope"></i>
+              </span>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                placeholder="tu@email.com"
+                className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm transition-all bg-gray-50 focus:bg-white focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">Contraseña</label>
+            <div className="relative">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                <i className="fas fa-lock"></i>
+              </span>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                placeholder="••••••••"
+                className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm transition-all bg-gray-50 focus:bg-white focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-primary text-white font-semibold rounded-lg shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+          >
+            {isLoading ? (
+              <>
+                <i className="fas fa-spinner fa-spin"></i>
+                Iniciando...
+              </>
+            ) : (
+              <>
+                <i className="fas fa-sign-in-alt"></i>
+                Iniciar Sesión
+              </>
+            )}
           </button>
         </form>
-        <div className="p-6 pt-0 text-center">
-          <p className="text-gray-medium">¿No tienes cuenta? <a href="#" onClick={(e) => { e.preventDefault(); onShowRegister(); }} className="text-primary font-semibold hover:underline">Regístrate aquí</a></p>
+
+        {/* Footer */}
+        <div className="px-6 pb-6 text-center">
+          <p className="text-sm text-gray-500">
+            ¿No tienes cuenta?{' '}
+            <button
+              onClick={handleSwitchToRegister}
+              className="text-primary font-semibold hover:underline"
+            >
+              Regístrate aquí
+            </button>
+          </p>
         </div>
       </div>
     </div>
