@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../../application/hooks/useAuth';
 import { NotificationManager } from '../../infrastructure/services/NotificationManager';
 
@@ -19,32 +19,13 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
     phone: ''
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const [recaptchaError, setRecaptchaError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { register } = useAuth();
   const notificationManager = new NotificationManager();
-
-  useEffect(() => {
-    if (isOpen && window.grecaptcha) {
-      // Render reCAPTCHA when modal opens
-      setTimeout(() => {
-        const container = document.getElementById('register-recaptcha-container');
-        if (container && container.children.length === 0 && window.grecaptcha) {
-          try {
-            window.grecaptcha.render('register-recaptcha-container', {
-              sitekey: import.meta.env.VITE_RECAPTCHA_SITE_KEY || '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
-            });
-          } catch {
-            console.log('reCAPTCHA not loaded yet');
-          }
-        }
-      }, 100);
-    }
-  }, [isOpen]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
@@ -53,24 +34,20 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
   const validateForm = (): boolean => {
     const newErrors: { [key: string]: string } = {};
 
-    if (!formData.firstName.trim()) {
-      newErrors.firstName = 'El nombre es requerido';
-    }
-    if (!formData.lastName.trim()) {
-      newErrors.lastName = 'El apellido es requerido';
-    }
+    if (!formData.firstName.trim()) newErrors.firstName = 'Requerido';
+    if (!formData.lastName.trim()) newErrors.lastName = 'Requerido';
     if (!formData.email.trim()) {
-      newErrors.email = 'El email es requerido';
+      newErrors.email = 'Requerido';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Email inválido';
     }
     if (!formData.password) {
-      newErrors.password = 'La contraseña es requerida';
+      newErrors.password = 'Requerido';
     } else if (formData.password.length < 6) {
-      newErrors.password = 'La contraseña debe tener al menos 6 caracteres';
+      newErrors.password = 'Mín. 6 caracteres';
     }
     if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Las contraseñas no coinciden';
+      newErrors.confirmPassword = 'No coinciden';
     }
 
     setErrors(newErrors);
@@ -79,22 +56,9 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!validateForm()) {
-      return;
-    }
+    if (!validateForm()) return;
 
-    // Validate reCAPTCHA only if it's loaded
-    if (window.grecaptcha) {
-      const recaptchaResponse = window.grecaptcha.getResponse();
-      if (!recaptchaResponse) {
-        setRecaptchaError(true);
-        return;
-      }
-    }
-    
-    setRecaptchaError(false);
-
+    setIsLoading(true);
     try {
       await register({
         firstName: formData.firstName,
@@ -107,14 +71,15 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
         message: '¡Cuenta creada exitosamente!',
         type: 'success'
       });
-      onClose();
-      resetForm();
+      handleClose();
     } catch (error) {
       console.error('Register error:', error);
       notificationManager.show({
         message: 'Error al crear la cuenta. Intenta de nuevo.',
         type: 'error'
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -129,10 +94,6 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
       phone: ''
     });
     setErrors({});
-    setRecaptchaError(false);
-    if (window.grecaptcha) {
-      window.grecaptcha.reset();
-    }
   };
 
   const handleClose = () => {
@@ -140,128 +101,224 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
     onClose();
   };
 
-  console.log('🔷 RegisterModal render - isOpen:', isOpen);
+  const handleSwitchToLogin = () => {
+    handleClose();
+    onShowLogin();
+  };
 
   if (!isOpen) return null;
 
+  const inputClass = (field: string) =>
+    `w-full pl-10 pr-4 py-2.5 border rounded-lg text-sm transition-all bg-gray-50 focus:bg-white focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 ${
+      errors[field] ? 'border-red-400' : 'border-gray-200'
+    }`;
+
   return (
-    <div className="fixed inset-0 bg-dark/80 backdrop-blur-sm flex items-center justify-center p-4 z-50" onClick={handleClose}>
-      <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-        <div className="flex items-center justify-between p-6 border-b border-gray-lighter sticky top-0 bg-white z-10">
-          <h2 className="text-2xl font-bold text-dark flex items-center gap-3"><i className="fas fa-user-plus text-primary"></i> Crear Cuenta</h2>
-          <button className="w-10 h-10 bg-gray-lighter hover:bg-gray-light rounded-full flex items-center justify-center text-gray-dark hover:text-dark transition-colors text-2xl" onClick={handleClose}>&times;</button>
-        </div>
-        <form className="p-6 space-y-4" onSubmit={handleSubmit}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label htmlFor="register-firstName" className="block text-sm font-medium text-gray-dark mb-2">Nombre</label>
-              <input
-                type="text"
-                id="register-firstName"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 border border-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-              {errors.firstName && <span className="text-danger text-sm mt-1">{errors.firstName}</span>}
-            </div>
-            <div>
-              <label htmlFor="register-lastName" className="block text-sm font-medium text-gray-dark mb-2">Apellido</label>
-              <input
-                type="text"
-                id="register-lastName"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 border border-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-              {errors.lastName && <span className="text-danger text-sm mt-1">{errors.lastName}</span>}
-            </div>
-          </div>
-          <div>
-            <label htmlFor="register-email" className="block text-sm font-medium text-gray-dark mb-2">Email</label>
-            <input
-              type="email"
-              id="register-email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-3 border border-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 animate-fade-in">
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={handleClose} />
+
+      {/* Modal */}
+      <div className="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-hidden flex flex-col animate-slide-up">
+        {/* Header con imagen de fondo */}
+        <div className="relative h-36 w-full overflow-hidden flex-shrink-0">
+          <div className="absolute inset-0 bg-gray-900">
+            <img
+              src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80"
+              alt="Register background"
+              className="w-full h-full object-cover opacity-60"
             />
-            {errors.email && <span className="text-danger text-sm mt-1">{errors.email}</span>}
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label htmlFor="register-password" className="block text-sm font-medium text-gray-dark mb-2">Contraseña</label>
-              <input
-                type="password"
-                id="register-password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-                minLength={6}
-                className="w-full px-4 py-3 border border-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-              {errors.password && <span className="text-danger text-sm mt-1">{errors.password}</span>}
-            </div>
-            <div>
-              <label htmlFor="register-confirmPassword" className="block text-sm font-medium text-gray-dark mb-2">Confirmar Contraseña</label>
-              <input
-                type="password"
-                id="register-confirmPassword"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 border border-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-              {errors.confirmPassword && <span className="text-danger text-sm mt-1">{errors.confirmPassword}</span>}
-            </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label htmlFor="register-company" className="block text-sm font-medium text-gray-dark mb-2">Empresa (opcional)</label>
-              <input
-                type="text"
-                id="register-company"
-                name="company"
-                value={formData.company}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-            </div>
-            <div>
-              <label htmlFor="register-phone" className="block text-sm font-medium text-gray-dark mb-2">Teléfono (opcional)</label>
-              <input
-                type="tel"
-                id="register-phone"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                placeholder="+502 3132-2197"
-                className="w-full px-4 py-3 border border-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-            </div>
-          </div>
-          <div>
-            <div id="register-recaptcha-container" className="g-recaptcha"></div>
-            {recaptchaError && (
-              <div id="register-recaptcha-error" className="text-danger text-sm mt-2">
-                Por favor, completa la verificación reCAPTCHA
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>
+          
+          <div className="absolute bottom-0 left-0 w-full p-5 z-10">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/20 shadow-2xl">
+                <i className="fas fa-user-plus text-xl text-white"></i>
               </div>
-            )}
+              <div>
+                <h2 className="text-xl font-bold text-white">Crear Cuenta</h2>
+                <p className="text-gray-300 text-sm">Regístrate para continuar</p>
+              </div>
+            </div>
           </div>
-          <button type="submit" className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-primary text-white font-semibold rounded-lg shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all">
-            <i className="fas fa-user-plus"></i>
-            Crear Cuenta
+
+          {/* Botón cerrar */}
+          <button
+            onClick={handleClose}
+            className="absolute top-4 right-4 w-10 h-10 bg-black/20 hover:bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center transition-all text-white border border-white/10 z-20"
+          >
+            <i className="fas fa-times text-lg"></i>
+          </button>
+        </div>
+
+        {/* Form - Scrollable */}
+        <form className="p-6 space-y-4 overflow-y-auto flex-1" onSubmit={handleSubmit}>
+          {/* Nombre y Apellido */}
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                  <i className="fas fa-user text-xs"></i>
+                </span>
+                <input
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  placeholder="Juan"
+                  className={inputClass('firstName')}
+                />
+              </div>
+              {errors.firstName && <span className="text-red-500 text-xs">{errors.firstName}</span>}
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Apellido</label>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                  <i className="fas fa-user text-xs"></i>
+                </span>
+                <input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  placeholder="Pérez"
+                  className={inputClass('lastName')}
+                />
+              </div>
+              {errors.lastName && <span className="text-red-500 text-xs">{errors.lastName}</span>}
+            </div>
+          </div>
+
+          {/* Email */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <div className="relative">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                <i className="fas fa-envelope text-xs"></i>
+              </span>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="tu@email.com"
+                className={inputClass('email')}
+              />
+            </div>
+            {errors.email && <span className="text-red-500 text-xs">{errors.email}</span>}
+          </div>
+
+          {/* Contraseñas */}
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                  <i className="fas fa-lock text-xs"></i>
+                </span>
+                <input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="••••••••"
+                  className={inputClass('password')}
+                />
+              </div>
+              {errors.password && <span className="text-red-500 text-xs">{errors.password}</span>}
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Confirmar</label>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                  <i className="fas fa-lock text-xs"></i>
+                </span>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  placeholder="••••••••"
+                  className={inputClass('confirmPassword')}
+                />
+              </div>
+              {errors.confirmPassword && <span className="text-red-500 text-xs">{errors.confirmPassword}</span>}
+            </div>
+          </div>
+
+          {/* Empresa y Teléfono (opcionales) */}
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Empresa <span className="text-gray-400 font-normal text-xs">(opcional)</span>
+              </label>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                  <i className="fas fa-building text-xs"></i>
+                </span>
+                <input
+                  type="text"
+                  name="company"
+                  value={formData.company}
+                  onChange={handleChange}
+                  placeholder="Tu empresa"
+                  className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm transition-all bg-gray-50 focus:bg-white focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
+                />
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Teléfono <span className="text-gray-400 font-normal text-xs">(opcional)</span>
+              </label>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                  <i className="fas fa-phone text-xs"></i>
+                </span>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="+502 1234-5678"
+                  className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm transition-all bg-gray-50 focus:bg-white focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
+                />
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-primary text-white font-semibold rounded-lg shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+          >
+            {isLoading ? (
+              <>
+                <i className="fas fa-spinner fa-spin"></i>
+                Creando cuenta...
+              </>
+            ) : (
+              <>
+                <i className="fas fa-user-plus"></i>
+                Crear Cuenta
+              </>
+            )}
           </button>
         </form>
-        <div className="p-6 pt-0 text-center">
-          <p className="text-gray-medium">¿Ya tienes cuenta? <a href="#" onClick={(e) => { e.preventDefault(); onShowLogin(); }} className="text-primary font-semibold hover:underline">Inicia sesión aquí</a></p>
+
+        {/* Footer */}
+        <div className="px-6 pb-6 text-center flex-shrink-0">
+          <p className="text-sm text-gray-500">
+            ¿Ya tienes cuenta?{' '}
+            <button
+              onClick={handleSwitchToLogin}
+              className="text-primary font-semibold hover:underline"
+            >
+              Inicia sesión aquí
+            </button>
+          </p>
         </div>
       </div>
     </div>

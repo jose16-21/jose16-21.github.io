@@ -91,7 +91,7 @@ const Contact: React.FC = () => {
           <div className="space-y-6" data-aos="fade-up">
             {contactInfo.map((item) => (
               <div key={item.title} className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center flex-shrink-0">
                   <i className={`fas ${item.icon} text-sm text-white`}></i>
                 </div>
                 <div className="flex-1 min-w-0">
@@ -216,7 +216,7 @@ const Contact: React.FC = () => {
                   </div>
                 )}
               </div>
-              <button type="submit" className="w-full inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-gradient-to-r from-primary to-secondary text-white text-sm font-medium rounded-lg shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300">
+              <button type="submit" className="w-full inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-gradient-primary text-white text-sm font-medium rounded-lg shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300">
                 <i className="fas fa-paper-plane text-xs"></i>
                 Enviar Propuesta
               </button>
