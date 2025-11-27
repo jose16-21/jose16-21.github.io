@@ -43,24 +43,43 @@ const Portfolio: React.FC = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project) => (
-            <div 
-              key={project.id} 
-              className="bg-white rounded-xl shadow-md border border-gray-lighter overflow-hidden transition-all hover:-translate-y-1 hover:shadow-xl hover:border-primary group" 
-              data-aos="fade-up" 
+            <div
+              key={project.id}
+              className="bg-white rounded-xl shadow-md border border-gray-lighter overflow-hidden transition-all hover:-translate-y-1 hover:shadow-xl hover:border-primary group"
+              data-aos="fade-up"
               data-aos-delay={project.delay}
             >
-              <div className="relative h-32 bg-gradient-primary flex items-center justify-center overflow-hidden">
-                <div className="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
-                  <i className={`fas ${project.icon} text-4xl text-white`}></i>
+              {/* Header con imagen o gradiente */}
+              <div className="relative h-48 overflow-hidden">
+                {project.imageUrl ? (
+                  <>
+                    <img
+                      src={project.imageUrl}
+                      alt={project.title}
+                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent"></div>
+                  </>
+                ) : (
+                  <div className="w-full h-full bg-gradient-primary flex items-center justify-center">
+                    <div className="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                      <i className={`fas ${project.icon} text-4xl text-white`}></i>
+                    </div>
+                  </div>
+                )}
+
+                {/* Badge de bandera en la esquina */}
+                <div className="absolute top-3 right-3 text-3xl drop-shadow-lg" title={project.country}>
+                  {project.countryFlag}
                 </div>
               </div>
               <div className="p-5">
                 <div className="flex items-start justify-between mb-2">
                   <h3 className="text-xl font-bold text-dark flex-1">{project.title}</h3>
                   {project.url && (
-                    <a 
-                      href={project.url} 
-                      target="_blank" 
+                    <a
+                      href={project.url}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="ml-2 text-primary hover:text-dark transition-colors"
                       title="Ver proyecto"
@@ -70,11 +89,7 @@ const Portfolio: React.FC = () => {
                   )}
                 </div>
                 <p className="text-sm text-primary font-semibold mb-1">{project.company}</p>
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-xs text-gray-500">{project.country}</span>
-                  <span className="text-xs text-gray-400">•</span>
-                  <span className="text-xs text-gray-500">{project.period}</span>
-                </div>
+                <p className="text-xs text-gray-500 mb-3">{project.period}</p>
                 <p className="text-sm text-gray-medium mb-4 line-clamp-3">{project.description}</p>
                 <div className="flex flex-wrap gap-1.5">
                   {project.technologies.slice(0, 5).map((tech) => (

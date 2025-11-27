@@ -82,48 +82,48 @@ const Contact: React.FC = () => {
 
   return (
     <section className="py-24 bg-white" id="contacto">
-      <div className="max-w-7xl mx-auto px-8">
+      <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-dark mb-4">¿Listo para Trabajar Juntos?</h2>
-          <p className="text-lg text-gray-medium max-w-2xl mx-auto">Conversemos sobre tu próximo proyecto tecnológico</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">¿Listo para Trabajar Juntos?</h2>
+          <p className="text-lg text-gray-500 max-w-2xl mx-auto font-light">Conversemos sobre tu próximo proyecto tecnológico</p>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-16">
-          <div className="space-y-8" data-aos="fade-up">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12">
+          <div className="space-y-6" data-aos="fade-up">
             {contactInfo.map((item) => (
-              <div key={item.title} className="flex items-center gap-4 mb-8">
-                <div className="w-14 h-14 bg-gradient-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                  <i className={`fas ${item.icon} text-xl text-white`}></i>
+              <div key={item.title} className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center flex-shrink-0">
+                  <i className={`fas ${item.icon} text-sm text-white`}></i>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h4 className="text-lg font-semibold text-dark mb-1">{item.title}</h4>
+                  <h4 className="text-sm font-semibold text-gray-900">{item.title}</h4>
                   {(item.title === 'Email' || item.title === 'Teléfono') ? (
                     <div className="flex items-center gap-2 relative group">
-                      <p className="text-gray-medium m-0 cursor-pointer transition-colors hover:text-primary">{item.value}</p>
+                      <p className="text-sm text-gray-600 m-0 cursor-pointer transition-colors hover:text-primary">{item.value}</p>
                       <button
-                        className="bg-primary text-white border-none rounded-md p-2 cursor-pointer transition-all flex items-center justify-center w-8 h-8 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 hover:bg-secondary hover:scale-110 active:scale-95"
+                        className="bg-primary text-white border-none rounded p-1.5 cursor-pointer transition-all flex items-center justify-center w-6 h-6 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 hover:bg-secondary hover:scale-110 active:scale-95"
                         onClick={() => copyToClipboard(item.value, item.title)}
                         title={`Copiar ${item.title.toLowerCase()}`}
                       >
                         {copiedField === item.title ? (
-                          <i className="fas fa-check text-sm"></i>
+                          <i className="fas fa-check text-xs"></i>
                         ) : (
-                          <i className="fas fa-copy text-sm"></i>
+                          <i className="fas fa-copy text-xs"></i>
                         )}
                       </button>
                     </div>
                   ) : (
-                    <p className="text-gray-medium m-0">{item.value}</p>
+                    <p className="text-sm text-gray-600 m-0">{item.value}</p>
                   )}
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="bg-gray-lighter p-8 rounded-2xl" data-aos="fade-up" data-aos-delay={100}>
+          <div className="bg-gray-50 p-6 rounded-xl border border-gray-100" data-aos="fade-up" data-aos-delay={100}>
             <form className="w-full" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div className="mb-4">
-                  <label htmlFor="nombre" className="block mb-2 font-semibold text-dark">Nombre completo</label>
+                <div>
+                  <label htmlFor="nombre" className="block mb-1.5 text-sm font-medium text-gray-700">Nombre completo</label>
                   <input
                     type="text"
                     id="nombre"
@@ -131,11 +131,11 @@ const Contact: React.FC = () => {
                     value={formData.nombre}
                     onChange={handleChange}
                     required
-                    className="w-full px-3 py-3 border-2 border-gray-light rounded-lg text-base transition-all bg-white focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm transition-all bg-white focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
                   />
                 </div>
-                <div className="mb-4">
-                  <label htmlFor="email" className="block mb-2 font-semibold text-dark">Email</label>
+                <div>
+                  <label htmlFor="email" className="block mb-1.5 text-sm font-medium text-gray-700">Email</label>
                   <input
                     type="email"
                     id="email"
@@ -143,30 +143,30 @@ const Contact: React.FC = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-3 py-3 border-2 border-gray-light rounded-lg text-base transition-all bg-white focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm transition-all bg-white focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
                   />
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div className="mb-4">
-                  <label htmlFor="empresa" className="block mb-2 font-semibold text-dark">Empresa</label>
+                <div>
+                  <label htmlFor="empresa" className="block mb-1.5 text-sm font-medium text-gray-700">Empresa</label>
                   <input
                     type="text"
                     id="empresa"
                     name="empresa"
                     value={formData.empresa}
                     onChange={handleChange}
-                    className="w-full px-3 py-3 border-2 border-gray-light rounded-lg text-base transition-all bg-white focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm transition-all bg-white focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
                   />
                 </div>
-                <div className="mb-4">
-                  <label htmlFor="presupuesto" className="block mb-2 font-semibold text-dark">Presupuesto estimado</label>
+                <div>
+                  <label htmlFor="presupuesto" className="block mb-1.5 text-sm font-medium text-gray-700">Presupuesto estimado</label>
                   <select
                     id="presupuesto"
                     name="presupuesto"
                     value={formData.presupuesto}
                     onChange={handleChange}
-                    className="w-full px-3 py-3 border-2 border-gray-light rounded-lg text-base transition-all bg-white focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm transition-all bg-white focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
                   >
                     <option value="">Seleccionar rango</option>
                     <option value="500-2000">$500 - $2,000 USD</option>
@@ -177,14 +177,14 @@ const Contact: React.FC = () => {
                 </div>
               </div>
               <div className="mb-4">
-                <label htmlFor="servicio" className="block mb-2 font-semibold text-dark">Servicio de interés</label>
+                <label htmlFor="servicio" className="block mb-1.5 text-sm font-medium text-gray-700">Servicio de interés</label>
                 <select
                   id="servicio"
                   name="servicio"
                   value={formData.servicio}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 py-3 border-2 border-gray-light rounded-lg text-base transition-all bg-white focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm transition-all bg-white focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
                 >
                   <option value="">Seleccionar servicio</option>
                   <option value="web">Desarrollo Web Full-Stack</option>
@@ -196,28 +196,28 @@ const Contact: React.FC = () => {
                 </select>
               </div>
               <div className="mb-4">
-                <label htmlFor="mensaje" className="block mb-2 font-semibold text-dark">Describe tu proyecto</label>
+                <label htmlFor="mensaje" className="block mb-1.5 text-sm font-medium text-gray-700">Describe tu proyecto</label>
                 <textarea
                   id="mensaje"
                   name="mensaje"
-                  rows={5}
+                  rows={4}
                   value={formData.mensaje}
                   onChange={handleChange}
                   required
                   placeholder="Cuéntame sobre tu proyecto, objetivos y timeline esperado..."
-                  className="w-full px-3 py-3 border-2 border-gray-light rounded-lg text-base transition-all bg-white resize-y min-h-[120px] focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)]"
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm transition-all bg-white resize-y min-h-[100px] focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
                 ></textarea>
               </div>
               <div className="mb-4">
                 <div className="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
                 {recaptchaError && (
-                  <div id="recaptcha-error" className="text-error text-sm mt-2 flex items-center gap-2 before:content-['⚠️'] before:text-base">
+                  <div id="recaptcha-error" className="text-error text-xs mt-1.5 flex items-center gap-1.5 before:content-['⚠️'] before:text-sm">
                     Por favor, completa la verificación reCAPTCHA
                   </div>
                 )}
               </div>
-              <button type="submit" className="w-full inline-flex items-center justify-center gap-2 px-8 py-3 bg-gradient-primary text-white font-semibold rounded-lg shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all duration-300">
-                <i className="fas fa-paper-plane"></i>
+              <button type="submit" className="w-full inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-gradient-to-r from-primary to-secondary text-white text-sm font-medium rounded-lg shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300">
+                <i className="fas fa-paper-plane text-xs"></i>
                 Enviar Propuesta
               </button>
             </form>

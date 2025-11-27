@@ -45,7 +45,7 @@ export const servicesData: Service[] = [
     deliveryTime: '4-8 semanas',
     featured: true,
     available: true,
-    imageUrl: '/images/web-development.jpg'
+    imageUrl: '/images/web-development.png'
   },
   {
     id: 'mobile-app-development',
@@ -74,7 +74,7 @@ export const servicesData: Service[] = [
     deliveryTime: '6-10 semanas',
     featured: true,
     available: true,
-    imageUrl: '/images/mobile-development.jpg'
+    imageUrl: '/images/mobile-development.png'
   },
   {
     id: 'devops-automation',
@@ -103,7 +103,7 @@ export const servicesData: Service[] = [
     deliveryTime: '2-4 semanas',
     featured: false,
     available: true,
-    imageUrl: '/images/devops.jpg'
+    imageUrl: '/images/devops.png'
   },
   {
     id: 'cloud-architecture',
@@ -132,7 +132,7 @@ export const servicesData: Service[] = [
     deliveryTime: '4-6 semanas',
     featured: true,
     available: true,
-    imageUrl: '/images/cloud-architecture.jpg'
+    imageUrl: '/images/cloud-architecture.png'
   },
   {
     id: 'tech-consulting',
@@ -161,7 +161,7 @@ export const servicesData: Service[] = [
     deliveryTime: 'Flexible',
     featured: false,
     available: true,
-    imageUrl: '/images/consulting.jpg'
+    imageUrl: '/images/consulting.png'
   },
   {
     id: 'technical-training',
@@ -190,7 +190,7 @@ export const servicesData: Service[] = [
     deliveryTime: '2-3 días',
     featured: false,
     available: true,
-    imageUrl: '/images/training.jpg'
+    imageUrl: '/images/consulting.png'
   },
   {
     id: 'api-development',
@@ -219,7 +219,7 @@ export const servicesData: Service[] = [
     deliveryTime: '3-5 semanas',
     featured: false,
     available: true,
-    imageUrl: '/images/api-development.jpg'
+    imageUrl: '/images/web-development.png'
   },
   {
     id: 'ecommerce-solutions',
@@ -248,7 +248,7 @@ export const servicesData: Service[] = [
     deliveryTime: '6-8 semanas',
     featured: false,
     available: true,
-    imageUrl: '/images/ecommerce.jpg'
+    imageUrl: '/images/web-development.png'
   },
   {
     id: 'cms-strapi-aws',
@@ -303,7 +303,7 @@ export const servicesData: Service[] = [
     deliveryTime: '8-12 semanas',
     featured: true,
     available: true,
-    imageUrl: '/images/cms-aws.jpg'
+    imageUrl: '/images/cloud-architecture.png'
   },
   {
     id: 'iac-multi-cloud-terraform',
@@ -366,7 +366,7 @@ export const servicesData: Service[] = [
     deliveryTime: '10-14 semanas',
     featured: true,
     available: true,
-    imageUrl: '/images/iac-terraform.jpg'
+    imageUrl: '/images/devops.png'
   },
   {
     id: 'cybersecurity-audit-pentest',
@@ -428,7 +428,7 @@ export const servicesData: Service[] = [
     deliveryTime: '2-3 semanas',
     featured: false,
     available: true,
-    imageUrl: '/images/cybersecurity.jpg'
+    imageUrl: '/images/devops.png'
   },
   // Migrados de products.ts
   {
@@ -457,10 +457,10 @@ export const servicesData: Service[] = [
     deliveryTime: '2-3 semanas',
     featured: false,
     available: true,
-    imageUrl: '/images/database.jpg'
+    imageUrl: '/images/cloud-architecture.png'
   },
   {
-    id: 'technical-training',
+    id: 'technical-training-advanced',
     title: 'Capacitación Técnica',
     shortDescription: 'Formación personalizada para equipos de desarrollo',
     description: 'Formación personalizada para equipos de desarrollo con workshops personalizados, material didáctico incluido, ejercicios prácticos y certificado de participación.',
@@ -485,6 +485,6 @@ export const servicesData: Service[] = [
     deliveryTime: '1-2 semanas',
     featured: false,
     available: true,
-    imageUrl: '/images/training.jpg'
+    imageUrl: '/images/consulting.png'
   }
 ];

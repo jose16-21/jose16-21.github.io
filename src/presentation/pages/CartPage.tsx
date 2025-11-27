@@ -137,109 +137,99 @@ const CartPage: React.FC = () => {
                   {items.map((item) => (
                     <div 
                       key={item.product.id} 
-                      className="bg-gradient-to-br from-white to-gray-50 rounded-xl p-6 border-2 border-gray-200 hover:border-primary/40 hover:shadow-md transition-all"
+                      className="bg-white rounded-xl border border-gray-200 hover:border-primary/30 hover:shadow-lg transition-all overflow-hidden"
                     >
-                      <div className="flex gap-4">
-                        {/* Icono del servicio */}
-                        <div className="w-20 h-20 bg-gradient-primary rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
-                          <i className="fas fa-code text-3xl text-white"></i>
+                      {/* Header de la card */}
+                      <div className="flex items-center gap-4 p-4 border-b border-gray-100">
+                        <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center flex-shrink-0 shadow-md">
+                          <i className={`fas ${item.product.icon || 'fa-code'} text-xl text-white`}></i>
                         </div>
                         
-                        {/* Información principal */}
                         <div className="flex-1 min-w-0">
-                          <div className="flex items-start justify-between mb-3">
-                            <div className="flex-1">
-                              <h3 className="text-xl font-bold text-dark mb-2">{item.product.title}</h3>
-                              {item.product.shortDescription && (
-                                <p className="text-sm text-gray-600 leading-relaxed mb-3">
-                                  {item.product.shortDescription}
-                                </p>
-                              )}
+                          <h3 className="text-lg font-bold text-gray-900 truncate">{item.product.title}</h3>
+                          {item.product.shortDescription && (
+                            <p className="text-sm text-gray-500 truncate">
+                              {item.product.shortDescription}
+                            </p>
+                          )}
+                        </div>
+                        
+                        <button 
+                          className="w-9 h-9 text-gray-400 hover:bg-red-50 hover:text-red-500 rounded-lg transition-all flex items-center justify-center flex-shrink-0"
+                          onClick={() => {
+                            removeFromCart(item.product.id);
+                            notificationManager.show({
+                              message: `${item.product.title} eliminado del carrito`,
+                              type: 'success'
+                            });
+                          }}
+                          title="Eliminar del carrito"
+                        >
+                          <i className="fas fa-trash text-sm"></i>
+                        </button>
+                      </div>
+                      
+                      {/* Contenido de la card */}
+                      <div className="p-4">
+                        {/* Features en grid compacto */}
+                        {item.product.features && item.product.features.length > 0 && (
+                          <div className="mb-4">
+                            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Características incluidas:</p>
+                            <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
+                              {item.product.features.slice(0, 8).map((feature, idx) => (
+                                <div key={idx} className="flex items-start gap-2 text-sm text-gray-600">
+                                  <i className="fas fa-check text-emerald-500 mt-0.5 text-xs flex-shrink-0"></i>
+                                  <span className="line-clamp-1">{feature}</span>
+                                </div>
+                              ))}
                             </div>
-                            
-                            {/* Botón eliminar */}
+                          </div>
+                        )}
+                        
+                        {/* Delivery time */}
+                        {item.product.deliveryTime && (
+                          <div className="inline-flex items-center gap-1.5 text-xs text-gray-500 bg-gray-50 px-3 py-1.5 rounded-full mb-4">
+                            <i className="fas fa-clock text-primary"></i>
+                            <span>Tiempo de entrega: {item.product.deliveryTime}</span>
+                          </div>
+                        )}
+                        
+                        {/* Customizaciones */}
+                        {item.customizations && (
+                          <div className="bg-blue-50 border border-blue-100 rounded-lg p-2.5 mb-4">
+                            <p className="text-xs text-blue-700">
+                              <i className="fas fa-edit mr-1.5"></i>
+                              <span className="font-medium">Personalización:</span> {item.customizations}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                      
+                      {/* Footer con cantidad y precio */}
+                      <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-t border-gray-100">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-medium text-gray-500">Cantidad:</span>
+                          <div className="flex items-center bg-white rounded-lg border border-gray-200 shadow-sm">
                             <button 
-                              className="ml-4 w-10 h-10 bg-danger/10 text-danger hover:bg-danger hover:text-white rounded-lg transition-all flex items-center justify-center flex-shrink-0"
-                              onClick={() => {
-                                removeFromCart(item.product.id);
-                                notificationManager.show({
-                                  message: `${item.product.title} eliminado del carrito`,
-                                  type: 'success'
-                                });
-                              }}
-                              title="Eliminar del carrito"
+                              className="w-8 h-8 hover:bg-gray-100 transition-colors text-gray-600 hover:text-gray-900 font-semibold rounded-l-lg text-sm"
+                              onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
                             >
-                              <i className="fas fa-trash"></i>
+                              -
+                            </button>
+                            <span className="text-gray-900 font-bold w-10 text-center text-sm">{item.quantity}</span>
+                            <button 
+                              className="w-8 h-8 hover:bg-gray-100 transition-colors text-gray-600 hover:text-gray-900 font-semibold rounded-r-lg text-sm"
+                              onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                            >
+                              +
                             </button>
                           </div>
-                          
-                          {/* Features */}
-                          {item.product.features && item.product.features.length > 0 && (
-                            <div className="mb-4">
-                              <p className="text-xs font-semibold text-gray-dark mb-2">Características incluidas:</p>
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                                {item.product.features.map((feature, idx) => (
-                                  <div key={idx} className="flex items-start gap-2 text-sm text-gray-dark">
-                                    <i className="fas fa-check text-success mt-1 text-xs flex-shrink-0"></i>
-                                    <span>{feature}</span>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                          
-                          {/* Delivery time */}
-                          {item.product.deliveryTime && (
-                            <div className="flex items-center gap-2 text-sm text-gray-medium mb-4">
-                              <i className="fas fa-clock"></i>
-                              <span>Tiempo de entrega: {item.product.deliveryTime}</span>
-                            </div>
-                          )}
-                          
-                          {/* Customizaciones */}
-                          {item.customizations && (
-                            <div className="bg-primary/5 border border-primary/20 rounded-lg p-3 mb-4">
-                              <p className="text-sm text-gray-dark">
-                                <i className="fas fa-edit text-primary mr-2"></i>
-                                <span className="font-medium">Personalización:</span> {item.customizations}
-                              </p>
-                            </div>
-                          )}
-                          
-                          {/* Footer con precio y cantidad */}
-                          <div className="flex items-center justify-between pt-4 border-t border-gray-200">
-                            {/* Cantidad */}
-                            <div className="flex items-center gap-3">
-                              <span className="text-sm font-medium text-gray-dark">Cantidad:</span>
-                              <div className="flex items-center gap-2 bg-white rounded-lg border-2 border-gray-300 shadow-sm">
-                                <button 
-                                  className="px-4 py-2 hover:bg-gray-100 transition-colors text-gray-dark hover:text-dark font-bold rounded-l-lg"
-                                  onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                                >
-                                  -
-                                </button>
-                                <span className="text-dark font-bold min-w-[3rem] text-center text-lg">{item.quantity}</span>
-                                <button 
-                                  className="px-4 py-2 hover:bg-gray-100 transition-colors text-gray-dark hover:text-dark font-bold rounded-r-lg"
-                                  onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                                >
-                                  +
-                                </button>
-                              </div>
-                            </div>
-                            
-                            {/* Precio */}
-                            <div className="text-right">
-                              <div className="text-xs text-gray-medium mb-1">Precio unitario</div>
-                              <div className="text-2xl font-bold text-primary">
-                                ${item.product.price.amount.toLocaleString()} <span className="text-base font-normal">{item.product.price.currency}</span>
-                              </div>
-                              {item.quantity > 1 && (
-                                <div className="text-sm text-gray-medium mt-1 font-semibold">
-                                  Subtotal: ${(item.product.price.amount * item.quantity).toLocaleString()} {item.product.price.currency}
-                                </div>
-                              )}
-                            </div>
+                        </div>
+                        
+                        <div className="text-right">
+                          <div className="text-xs text-gray-400">Precio unitario</div>
+                          <div className="text-xl font-bold text-gray-900">
+                            ${item.product.price.amount.toLocaleString()} <span className="text-sm font-normal text-gray-500">{item.product.price.currency}</span>
                           </div>
                         </div>
                       </div>

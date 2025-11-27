@@ -6,6 +6,7 @@ import { useModal } from '../../application/context/ModalContext';
 
 const Navigation: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showLogo, setShowLogo] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const { itemCount } = useCart();
@@ -17,6 +18,8 @@ const Navigation: React.FC = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 100);
+      // Mostrar logo después de pasar la sección Hero (aproximadamente 600px)
+      setShowLogo(window.scrollY > 400);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -45,23 +48,18 @@ const Navigation: React.FC = () => {
   };
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 border-b ${
-      isScrolled 
-        ? 'bg-white shadow-lg border-gray-200' 
-        : 'bg-white/90 backdrop-blur-sm border-gray-100'
-    }`} id="navbar">
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 border-b ${isScrolled
+      ? 'bg-white shadow-lg border-gray-200'
+      : 'bg-white/90 backdrop-blur-sm border-gray-100'
+      }`} id="navbar">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          <Link to="/" className="flex items-center gap-3 cursor-pointer">
-            <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold">JJ</span>
-            </div>
-            <div className="hidden sm:block">
-              <h2 className="text-lg font-bold text-dark">Juan José Hernández</h2>
-              <span className="text-xs text-gray-medium">Tech Consultant</span>
+        <div className="flex justify-between items-center h-16">
+          <Link to="/" className={`flex items-center gap-2 cursor-pointer group transition-all duration-300 ${showLogo ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 pointer-events-none'}`}>
+            <div className="w-9 h-9 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
+              <span className="text-white font-bold text-sm">JJH</span>
             </div>
           </Link>
-        
+
           {/* Menú móvil desplegable */}
           <div className={`${isMenuOpen ? 'block' : 'hidden'} lg:hidden absolute top-full left-0 w-full bg-white border-t border-gray-200 shadow-lg max-h-[calc(100vh-5rem)] overflow-y-auto`}>
             <ul className="list-none flex flex-col p-4 gap-2">
@@ -72,7 +70,7 @@ const Navigation: React.FC = () => {
               <li><a href="#experiencia" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2.5 px-3 rounded-lg hover:bg-gray-lighter" onClick={(e) => handleNavClick(e, '#experiencia')}>Experiencia</a></li>
               <li><a href="#contacto" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2.5 px-3 rounded-lg hover:bg-gray-lighter" onClick={(e) => handleNavClick(e, '#contacto')}>Contacto</a></li>
             </ul>
-            
+
             {!isAuthenticated && (
               <div className="flex items-center gap-2 p-4 border-t border-gray-200">
                 <button className="flex-1 px-4 py-2.5 text-sm font-semibold rounded-lg text-gray-dark border border-gray-light hover:border-primary hover:text-primary transition-all" onClick={() => { openLogin(); setIsMenuOpen(false); }}>Iniciar Sesión</button>
@@ -119,8 +117,8 @@ const Navigation: React.FC = () => {
                 )}
               </div>
             )}
-            
-            <Link 
+
+            <Link
               to="/carrito"
               className="relative bg-gradient-primary text-white rounded-lg w-11 h-11 flex items-center justify-center cursor-pointer transition-all hover:shadow-lg"
             >

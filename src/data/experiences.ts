@@ -6,26 +6,22 @@ export const experiencesData: ExperienceData = {
       id: 1,
       period: '2023 - Presente',
       title: 'Tech Lead',
-      company: 'Capital Valley Tech • Guatemala (Remoto)',
+      company: 'Capital Valley Tech',
+      country: 'Guatemala',
+      countryFlag: '🇬🇹',
+      remote: true,
       companyUrl: 'https://www.capitalvalleytech.com/',
       companyLogo: 'https://www.capitalvalleytech.com/favicon.ico',
-      description: 'Liderazgo técnico del equipo de desarrollo, planificación con producto, diseño de arquitecturas y establecimiento de mejores prácticas.',
+      description: 'Liderazgo técnico y definición de arquitectura cloud-native. Implementación de mejores prácticas DevOps, diseño de soluciones escalables en AWS y mentoría de equipos de alto rendimiento.',
       skills: [
-        'AWS',
+        'AWS Architecture',
         'Kubernetes',
-        'Docker',
         'Terraform',
+        'Microservices',
+        'Node.js',
         'TypeScript',
-        'Adonis JS',
-        'Nest JS',
-        'MongoDB',
-        'SQL Server',
-        'CI/CD',
-        'Krakend Gateway',
-        'S3',
-        'DynamoDB',
-        'ECR',
-        'EC2'
+        'CI/CD Pipelines',
+        'System Design'
       ],
       delay: 0
     },
@@ -33,21 +29,21 @@ export const experiencesData: ExperienceData = {
       id: 2,
       period: '2022 - 2023',
       title: 'Sr. Full Stack Developer',
-      company: 'Finerio Connect • México (Remoto)',
+      company: 'Finerio Connect',
+      country: 'México',
+      countryFlag: '🇲🇽',
+      remote: true,
       companyUrl: 'https://www.finerioconnect.com/',
       companyLogo: 'https://www.finerioconnect.com/favicon.ico',
-      description: 'Desarrollo de soluciones bancarias, web scraping y arquitectura serverless con enfoque en Clean Architecture.',
+      description: 'Arquitectura de soluciones financieras serverless. Optimización de procesos de data scraping e implementación de Clean Architecture para garantizar escalabilidad y mantenibilidad.',
       skills: [
-        'Python',
+        'Serverless',
         'AWS Lambda',
-        'Terraform',
-        'CloudFormation',
-        'C#',
-        'Web Scraping',
+        'Python',
         'Clean Architecture',
-        'SonarQube',
-        'Unit Testing',
-        'Code Pipeline'
+        'Fintech',
+        'Web Scraping',
+        'SonarQube'
       ],
       delay: 100
     },
@@ -55,24 +51,21 @@ export const experiencesData: ExperienceData = {
       id: 3,
       period: '2021 - 2022',
       title: 'Sr. Backend Developer',
-      company: 'Rappi • Colombia (Remoto)',
+      company: 'Rappi',
+      country: 'Colombia',
+      countryFlag: '🇨🇴',
+      remote: true,
       companyUrl: 'https://www.rappi.com/',
       companyLogo: 'https://www.rappi.com/favicon.ico',
-      description: 'Desarrollo y mejoras en microservicios, micro frontends e integración con CRM Lupe en el squad Partner Support.',
+      description: 'Desarrollo de microservicios de alto rendimiento. Integración de sistemas críticos y optimización de flujos operativos en entornos de alta concurrencia.',
       skills: [
-        'Microservicios',
+        'High Concurrency',
+        'Microservices',
         'Apache Kafka',
         'MongoDB',
-        'MySQL',
         'PostgreSQL',
         'Docker',
-        'TypeScript',
-        'Angular',
-        'Jenkins',
-        'Firebase',
-        'Redash',
-        'SignalFx',
-        'LogDNA'
+        'Redis'
       ],
       delay: 200
     },
@@ -80,21 +73,20 @@ export const experiencesData: ExperienceData = {
       id: 4,
       period: '2019 - 2021',
       title: 'Analista Programador',
-      company: 'Business Development Group • Guatemala',
+      company: 'Business Development Group',
+      country: 'Guatemala',
+      countryFlag: '🇬🇹',
+      remote: false,
       companyUrl: 'https://bdgsa.net/',
       companyLogo: 'https://bdgsa.net/favicon.ico',
-      description: 'Desarrollo y mejoras en sistema bancario Sigma 7 para clientes como Cooperativa Génesis Empresarial, Grupo TRT y BAC Credomatic.',
+      description: 'Modernización de sistemas bancarios core. Migración a arquitecturas de microservicios y optimización de APIs REST para el sector financiero.',
       skills: [
-        '.NET',
         '.NET Core',
         'C#',
         'SQL Server',
-        'WCF',
-        'REST API',
-        'Microservicios',
-        'Reporting Services',
+        'REST APIs',
         'Azure DevOps',
-        'IIS'
+        'Banking Systems'
       ],
       delay: 300
     },
@@ -102,47 +94,41 @@ export const experiencesData: ExperienceData = {
       id: 5,
       period: '2014 - 2018',
       title: 'Analista Programador',
-      company: 'E-Solutions S.A. • Guatemala',
+      company: 'E-Solutions S.A.',
+      country: 'Guatemala',
+      countryFlag: '🇬🇹',
+      remote: false,
       companyUrl: 'https://www.e-solutions.com.gt/',
       companyLogo: 'https://www.e-solutions.com.gt/favicon.ico',
-      description: 'Análisis, desarrollo y mantenimiento de productos financieros corporativos con tecnologías Microsoft.',
+      description: 'Ingeniería de software para sector financiero. Desarrollo full-stack de productos corporativos y optimización de bases de datos transaccionales.',
       skills: [
-        'C#',
-        'VB',
-        'SQL Server',
-        'N-Capas',
-        'SOAP',
-        'REST',
-        'SSRS',
-        'Store Procedures',
-        'AS400',
-        'IIS',
-        'XML'
+        'Full Stack .NET',
+        'SQL Optimization',
+        'N-Tier Architecture',
+        'Financial Software',
+        'SOAP/REST'
       ],
       delay: 400
     }
   ],
   achievements: [
     {
-      icon: 'fa-trophy',
-      title: 'Certificaciones Profesionales',
-      description: 'Scrum Fundamental Certified, Certified Secure Development, Business Intelligence (UVG)'
+      icon: 'fa-certificate',
+      title: 'Certificaciones & Formación',
+      description: 'Scrum Fundamental Certified, Certified Secure Development, Business Intelligence (UVG). Ingeniero en Sistemas (UMG).'
     },
     {
-      icon: 'fa-graduation-cap',
-      title: 'Educación',
-      description: 'Ingeniero en Sistemas (UMG), Técnico en Software (UVG), +50 cursos profesionales en Platzi'
+      icon: 'fa-cloud',
+      title: 'Expertise Cloud & DevOps',
+      description: 'Especialización en AWS (Route 53, EC2, ELB, S3, RDS), Docker, Kubernetes y Pipelines de CI/CD (Jenkins, GitHub Actions).'
     }
   ],
   devopsTools: [
+    { name: 'AWS', icon: 'SiAmazon', color: '#FF9900' },
     { name: 'Docker', icon: 'SiDocker', color: '#2496ED' },
     { name: 'Kubernetes', icon: 'SiKubernetes', color: '#326CE5' },
-    { name: 'Jenkins', icon: 'SiJenkins', color: '#D24939' },
-    { name: 'GitHub Actions', icon: 'SiGithubactions', color: '#2088FF' },
     { name: 'Terraform', icon: 'SiTerraform', color: '#7B42BC' },
-    { name: 'Prometheus', icon: 'SiPrometheus', color: '#E6522C' },
-    { name: 'Grafana', icon: 'SiGrafana', color: '#F46800' },
-    { name: 'GitLab', icon: 'SiGitlab', color: '#FC6D26' },
-    { name: 'ArgoCD', icon: 'SiArgo', color: '#EF7B4D' }
+    { name: 'Jenkins', icon: 'SiJenkins', color: '#D24939' },
+    { name: 'GitLab', icon: 'SiGitlab', color: '#FC6D26' }
   ]
 };

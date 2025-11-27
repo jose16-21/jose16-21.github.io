@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { 
+import {
   SiAmazon,
-  SiGooglecloud,
   SiDocker,
   SiKubernetes,
   SiJenkins,
@@ -12,13 +11,13 @@ import {
   SiGitlab,
   SiArgo
 } from 'react-icons/si';
-import { FaCloud } from 'react-icons/fa';
 import { GetExperiencesUseCase } from '../../domain/use-cases/GetExperiencesUseCase';
 import { ExperienceRepositoryImpl } from '../../infrastructure/repositories/ExperienceRepositoryImpl';
 import { ExperienceData } from '../../domain/entities/Experience';
 
 // Mapa de iconos para DevOps tools
 const iconMap: Record<string, React.ReactElement> = {
+  SiAmazon: <SiAmazon className="w-8 h-8" />,
   SiDocker: <SiDocker className="w-8 h-8" />,
   SiKubernetes: <SiKubernetes className="w-8 h-8" />,
   SiJenkins: <SiJenkins className="w-8 h-8" />,
@@ -64,78 +63,64 @@ const Experience: React.FC = () => {
   const { timeline, achievements, devopsTools } = experienceData;
 
   return (
-    <section className="py-24 bg-gradient-to-b from-gray-50 via-white to-gray-50 relative overflow-hidden" id="experiencia">
+    <section className="py-24 bg-white relative overflow-hidden" id="experiencia">
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-8 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-dark mb-4">Experiencia Profesional</h2>
-          <p className="text-lg text-gray-medium max-w-2xl mx-auto">Trayectoria y logros en el desarrollo tecnológico</p>
-          
-          {/* DevOps & Cloud badge */}
-          <div className="flex flex-wrap justify-center gap-3 mt-6">
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
-              <SiAmazon className="w-4 h-4" /> AWS
-            </span>
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-sky-100 text-sky-700 rounded-full text-sm font-semibold">
-              <FaCloud className="w-4 h-4" /> Azure
-            </span>
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-100 text-indigo-700 rounded-full text-sm font-semibold">
-              <SiGooglecloud className="w-4 h-4" /> GCP
-            </span>
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold">
-              ♾️ DevOps & CI/CD
-            </span>
-          </div>
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        <div className="text-center mb-20">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">Experiencia Profesional</h2>
+          <p className="text-lg text-gray-500 max-w-2xl mx-auto font-light">Trayectoria enfocada en arquitectura de software y liderazgo técnico.</p>
         </div>
 
         {/* Timeline */}
-        <div className="relative before:absolute before:left-[30px] before:top-0 before:bottom-0 before:w-0.5 before:bg-gradient-primary md:before:left-1/2">
+        <div className="relative before:absolute before:left-[21px] before:top-2 before:bottom-0 before:w-px before:bg-gray-200 md:before:left-1/2 md:before:-ml-px">
           {timeline.map((item, index) => {
             const isEven = index % 2 === 0;
             return (
-              <div 
-                key={item.id} 
-                className="relative flex items-start mb-8 md:mb-10" 
-                data-aos="fade-up" 
+              <div
+                key={item.id}
+                className="relative flex items-start mb-12 md:mb-16"
+                data-aos="fade-up"
                 data-aos-delay={item.delay}
               >
-                <div className="absolute left-[22px] w-4 h-4 bg-primary rounded-full border-4 border-white shadow-lg md:left-1/2 md:-ml-2 animate-pulse z-10"></div>
-                <div className={`ml-16 bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-gray-lighter transition-all hover:-translate-y-2 hover:shadow-xl hover:border-primary md:ml-0 md:w-[calc(50%-60px)] ${isEven ? 'md:mr-auto' : 'md:ml-auto'}`}>
-                  <div className="inline-block px-4 py-2 bg-gradient-primary text-white rounded-full text-sm font-semibold mb-4">{item.period}</div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-dark mb-2">{item.title}</h3>
-                    {item.companyUrl ? (
-                      <a 
-                        href={item.companyUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-lg text-primary font-semibold mb-4 hover:underline transition-all group"
+                {/* Dot */}
+                <div className="absolute left-[14px] w-4 h-4 bg-white rounded-full border-2 border-primary md:left-1/2 md:-ml-2 z-10"></div>
+
+                {/* Content */}
+                <div className={`ml-12 md:ml-0 md:w-[calc(50%-40px)] ${isEven ? 'md:mr-auto md:text-right' : 'md:ml-auto md:text-left'}`}>
+                  <span className="inline-block px-3 py-1 bg-gray-50 text-gray-500 rounded-full text-xs font-medium mb-3 tracking-wide uppercase">{item.period}</span>
+                  <h3 className="text-xl font-bold text-gray-900 mb-1">{item.title}</h3>
+
+                  {item.companyUrl ? (
+                    <a
+                      href={item.companyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`inline-flex items-center gap-2 text-base text-primary font-medium mb-3 hover:text-primary-dark transition-colors ${isEven ? 'md:flex-row-reverse' : ''}`}
+                    >
+                      <span className="text-lg">{item.countryFlag}</span>
+                      <span>{item.company}</span>
+                      {item.remote && <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">Remoto</span>}
+                      <i className="fas fa-external-link-alt text-xs opacity-50"></i>
+                    </a>
+                  ) : (
+                    <h4 className={`inline-flex items-center gap-2 text-base text-primary font-medium mb-3 ${isEven ? 'md:flex-row-reverse' : ''}`}>
+                      <span className="text-lg">{item.countryFlag}</span>
+                      <span>{item.company}</span>
+                      {item.remote && <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">Remoto</span>}
+                    </h4>
+                  )}
+
+                  <p className="text-gray-600 mb-4 leading-relaxed font-light">{item.description}</p>
+
+                  <div className={`flex flex-wrap gap-2 ${isEven ? 'md:justify-end' : 'md:justify-start'}`}>
+                    {item.skills.map((skill, skillIndex) => (
+                      <span
+                        key={skillIndex}
+                        className="inline-block px-2.5 py-0.5 bg-gray-50 text-gray-600 text-xs rounded border border-gray-100"
                       >
-                        {item.companyLogo && (
-                          <img 
-                            src={item.companyLogo} 
-                            alt={`${item.company} logo`} 
-                            className="w-5 h-5 object-contain"
-                            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-                          />
-                        )}
-                        <span>{item.company}</span>
-                        <i className="fas fa-external-link-alt text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                      </a>
-                    ) : (
-                      <h4 className="text-lg text-primary font-semibold mb-4">{item.company}</h4>
-                    )}
-                    <p className="text-gray-medium mb-4">{item.description}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {item.skills.map((skill, skillIndex) => (
-                        <span 
-                          key={skillIndex} 
-                          className="inline-block px-3 py-1 bg-gray-100 hover:bg-primary hover:text-white text-gray-700 text-sm rounded-full transition-colors duration-200"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
+                        {skill}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -144,42 +129,42 @@ const Experience: React.FC = () => {
         </div>
 
         {/* Achievements Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-20">
           {achievements.map((achievement, index) => (
-            <div 
-              key={achievement.title} 
-              className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-gray-lighter transition-all hover:-translate-y-2 hover:shadow-xl hover:border-primary flex gap-6" 
-              data-aos="fade-up" 
+            <div
+              key={achievement.title}
+              className="bg-gray-50 rounded-xl p-8 border border-gray-100 hover:border-gray-200 transition-colors"
+              data-aos="fade-up"
               data-aos-delay={index * 100}
             >
-              <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center flex-shrink-0">
-                <i className={`fas ${achievement.icon} text-3xl text-white`}></i>
-              </div>
-              <div>
-                <h4 className="text-xl font-bold text-dark mb-2">{achievement.title}</h4>
-                <p className="text-gray-medium">{achievement.description}</p>
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm flex-shrink-0 text-primary">
+                  <i className={`fas ${achievement.icon} text-lg`}></i>
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold text-gray-900 mb-2">{achievement.title}</h4>
+                  <p className="text-gray-600 text-sm leading-relaxed">{achievement.description}</p>
+                </div>
               </div>
             </div>
           ))}
         </div>
 
         {/* DevOps Tools Bar at Bottom */}
-        <div className="mt-20 bg-white/80 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-gray-200">
-          <h3 className="text-2xl font-bold text-dark text-center mb-6">Stack DevOps & Cloud</h3>
-          <div className="flex flex-wrap justify-center gap-6">
+        <div className="mt-20 pt-10 border-t border-gray-100">
+          <p className="text-center text-sm text-gray-400 uppercase tracking-widest mb-8">Tecnologías & Herramientas</p>
+          <div className="flex flex-wrap justify-center gap-8 md:gap-12 opacity-80 hover:opacity-100 transition-opacity">
             {devopsTools.map((tool, index) => (
               <div
                 key={tool.name}
-                className="group flex flex-col items-center gap-2 transition-transform hover:scale-110"
-                data-aos="zoom-in"
+                className="group flex flex-col items-center gap-2"
+                data-aos="fade-in"
                 data-aos-delay={index * 50}
+                title={tool.name}
               >
-                <div style={{ color: tool.color }} className="transform transition-transform">
+                <div className="text-gray-400 group-hover:text-gray-600 transition-colors transform group-hover:scale-110 duration-300">
                   {iconMap[tool.icon]}
                 </div>
-                <span className="text-xs text-gray-600 font-medium group-hover:text-primary transition-colors">
-                  {tool.name}
-                </span>
               </div>
             ))}
           </div>

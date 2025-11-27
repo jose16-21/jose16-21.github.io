@@ -3,12 +3,14 @@ export interface Project {
   title: string;
   company: string;
   country: string;
+  countryFlag: string;
   period: string;
   description: string;
   achievements: string[];
   technologies: string[];
   icon: string;
   url?: string;
+  imageUrl?: string;
   delay: number;
 }
 

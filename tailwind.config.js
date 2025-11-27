@@ -4,36 +4,61 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#2563eb',
-        secondary: '#059669',
-        accent: '#ea580c',
-        success: '#10b981',
-        warning: '#f59e0b',
-        error: '#ef4444',
-        dark: '#111827',
-        gray: {
-          dark: '#374151',
-          medium: '#6b7280',
-          light: '#d1d5db',
-          lighter: '#f3f4f6',
+        // Executive Palette
+        primary: {
+          DEFAULT: '#0f172a', // Slate 900 - Deep, authoritative blue-black
+          light: '#334155',   // Slate 700
+          dark: '#020617',    // Slate 950
         },
+        secondary: {
+          DEFAULT: '#3b82f6', // Blue 500 - Trustworthy blue, used sparingly
+          light: '#60a5fa',
+          dark: '#2563eb',
+        },
+        accent: {
+          DEFAULT: '#0ea5e9', // Sky 500 - Modern, tech-forward accent
+          hover: '#0284c7',
+        },
+        // Neutral scale for minimalism
+        dark: '#020617',      // Almost black
+        light: '#f8fafc',     // Slate 50
+        white: '#ffffff',
+        gray: {
+          dark: '#1e293b',    // Slate 800
+          medium: '#64748b',  // Slate 500 - Perfect for secondary text
+          light: '#cbd5e1',   // Slate 300 - Borders
+          lighter: '#f1f5f9', // Slate 100 - Backgrounds
+          lightest: '#f8fafc', // Slate 50
+        },
+        // Semantic colors
+        success: '#10b981',   // Emerald 500
+        warning: '#f59e0b',   // Amber 500
+        error: '#ef4444',     // Red 500
+        info: '#3b82f6',      // Blue 500
       },
       fontFamily: {
-        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        display: ['Lexend', 'Inter', 'system-ui', 'sans-serif'], // For headings
       },
       backgroundImage: {
-        'gradient-primary': 'linear-gradient(135deg, #2563eb, #059669)',
-        'gradient-accent': 'linear-gradient(135deg, #ea580c, #f97316)',
+        'gradient-primary': 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)', // Deep executive gradient
+        'gradient-secondary': 'linear-gradient(135deg, #3b82f6 0%, #0ea5e9 100%)', // Tech blue gradient
+        'gradient-dark': 'linear-gradient(to bottom, #0f172a, #020617)',
+        'gradient-light': 'linear-gradient(to bottom, #f8fafc, #ffffff)',
       },
       boxShadow: {
         'sm': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-        'DEFAULT': '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-        'lg': '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
-        'xl': '0 20px 25px -5px rgba(0, 0, 0, 0.1)',
+        'DEFAULT': '0 4px 6px -1px rgba(15, 23, 42, 0.1), 0 2px 4px -1px rgba(15, 23, 42, 0.06)',
+        'lg': '0 10px 15px -3px rgba(15, 23, 42, 0.1), 0 4px 6px -2px rgba(15, 23, 42, 0.05)',
+        'xl': '0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 10px 10px -5px rgba(15, 23, 42, 0.04)',
+        '2xl': '0 25px 50px -12px rgba(15, 23, 42, 0.25)',
+        'inner-light': 'inset 0 2px 4px 0 rgba(255, 255, 255, 0.3)',
       },
       borderRadius: {
         'DEFAULT': '0.5rem',
-        'lg': '1rem',
+        'lg': '0.75rem',
+        'xl': '1rem',
+        '2xl': '1.5rem',
       },
       transitionTimingFunction: {
         'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
@@ -42,16 +67,21 @@ export default {
         'spin-slow': 'spin 20s linear infinite',
         'float': 'float 6s ease-in-out infinite',
         'float-slow': 'float 8s ease-in-out infinite',
-        'gradient': 'gradient 8s linear infinite',
+        'fade-in': 'fadeIn 0.5s ease-out forwards',
+        'slide-up': 'slideUp 0.5s ease-out forwards',
       },
       keyframes: {
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-20px)' },
+          '50%': { transform: 'translateY(-10px)' },
         },
-        gradient: {
-          '0%, 100%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
         },
       },
     },

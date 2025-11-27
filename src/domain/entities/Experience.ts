@@ -3,6 +3,9 @@ export interface ExperienceItem {
   period: string;
   title: string;
   company: string;
+  country: string;
+  countryFlag: string;
+  remote: boolean;
   companyUrl?: string;
   companyLogo?: string;
   description: string;

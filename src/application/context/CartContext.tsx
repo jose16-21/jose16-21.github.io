@@ -12,9 +12,9 @@ interface CartProviderProps {
   repository?: CartRepository;
 }
 
-export const CartProvider: React.FC<CartProviderProps> = ({ 
-  children, 
-  repository = new LocalStorageCartRepository() 
+export const CartProvider: React.FC<CartProviderProps> = ({
+  children,
+  repository = new LocalStorageCartRepository()
 }) => {
   const [items, setItems] = useState<CartItem[]>([]);
 
@@ -24,7 +24,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({
   useEffect(() => {
     const loadedItems = repository.getItems();
     setItems(loadedItems);
-  }, [repository]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const addToCart = (product: Service, quantity: number = 1, customizations?: string) => {
     addToCartUseCase.execute(product, quantity, customizations);
@@ -39,7 +39,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({
   const updateQuantity = (productId: string, quantity: number) => {
     const currentItems = repository.getItems();
     const item = currentItems.find(item => item.product.id === productId);
-    
+
     if (item) {
       if (quantity <= 0) {
         removeFromCart(productId);
