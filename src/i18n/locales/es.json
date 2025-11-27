@@ -1,0 +1,242 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "services": "Servicios",
+    "technologies": "Tecnologías",
+    "portfolio": "Portafolio",
+    "experience": "Experiencia",
+    "contact": "Contacto",
+    "login": "Iniciar Sesión",
+    "register": "Registrarse",
+    "logout": "Cerrar Sesión",
+    "profile": "Perfil",
+    "orders": "Mis Pedidos"
+  },
+  "hero": {
+    "available": "Disponible para nuevos proyectos",
+    "title": "Transformo ideas",
+    "titleHighlight": "en soluciones digitales",
+    "description": "Más de 10 años diseñando arquitecturas escalables, liderando equipos técnicos y entregando productos que generan impacto real en empresas de Latinoamérica.",
+    "explore": "Explorar",
+    "cta": {
+      "startProject": "Iniciar proyecto",
+      "viewWork": "Ver trabajos",
+      "services": "Ver Servicios",
+      "contact": "Contactar"
+    },
+    "stats": {
+      "experience": "Años experiencia",
+      "projects": "Proyectos entregados",
+      "countries": "Países"
+    },
+    "specialties": {
+      "architecture": "Arquitectura de Software",
+      "devops": "DevOps & Cloud (AWS/Azure)",
+      "leadership": "Liderazgo Técnico"
+    }
+  },
+  "services": {
+    "title": "Servicios Profesionales",
+    "subtitle": "Soluciones tecnológicas completas para impulsar tu negocio al siguiente nivel",
+    "details": "Detalles",
+    "addToCart": "Agregar",
+    "popular": "Popular",
+    "weeks": "semanas",
+    "swipeMore": "Desliza para ver más",
+    "noServices": "No hay servicios disponibles en esta categoría",
+    "categories": {
+      "all": "Todos",
+      "web-development": "Desarrollo Web",
+      "cloud-devops": "Cloud & DevOps",
+      "consulting": "Consultoría"
+    }
+  },
+  "technologies": {
+    "title": "Stack Tecnológico",
+    "subtitle": "Mi arsenal de herramientas para crear soluciones digitales"
+  },
+  "portfolio": {
+    "title": "Proyectos Destacados",
+    "subtitle": "Una selección de mis trabajos más relevantes",
+    "viewProject": "Ver Proyecto",
+    "private": "Privado"
+  },
+  "experience": {
+    "title": "Experiencia Profesional",
+    "subtitle": "Mi trayectoria en la industria tecnológica",
+    "present": "Presente"
+  },
+  "contact": {
+    "title": "¿Listo para Trabajar Juntos?",
+    "subtitle": "Conversemos sobre tu próximo proyecto tecnológico",
+    "info": {
+      "email": "Email",
+      "phone": "Teléfono",
+      "location": "Ubicación",
+      "availability": "Disponibilidad",
+      "schedule": "Lun - Vie, 9:00 AM - 6:00 PM"
+    },
+    "form": {
+      "name": "Nombre completo",
+      "email": "Email",
+      "company": "Empresa",
+      "budget": "Presupuesto estimado",
+      "budgetPlaceholder": "Seleccionar rango",
+      "service": "Servicio de interés",
+      "servicePlaceholder": "Seleccionar servicio",
+      "message": "Describe tu proyecto",
+      "messagePlaceholder": "Cuéntame sobre tu proyecto, objetivos y timeline esperado...",
+      "submit": "Enviar Propuesta",
+      "sending": "Enviando...",
+      "success": "¡Mensaje enviado exitosamente! Te contactaré pronto.",
+      "error": "Error al enviar el mensaje. Por favor intenta de nuevo.",
+      "recaptchaError": "Por favor, completa la verificación reCAPTCHA"
+    },
+    "serviceOptions": {
+      "web": "Desarrollo Web Full-Stack",
+      "mobile": "Desarrollo de Apps Móviles",
+      "consulting": "Consultoría y Arquitectura",
+      "database": "Sistemas de Base de Datos",
+      "devops": "Seguridad y DevOps",
+      "training": "Capacitación Técnica"
+    },
+    "budgetRanges": {
+      "range1": "$1,000 - $5,000",
+      "range2": "$5,000 - $15,000",
+      "range3": "$15,000 - $50,000",
+      "range4": "$50,000+"
+    }
+  },
+  "footer": {
+    "description": "Consultor especializado en desarrollo tecnológico y transformación digital. Convirtiendo ideas innovadoras en soluciones tecnológicas exitosas.",
+    "services": "Servicios",
+    "technologies": "Tecnologías",
+    "contact": "Contacto",
+    "quickLinks": "Enlaces Rápidos",
+    "rights": "Todos los derechos reservados.",
+    "builtWith": "Construido con",
+    "links": {
+      "webDev": "Desarrollo Web",
+      "mobileApps": "Apps Móviles",
+      "consulting": "Consultoría",
+      "database": "Base de Datos",
+      "reactAngular": "React & Angular",
+      "nodePython": "Node.js & Python",
+      "awsCloud": "AWS & Cloud",
+      "databases": "Bases de Datos"
+    }
+  },
+  "cart": {
+    "title": "Mi Carrito de Compras",
+    "empty": "Tu carrito está vacío",
+    "emptyDescription": "Explora nuestros servicios profesionales y comienza a construir tu proyecto",
+    "explore": "Explorar Servicios",
+    "back": "Volver a servicios",
+    "servicesInCart": "servicios en tu carrito",
+    "serviceInCart": "servicio en tu carrito",
+    "clearCart": "Vaciar carrito",
+    "confirmClear": "¿Estás seguro de que deseas vaciar el carrito?",
+    "selectedServices": "Servicios Seleccionados",
+    "featuresIncluded": "Características incluidas:",
+    "deliveryTime": "Tiempo de entrega:",
+    "customization": "Personalización:",
+    "quantity": "Cantidad:",
+    "unitPrice": "Precio unitario",
+    "summary": "Resumen",
+    "totalProducts": "Total de productos",
+    "uniqueServices": "Servicios únicos",
+    "total": "Total:",
+    "comments": "Comentarios",
+    "commentsOptional": "(Opcional)",
+    "commentsPlaceholder": "Requisitos especiales, preferencias de tecnología, plazos específicos...",
+    "quoteMode": "Solicitar cotización sin costo",
+    "quoteModeDescription": "Te contactaremos con precios personalizados y detalles del proyecto.",
+    "loginRequired": "Inicia sesión para proceder con la compra",
+    "proceedPayment": "Proceder al Pago",
+    "requestQuote": "Solicitar Cotización",
+    "processing": "Procesando...",
+    "securePayment": "Pago seguro - Simulación",
+    "quoteByEmail": "Cotización por email",
+    "quote": "Cotización",
+    "removed": "eliminado del carrito",
+    "cleared": "Carrito vaciado",
+    "added": "agregado al carrito"
+  },
+  "auth": {
+    "login": {
+      "title": "Bienvenido",
+      "subtitle": "Inicia sesión para continuar",
+      "email": "Email",
+      "password": "Contraseña",
+      "submit": "Iniciar Sesión",
+      "submitting": "Iniciando...",
+      "noAccount": "¿No tienes cuenta?",
+      "registerHere": "Regístrate aquí",
+      "success": "¡Sesión iniciada exitosamente!",
+      "error": "Error al iniciar sesión. Intenta de nuevo."
+    },
+    "register": {
+      "title": "Crear Cuenta",
+      "subtitle": "Regístrate para continuar",
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "email": "Email",
+      "password": "Contraseña",
+      "confirmPassword": "Confirmar",
+      "company": "Empresa",
+      "phone": "Teléfono",
+      "optional": "(opcional)",
+      "submit": "Crear Cuenta",
+      "submitting": "Creando cuenta...",
+      "hasAccount": "¿Ya tienes cuenta?",
+      "loginHere": "Inicia sesión aquí",
+      "success": "¡Cuenta creada exitosamente!",
+      "error": "Error al crear la cuenta. Intenta de nuevo.",
+      "validation": {
+        "required": "Requerido",
+        "invalidEmail": "Email inválido",
+        "minPassword": "Mín. 6 caracteres",
+        "passwordMismatch": "No coinciden"
+      }
+    }
+  },
+  "profile": {
+    "title": "Mi Perfil",
+    "subtitle": "Administra tu información personal",
+    "update": "Actualizar Perfil",
+    "cancel": "Cancelar",
+    "success": "¡Perfil actualizado exitosamente!",
+    "error": "Error al actualizar el perfil."
+  },
+  "orders": {
+    "title": "Mis Pedidos",
+    "empty": "Aún no tienes pedidos",
+    "emptyDescription": "Cuando realices una compra, tus pedidos aparecerán aquí",
+    "explore": "Explorar Servicios"
+  },
+  "serviceDetail": {
+    "description": "Descripción Detallada",
+    "features": "Características Incluidas",
+    "technologies": "Tecnologías Utilizadas",
+    "price": "por proyecto",
+    "delivery": "Entrega:",
+    "addToCart": "Agregar al Carrito",
+    "contactNow": "Contactar Ahora",
+    "available": "Disponible Ahora",
+    "unavailable": "No Disponible"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "close": "Cerrar",
+    "confirm": "Confirmar",
+    "yes": "Sí",
+    "no": "No",
+    "copied": "¡Copiado!"
+  }
+}
