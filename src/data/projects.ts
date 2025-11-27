@@ -7,6 +7,7 @@ export const projectsData: ProjectsData = {
       title: 'Sistema de Gestión Empresarial',
       company: 'Distribuidora Don Julio S.A. y Distribuidora Anabel S.A.',
       country: 'Guatemala',
+      countryFlag: '🇬🇹',
       period: '2019 - 2025',
       description: 'Aplicativo web y móvil para administración y ventas de productos de primera necesidad, con integración de factura electrónica SAT.',
       achievements: [
@@ -28,6 +29,7 @@ export const projectsData: ProjectsData = {
         'Jenkins'
       ],
       icon: 'fa-store',
+      imageUrl: '/images/project-don-julio.png',
       delay: 0
     },
     {
@@ -35,6 +37,7 @@ export const projectsData: ProjectsData = {
       title: 'Plataforma Multi-Cliente',
       company: 'QuickComm Company',
       country: 'Perú',
+      countryFlag: '🇵🇪',
       period: '2022 - 2024',
       url: 'https://www.linkedin.com/company/gravitymarketplace/',
       description: 'Desarrollo de soluciones tecnológicas para múltiples clientes en Perú y Argentina con arquitectura escalable.',
@@ -55,6 +58,7 @@ export const projectsData: ProjectsData = {
         'Microservicios'
       ],
       icon: 'fa-project-diagram',
+      imageUrl: '/images/project-gravity.png',
       delay: 100
     },
     {
@@ -62,6 +66,7 @@ export const projectsData: ProjectsData = {
       title: 'Sistema Bancario Mobile',
       company: 'Menoo App',
       country: 'Uruguay',
+      countryFlag: '🇺🇾',
       period: '2021 - 2022',
       url: 'https://www.linkedin.com/company/menoouy/',
       description: 'Desarrollo de aplicativo SPA y móvil para gestión administrativa, super admin y factura electrónica.',
@@ -83,6 +88,7 @@ export const projectsData: ProjectsData = {
         'SonarQube'
       ],
       icon: 'fa-mobile-alt',
+      imageUrl: '/images/project-menoo.png',
       delay: 200
     },
     {
@@ -90,6 +96,7 @@ export const projectsData: ProjectsData = {
       title: 'Sistemas Financieros',
       company: 'Technology Center',
       country: 'Guatemala',
+      countryFlag: '🇬🇹',
       period: '2021 - 2022',
       url: 'https://www.tsc.com.gt/',
       description: 'Aplicativos financieros para gestión de créditos con integración a banca virtual Banrural.',
@@ -110,6 +117,7 @@ export const projectsData: ProjectsData = {
         'Clean Architecture'
       ],
       icon: 'fa-university',
+      imageUrl: '/images/project-tsc.png',
       delay: 300
     },
     {
@@ -117,6 +125,7 @@ export const projectsData: ProjectsData = {
       title: 'Ventanilla Única Virtual',
       company: 'USAID / Municipalidad Villa Nueva',
       country: 'Guatemala',
+      countryFlag: '🇬🇹',
       period: '2021',
       url: 'https://www.villanueva.gob.gt/ventanilla-unica-municipal/',
       description: 'Sistema de ventanilla única virtual para trámites municipales con integración de servicios web SOAP.',
@@ -136,6 +145,7 @@ export const projectsData: ProjectsData = {
         'TypeScript'
       ],
       icon: 'fa-city',
+      imageUrl: '/images/project-villanueva.png',
       delay: 400
     }
   ]

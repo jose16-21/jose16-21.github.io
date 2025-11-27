@@ -34,48 +34,60 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 animate-fadeIn">
       {/* Backdrop */}
-      <div 
+      <div
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
       ></div>
 
       {/* Modal */}
-      <div className="relative bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden animate-slideUp">
-        {/* Header con gradiente */}
-        <div className="relative h-48 bg-gradient-to-br from-primary via-secondary to-accent p-8 flex items-center overflow-hidden">
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full -translate-y-1/2 translate-x-1/2"></div>
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-white rounded-full translate-y-1/2 -translate-x-1/2"></div>
-          </div>
-          
-          <div className="relative z-10 flex items-center gap-6 w-full">
-            <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-white/30 shadow-lg flex-shrink-0">
-              <i className={`fas ${service.icon} text-4xl text-white`}></i>
-            </div>
-            <div className="flex-1">
-              <h2 className="text-3xl font-bold text-white mb-2">{service.title}</h2>
-              <p className="text-white/90 text-sm">{service.shortDescription}</p>
-            </div>
-            {service.featured && (
-              <div className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 border border-white/30">
-                <i className="fas fa-star"></i>
-                Popular
-              </div>
+      <div className="relative bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden animate-slideUp flex flex-col">
+        {/* Header con imagen */}
+        <div className="relative h-56 md:h-64 w-full overflow-hidden group flex-shrink-0">
+          <div className="absolute inset-0 bg-gray-900">
+            {service.imageUrl && (
+              <img
+                src={service.imageUrl}
+                alt={service.title}
+                className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
+              />
             )}
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>
+
+          <div className="absolute bottom-0 left-0 w-full p-6 md:p-8 z-10">
+            <div className="flex flex-col md:flex-row md:items-end gap-4">
+              <div className="w-16 h-16 md:w-18 md:h-18 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/20 shadow-2xl flex-shrink-0">
+                <i className={`fas ${service.icon} text-3xl text-white`}></i>
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="px-2.5 py-1 bg-primary/90 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-wider rounded-full">
+                    {service.category.replace('-', ' ')}
+                  </span>
+                  {service.featured && (
+                    <span className="px-2.5 py-1 bg-accent/90 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-wider rounded-full flex items-center gap-1">
+                      <i className="fas fa-star text-[10px]"></i> Popular
+                    </span>
+                  )}
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-1 tracking-tight leading-tight">{service.title}</h2>
+                <p className="text-gray-300 text-sm md:text-base font-light max-w-2xl leading-relaxed">{service.shortDescription}</p>
+              </div>
+            </div>
           </div>
 
           {/* Botón cerrar */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 w-10 h-10 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full flex items-center justify-center transition-all border border-white/30"
+            className="absolute top-6 right-6 w-10 h-10 bg-black/20 hover:bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center transition-all text-white border border-white/10 z-20"
           >
-            <i className="fas fa-times text-white text-lg"></i>
+            <i className="fas fa-times text-lg"></i>
           </button>
         </div>
 
         {/* Contenido scrolleable */}
-        <div className="overflow-y-auto max-h-[calc(90vh-12rem)] p-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="overflow-y-auto flex-1 p-6 md:p-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
             {/* Columna principal */}
             <div className="lg:col-span-2 space-y-6">
               {/* Descripción completa */}
@@ -95,7 +107,7 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
                 </h3>
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {service.features.map((feature, index) => (
-                    <li 
+                    <li
                       key={index}
                       className="flex items-start gap-2 text-sm text-gray-dark bg-gray-50 p-3 rounded-lg border border-gray-100"
                     >
@@ -114,7 +126,7 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {service.technologies.map((tech, index) => (
-                    <span 
+                    <span
                       key={index}
                       className="px-4 py-2 bg-gradient-to-r from-primary/10 to-secondary/10 text-primary border border-primary/20 rounded-lg text-sm font-medium"
                     >
@@ -147,7 +159,7 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
 
                 <div className="space-y-3">
                   {onAddToCart && (
-                    <button 
+                    <button
                       onClick={handleAddToCart}
                       className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-primary text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
                     >
@@ -155,8 +167,8 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
                       Agregar al Carrito
                     </button>
                   )}
-                  
-                  <button 
+
+                  <button
                     onClick={handleContactService}
                     className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-white text-primary font-semibold rounded-xl border-2 border-primary hover:bg-primary hover:text-white hover:scale-105 transition-all duration-300"
                   >

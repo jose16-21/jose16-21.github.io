@@ -2,102 +2,166 @@ import React from 'react';
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative min-h-screen flex items-center bg-gradient-to-b from-gray-50 via-white to-gray-50 overflow-hidden pt-20 lg:pt-0" id="inicio">
-      
-      {/* Fondo minimalista con formas geométricas sutiles - Usando colores del branding */}
+    <section className="relative min-h-screen flex items-center bg-gradient-to-br from-slate-50 via-white to-blue-50/30 overflow-hidden" id="inicio">
+
+      {/* Fondo ejecutivo minimalista */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Círculos de fondo sutiles con colores del branding */}
-        <div className="absolute top-20 right-[15%] w-[400px] h-[400px] bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-[25%] w-[300px] h-[300px] bg-gradient-to-br from-secondary/15 to-accent/15 rounded-full blur-3xl"></div>
+        {/* Gradiente sutil */}
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent"></div>
         
-        {/* Puntos decorativos con colores del branding */}
-        <div className="absolute top-1/4 right-[10%] w-2 h-2 bg-primary/30 rounded-full"></div>
-        <div className="absolute top-1/3 right-[20%] w-3 h-3 bg-secondary/30 rounded-full"></div>
-        <div className="absolute bottom-1/3 right-[15%] w-2 h-2 bg-accent/30 rounded-full"></div>
+        {/* Líneas decorativas sutiles */}
+        <div className="absolute top-1/4 right-[20%] w-px h-32 bg-gradient-to-b from-transparent via-secondary/20 to-transparent"></div>
+        <div className="absolute bottom-1/4 right-[15%] w-px h-24 bg-gradient-to-b from-transparent via-primary/20 to-transparent"></div>
+        
+        {/* Círculo decorativo */}
+        <div className="absolute top-1/3 right-[10%] w-64 h-64 border border-secondary/10 rounded-full"></div>
+        <div className="absolute top-1/3 right-[10%] w-48 h-48 border border-primary/10 rounded-full translate-x-8 translate-y-8"></div>
       </div>
 
-      {/* Contenido Principal - Centrado */}
-      <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
-        {/* Título principal con gradiente del branding */}
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-          Juan José Hernández
-        </h1>
-        
-        {/* Subtítulo */}
-        <h2 className="text-2xl md:text-3xl font-light text-gray-dark mb-6">
-          Software Engineer & Tech Consultant
-        </h2>
+      {/* Contenido Principal */}
+      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 py-20 lg:py-0">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          
+          {/* Columna izquierda - Contenido principal */}
+          <div className="text-center lg:text-left">
+            {/* Badge de disponibilidad */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-full text-sm font-medium mb-8 border border-emerald-200">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              Disponible para nuevos proyectos
+            </div>
 
-        {/* Badge de disponibilidad */}
-        <div className="mb-8">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-semibold">
-            <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
-            </span>
-            Disponible para proyectos
+            {/* Título principal */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-6">
+              Transformo ideas
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mt-2">
+                en soluciones digitales
+              </span>
+            </h1>
+
+            {/* Descripción */}
+            <p className="text-lg lg:text-xl text-slate-600 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
+              Más de <span className="font-semibold text-slate-800">10 años</span> diseñando arquitecturas escalables, 
+              liderando equipos técnicos y entregando productos que generan impacto real en empresas de 
+              <span className="font-semibold text-slate-800"> Latinoamérica</span>.
+            </p>
+
+            {/* Stats rápidos */}
+            <div className="flex flex-wrap justify-center lg:justify-start gap-8 mb-10">
+              <div className="text-center lg:text-left">
+                <div className="text-3xl font-bold text-primary">+10</div>
+                <div className="text-sm text-slate-500">Años experiencia</div>
+              </div>
+              <div className="text-center lg:text-left">
+                <div className="text-3xl font-bold text-primary">+50</div>
+                <div className="text-sm text-slate-500">Proyectos entregados</div>
+              </div>
+              <div className="text-center lg:text-left">
+                <div className="text-3xl font-bold text-primary">5</div>
+                <div className="text-sm text-slate-500">Países</div>
+              </div>
+            </div>
+
+            {/* Botones CTA */}
+            <div className="flex flex-wrap justify-center lg:justify-start gap-4">
+              <a
+                href="#contacto"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-semibold rounded-lg shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300"
+              >
+                <i className="fas fa-paper-plane text-sm"></i>
+                Iniciar proyecto
+              </a>
+              <a
+                href="#portafolio"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-white text-slate-700 font-semibold rounded-lg border border-slate-200 hover:border-primary hover:text-primary hover:-translate-y-0.5 transition-all duration-300"
+              >
+                <i className="fas fa-briefcase text-sm"></i>
+                Ver trabajos
+              </a>
+            </div>
+          </div>
+
+          {/* Columna derecha - Card profesional */}
+          <div className="hidden lg:flex justify-center lg:justify-end">
+            <div className="relative">
+              {/* Card principal */}
+              <div className="bg-white rounded-2xl shadow-2xl shadow-slate-200/50 p-8 border border-slate-100 w-80">
+                {/* Avatar/Iniciales */}
+                <div className="w-20 h-20 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-primary/20">
+                  <span className="text-white text-2xl font-bold">JJH</span>
+                </div>
+                
+                {/* Info */}
+                <h3 className="text-xl font-bold text-slate-900 mb-1">Juan José Hernández</h3>
+                <p className="text-secondary font-medium mb-4">Senior Software Engineer</p>
+                
+                {/* Especialidades */}
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center gap-3 text-sm text-slate-600">
+                    <i className="fas fa-check-circle text-emerald-500"></i>
+                    <span>Arquitectura de Software</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-sm text-slate-600">
+                    <i className="fas fa-check-circle text-emerald-500"></i>
+                    <span>DevOps & Cloud (AWS/Azure)</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-sm text-slate-600">
+                    <i className="fas fa-check-circle text-emerald-500"></i>
+                    <span>Liderazgo Técnico</span>
+                  </div>
+                </div>
+
+                {/* Redes sociales */}
+                <div className="flex gap-3 pt-4 border-t border-slate-100">
+                  <a
+                    href="mailto:ju16jo@gmail.com"
+                    className="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center hover:bg-primary hover:text-white transition-all text-slate-500"
+                  >
+                    <i className="fas fa-envelope text-sm"></i>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/juan-jose-hernandez-gt/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center hover:bg-[#0077B5] hover:text-white transition-all text-slate-500"
+                  >
+                    <i className="fab fa-linkedin-in text-sm"></i>
+                  </a>
+                  <a
+                    href="https://github.com/jose16-21"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center hover:bg-slate-800 hover:text-white transition-all text-slate-500"
+                  >
+                    <i className="fab fa-github text-sm"></i>
+                  </a>
+                  <a
+                    href="https://wa.me/50231322197"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all text-slate-500"
+                  >
+                    <i className="fab fa-whatsapp text-sm"></i>
+                  </a>
+                </div>
+              </div>
+
+              {/* Decoración flotante */}
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-secondary/10 rounded-2xl -z-10"></div>
+              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-primary/10 rounded-2xl -z-10"></div>
+            </div>
           </div>
         </div>
-
-        {/* Descripción */}
-        <p className="text-lg text-gray-medium leading-relaxed mb-8 max-w-2xl mx-auto">
-          Especialista en desarrollo de software, arquitectura de sistemas y consultoría tecnológica. 
-          Transformo ideas en <span className="font-semibold text-primary">soluciones digitales robustas y escalables</span>.
-        </p>
-
-        {/* Redes sociales */}
-        <div className="flex justify-center gap-4 mb-8">
-          <a 
-            href="mailto:ju16jo@gmail.com" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="w-12 h-12 bg-gray-lighter rounded-xl flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300 text-gray-medium"
-          >
-            <i className="fas fa-envelope"></i>
-          </a>
-          <a 
-            href="https://www.linkedin.com/in/juan-jose-hernandez-gt/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="w-12 h-12 bg-gray-lighter rounded-xl flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300 text-gray-medium"
-          >
-            <i className="fab fa-linkedin"></i>
-          </a>
-          <a 
-            href="https://github.com/jose16-21" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="w-12 h-12 bg-gray-lighter rounded-xl flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300 text-gray-medium"
-          >
-            <i className="fab fa-github"></i>
-          </a>
-        </div>
-
-        {/* Botones CTA */}
-        <div className="flex flex-wrap justify-center gap-4">
-          <a 
-            href="#contacto" 
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-primary text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-          >
-            <i className="fas fa-paper-plane"></i>
-            Contratar Servicios
-          </a>
-          <a 
-            href="#portafolio" 
-            className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-semibold rounded-xl border-2 border-primary hover:bg-primary hover:text-white hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
-          >
-            <i className="fas fa-eye"></i>
-            Ver Portafolio
-          </a>
-        </div>
       </div>
 
-      {/* Indicador de scroll */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-20">
-        <div className="flex flex-col items-center gap-2 text-gray-400 hover:text-primary transition-colors cursor-pointer">
-          <span className="text-sm font-medium">Scroll</span>
-          <i className="fas fa-chevron-down"></i>
-        </div>
+      {/* Indicador de scroll - más sutil */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20">
+        <a href="#servicios" className="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors">
+          <span className="text-xs font-medium tracking-wider uppercase">Explorar</span>
+          <i className="fas fa-chevron-down text-sm animate-bounce"></i>
+        </a>
       </div>
     </section>
   );
