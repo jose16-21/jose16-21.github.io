@@ -29,6 +29,50 @@ const iconMap: Record<string, React.ReactElement> = {
   SiArgo: <SiArgo className="w-8 h-8" />
 };
 
+// Componente de fondo animado
+const AnimatedBackground: React.FC = () => {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Gradiente base */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-blue-50/30"></div>
+      
+      {/* Gradiente lateral */}
+      <div className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-primary/5 to-transparent"></div>
+      <div className="absolute bottom-0 right-0 w-1/3 h-full bg-gradient-to-l from-secondary/5 to-transparent"></div>
+      
+      {/* Líneas decorativas animadas */}
+      <div className="absolute top-1/4 left-[10%] w-px h-40 bg-gradient-to-b from-transparent via-primary/20 to-transparent animate-pulse"></div>
+      <div className="absolute top-1/3 left-[5%] w-px h-32 bg-gradient-to-b from-transparent via-secondary/15 to-transparent animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+      <div className="absolute bottom-1/4 right-[10%] w-px h-36 bg-gradient-to-b from-transparent via-primary/20 to-transparent animate-pulse" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute bottom-1/3 right-[5%] w-px h-28 bg-gradient-to-b from-transparent via-secondary/15 to-transparent animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+      
+      {/* Círculos decorativos flotantes */}
+      <div className="absolute top-[15%] left-[8%] w-64 h-64 border border-primary/10 rounded-full animate-[spin_60s_linear_infinite]"></div>
+      <div className="absolute top-[20%] left-[12%] w-48 h-48 border border-secondary/10 rounded-full animate-[spin_45s_linear_infinite_reverse]"></div>
+      
+      <div className="absolute bottom-[15%] right-[8%] w-72 h-72 border border-secondary/10 rounded-full animate-[spin_50s_linear_infinite]"></div>
+      <div className="absolute bottom-[20%] right-[12%] w-56 h-56 border border-primary/10 rounded-full animate-[spin_40s_linear_infinite_reverse]"></div>
+      
+      {/* Puntos flotantes animados */}
+      <div className="absolute top-[30%] left-[20%] w-2 h-2 bg-primary/20 rounded-full animate-bounce" style={{ animationDuration: '3s' }}></div>
+      <div className="absolute top-[50%] left-[15%] w-3 h-3 bg-secondary/15 rounded-full animate-bounce" style={{ animationDuration: '4s', animationDelay: '0.5s' }}></div>
+      <div className="absolute top-[70%] left-[25%] w-2 h-2 bg-primary/20 rounded-full animate-bounce" style={{ animationDuration: '3.5s', animationDelay: '1s' }}></div>
+      
+      <div className="absolute top-[25%] right-[20%] w-3 h-3 bg-secondary/15 rounded-full animate-bounce" style={{ animationDuration: '4s', animationDelay: '0.3s' }}></div>
+      <div className="absolute top-[45%] right-[15%] w-2 h-2 bg-primary/20 rounded-full animate-bounce" style={{ animationDuration: '3s', animationDelay: '0.8s' }}></div>
+      <div className="absolute top-[65%] right-[25%] w-3 h-3 bg-secondary/15 rounded-full animate-bounce" style={{ animationDuration: '3.5s', animationDelay: '1.2s' }}></div>
+      
+      {/* Formas geométricas sutiles */}
+      <div className="absolute top-[40%] left-[3%] w-20 h-20 border border-primary/10 rotate-45 animate-pulse" style={{ animationDuration: '4s' }}></div>
+      <div className="absolute bottom-[40%] right-[3%] w-16 h-16 border border-secondary/10 rotate-12 animate-pulse" style={{ animationDuration: '5s', animationDelay: '1s' }}></div>
+      
+      {/* Líneas horizontales decorativas */}
+      <div className="absolute top-[20%] left-0 w-32 h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent animate-pulse" style={{ animationDuration: '3s' }}></div>
+      <div className="absolute bottom-[20%] right-0 w-40 h-px bg-gradient-to-l from-transparent via-secondary/15 to-transparent animate-pulse" style={{ animationDuration: '4s', animationDelay: '1.5s' }}></div>
+    </div>
+  );
+};
+
 const Experience: React.FC = () => {
   const [experienceData, setExperienceData] = useState<ExperienceData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -53,6 +97,7 @@ const Experience: React.FC = () => {
   if (loading || !experienceData) {
     return (
       <section className="py-24 bg-gradient-to-b from-gray-50 via-white to-gray-50 relative overflow-hidden" id="experiencia">
+        <AnimatedBackground />
         <div className="max-w-7xl mx-auto px-8 relative z-10 text-center">
           <p className="text-gray-medium">Cargando experiencia...</p>
         </div>
@@ -64,6 +109,8 @@ const Experience: React.FC = () => {
 
   return (
     <section className="py-24 bg-white relative overflow-hidden" id="experiencia">
+      {/* Fondo animado */}
+      <AnimatedBackground />
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <div className="text-center mb-20">
