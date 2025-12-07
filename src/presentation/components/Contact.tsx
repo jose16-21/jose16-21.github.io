@@ -1,9 +1,23 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ClipboardUtils } from '../../utils';
 
+declare global {
+  interface Window {
+    grecaptcha: {
+      render: (container: HTMLElement, parameters: any) => number;
+      reset: (widgetId?: number) => void;
+      getResponse: (widgetId?: number) => string;
+      ready: (callback: () => void) => void;
+    };
+  }
+}
+
 const Contact: React.FC = () => {
   const { t } = useTranslation();
+  const recaptchaRef = useRef<HTMLDivElement>(null);
+  const widgetIdRef = useRef<number | null>(null);
+  
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
@@ -15,6 +29,34 @@ const Contact: React.FC = () => {
 
   const [recaptchaError, setRecaptchaError] = useState(false);
   const [copiedField, setCopiedField] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  useEffect(() => {
+    const loadRecaptcha = () => {
+      if (window.grecaptcha && window.grecaptcha.render && recaptchaRef.current) {
+        if (widgetIdRef.current === null) {
+          try {
+            widgetIdRef.current = window.grecaptcha.render(recaptchaRef.current, {
+              'sitekey': import.meta.env.VITE_RECAPTCHA_SITE_KEY,
+              'callback': () => setRecaptchaError(false)
+            });
+          } catch (e) {
+            console.error("Error rendering recaptcha", e);
+          }
+        }
+      }
+    };
+
+    const checkGrecaptcha = setInterval(() => {
+      if (window.grecaptcha && window.grecaptcha.render) {
+        clearInterval(checkGrecaptcha);
+        loadRecaptcha();
+      }
+    }, 500);
+
+    return () => clearInterval(checkGrecaptcha);
+  }, []);
 
   const copyToClipboard = async (text: string, field: string) => {
     const success = await ClipboardUtils.copyToClipboard(text);
@@ -24,32 +66,79 @@ const Contact: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
     // Validar reCAPTCHA
-    if (window.grecaptcha) {
-      const response = window.grecaptcha.getResponse();
+    if (window.grecaptcha && widgetIdRef.current !== null) {
+      const response = window.grecaptcha.getResponse(widgetIdRef.current);
       if (!response) {
         setRecaptchaError(true);
         return;
       }
       setRecaptchaError(false);
+    } else if (window.grecaptcha) {
+       // Fallback si widgetId es null pero grecaptcha existe (caso raro)
+       setRecaptchaError(true);
+       return;
     }
 
-    // Aquí iría la lógica de envío del formulario
-    console.log('Formulario enviado:', formData);
-    alert(t('contact.form.success'));
-    
-    // Reset form
-    setFormData({
-      nombre: '',
-      email: '',
-      empresa: '',
-      presupuesto: '',
-      servicio: '',
-      mensaje: ''
-    });
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      // Usar el proxy configurado en vite.config.ts para desarrollo
+      // En producción, esto debería apuntar a la URL real si el backend permite CORS
+      const apiUrl = import.meta.env.DEV ? '/api/send-email' : 'https://api.smartdevs.com.gt/send-email';
+      
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          template: "ContactFormTemplateV2",
+          template_data: {
+            nombre: formData.nombre,
+            email: formData.email,
+            empresa: formData.empresa,
+            presupuesto: formData.presupuesto,
+            servicio: formData.servicio,
+            descripcion: formData.mensaje
+          }
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al enviar el formulario');
+      }
+
+      setSubmitStatus('success');
+      setFormData({
+        nombre: '',
+        email: '',
+        empresa: '',
+        presupuesto: '',
+        servicio: '',
+        mensaje: ''
+      });
+      
+      // Reset recaptcha if exists
+      if (window.grecaptcha && widgetIdRef.current !== null) {
+        window.grecaptcha.reset(widgetIdRef.current);
+      }
+
+      // Clear success message after 5 seconds
+      setTimeout(() => {
+        setSubmitStatus('idle');
+      }, 5000);
+
+    } catch (error) {
+      console.error('Error sending form:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -211,17 +300,44 @@ const Contact: React.FC = () => {
                 ></textarea>
               </div>
               <div className="mb-4">
-                <div className="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+                <div ref={recaptchaRef}></div>
                 {recaptchaError && (
                   <div id="recaptcha-error" className="text-error text-xs mt-1.5 flex items-center gap-1.5 before:content-['⚠️'] before:text-sm">
                     {t('contact.form.recaptchaError')}
                   </div>
                 )}
               </div>
-              <button type="submit" className="w-full inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-gradient-primary text-white text-sm font-medium rounded-lg shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300">
-                <i className="fas fa-paper-plane text-xs"></i>
-                {t('contact.form.submit')}
+              <button 
+                type="submit" 
+                disabled={isSubmitting}
+                className={`w-full inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-gradient-primary text-white text-sm font-medium rounded-lg shadow-md transition-all duration-300 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:-translate-y-0.5 hover:shadow-lg'}`}
+              >
+                {isSubmitting ? (
+                  <>
+                    <i className="fas fa-spinner fa-spin text-xs"></i>
+                    Enviando...
+                  </>
+                ) : (
+                  <>
+                    <i className="fas fa-paper-plane text-xs"></i>
+                    {t('contact.form.submit')}
+                  </>
+                )}
               </button>
+
+              {submitStatus === 'success' && (
+                <div className="mt-4 p-3 bg-green-50 text-green-700 text-sm rounded-lg border border-green-200 flex items-center gap-2 animate-fade-in">
+                  <i className="fas fa-check-circle"></i>
+                  {t('contact.form.success')}
+                </div>
+              )}
+
+              {submitStatus === 'error' && (
+                <div className="mt-4 p-3 bg-red-50 text-red-700 text-sm rounded-lg border border-red-200 flex items-center gap-2 animate-fade-in">
+                  <i className="fas fa-exclamation-circle"></i>
+                  Error al enviar el mensaje. Por favor intenta de nuevo.
+                </div>
+              )}
             </form>
           </div>
         </div>
