@@ -1,6 +1,7 @@
 import { FaArrowLeft, FaShoppingCart, FaTrash, FaSearch, FaList, FaClock, FaEdit, FaReceipt, FaShoppingBag, FaTags, FaCommentAlt, FaFileInvoice, FaInfoCircle, FaSignInAlt, FaSpinner, FaCreditCard, FaCheck, FaCcVisa, FaCcMastercard, FaCcPaypal, FaCcAmex, FaEnvelope, FaShieldAlt } from 'react-icons/fa';
 import { faIconMap } from '../utils/faIconMap';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useCart } from '../../application/hooks/useCart';
 import { useAuth } from '../../application/hooks/useAuth';
 import { useModal } from '../../application/context/ModalContext';
@@ -10,6 +11,7 @@ import LoginModal from '../components/LoginModal';
 import RegisterModal from '../components/RegisterModal';
 
 const CartPage: React.FC = () => {
+  const { t } = useTranslation();
   const { items, totalAmount, updateQuantity, removeFromCart, clearCart } = useCart();
   const { isAuthenticated, user } = useAuth();
   const { 
@@ -85,19 +87,19 @@ const CartPage: React.FC = () => {
             className="inline-flex items-center gap-2 text-gray-600 hover:text-primary transition-colors mb-4"
           >
             <FaArrowLeft />
-            <span>Volver a servicios</span>
+            <span>{t('cart.back')}</span>
           </Link>
           
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-4xl font-bold text-dark mb-2 flex items-center gap-3">
                 <FaShoppingCart className="text-primary" />
-                Mi Carrito de Compras
+                {t('cart.title')}
               </h1>
               <p className="text-gray-medium">
                 {items.length === 0 
-                  ? 'Tu carrito está vacío' 
-                  : `${items.length} ${items.length === 1 ? 'servicio' : 'servicios'} en tu carrito`
+                  ? t('cart.empty')
+                  : `${items.length} ${items.length === 1 ? t('cart.serviceInCart') : t('cart.servicesInCart')}`
                 }
               </p>
             </div>
@@ -105,10 +107,10 @@ const CartPage: React.FC = () => {
             {items.length > 0 && (
               <button
                 onClick={() => {
-                  if (confirm('¿Estás seguro de que deseas vaciar el carrito?')) {
+                  if (confirm(t('cart.confirmClear'))) {
                     clearCart();
                     notificationManager.show({
-                      message: 'Carrito vaciado',
+                      message: t('cart.cleared'),
                       type: 'success'
                     });
                   }
@@ -116,7 +118,7 @@ const CartPage: React.FC = () => {
                 className="px-4 py-2 text-danger hover:bg-danger/10 rounded-lg transition-colors flex items-center gap-2"
               >
                 <FaTrash />
-                Vaciar carrito
+                {t('cart.clearCart')}
               </button>
             )}
           </div>
@@ -125,14 +127,14 @@ const CartPage: React.FC = () => {
         {items.length === 0 ? (
           <div className="bg-white rounded-2xl shadow-lg p-12 text-center">
             <FaShoppingCart className="text-8xl text-gray-300 mb-6" />
-            <h2 className="text-2xl font-bold text-gray-dark mb-4">Tu carrito está vacío</h2>
-            <p className="text-gray-medium mb-8">Explora nuestros servicios profesionales y comienza a construir tu proyecto</p>
+            <h2 className="text-2xl font-bold text-gray-dark mb-4">{t('cart.empty')}</h2>
+            <p className="text-gray-medium mb-8">{t('cart.emptyDescription')}</p>
             <Link
               to="/"
               className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-primary text-white font-semibold rounded-lg shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all"
             >
               <FaSearch />
-              Explorar Servicios
+              {t('cart.explore')}
             </Link>
           </div>
         ) : (
@@ -142,7 +144,7 @@ const CartPage: React.FC = () => {
               <div className="bg-white rounded-xl shadow-md p-6">
                 <h2 className="text-2xl font-bold text-dark mb-6 flex items-center gap-2">
                   <FaList className="text-primary" />
-                  Servicios Seleccionados
+                  {t('cart.selectedServices')}
                 </h2>
                 
                 <div className="space-y-4">
@@ -171,7 +173,7 @@ const CartPage: React.FC = () => {
                           onClick={() => {
                             removeFromCart(item.product.id);
                             notificationManager.show({
-                              message: `${item.product.title} eliminado del carrito`,
+                              message: `${item.product.title} ${t('cart.removed')}`,
                               type: 'success'
                             });
                           }}
@@ -186,7 +188,7 @@ const CartPage: React.FC = () => {
                         {/* Features en grid compacto */}
                         {item.product.features && item.product.features.length > 0 && (
                           <div className="mb-4">
-                            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Características incluidas:</p>
+                            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">{t('cart.featuresIncluded')}</p>
                             <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
                               {item.product.features.slice(0, 8).map((feature, idx) => (
                                 <div key={idx} className="flex items-start gap-2 text-sm text-gray-600">
@@ -202,7 +204,7 @@ const CartPage: React.FC = () => {
                         {item.product.deliveryTime && (
                           <div className="inline-flex items-center gap-1.5 text-xs text-gray-500 bg-gray-50 px-3 py-1.5 rounded-full mb-4">
                             <FaClock className="text-primary" />
-                            <span>Tiempo de entrega: {item.product.deliveryTime}</span>
+                            <span>{t('cart.deliveryTime')} {item.product.deliveryTime}</span>
                           </div>
                         )}
                         
@@ -211,7 +213,7 @@ const CartPage: React.FC = () => {
                           <div className="bg-blue-50 border border-blue-100 rounded-lg p-2.5 mb-4">
                             <p className="text-xs text-blue-700">
                               <FaEdit className="mr-1.5" />
-                              <span className="font-medium">Personalización:</span> {item.customizations}
+                              <span className="font-medium">{t('cart.customization')}</span> {item.customizations}
                             </p>
                           </div>
                         )}
@@ -220,7 +222,7 @@ const CartPage: React.FC = () => {
                       {/* Footer con cantidad y precio */}
                       <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-t border-gray-100">
                         <div className="flex items-center gap-2">
-                          <span className="text-xs font-medium text-gray-500">Cantidad:</span>
+                          <span className="text-xs font-medium text-gray-500">{t('cart.quantity')}</span>
                           <div className="flex items-center bg-white rounded-lg border border-gray-200 shadow-sm">
                             <button 
                               className="w-8 h-8 hover:bg-gray-100 transition-colors text-gray-600 hover:text-gray-900 font-semibold rounded-l-lg text-sm"
@@ -239,7 +241,7 @@ const CartPage: React.FC = () => {
                         </div>
                         
                         <div className="text-right">
-                          <div className="text-xs text-gray-400">Precio unitario</div>
+                          <div className="text-xs text-gray-400">{t('cart.unitPrice')}</div>
                           <div className="text-xl font-bold text-gray-900">
                             ${item.product.price.amount.toLocaleString()} <span className="text-sm font-normal text-gray-500">{item.product.price.currency}</span>
                           </div>
@@ -256,7 +258,7 @@ const CartPage: React.FC = () => {
               <div className="bg-white rounded-xl shadow-md p-6 sticky top-4">
                 <h2 className="text-2xl font-bold text-dark mb-6 flex items-center gap-2">
                   <FaReceipt className="text-primary" />
-                  Resumen
+                  {t('cart.summary')}
                 </h2>
                 
                 {/* Resumen de la orden */}
@@ -264,7 +266,7 @@ const CartPage: React.FC = () => {
                   <div className="flex justify-between items-center pb-3 border-b border-gray-200">
                     <span className="text-gray-medium flex items-center gap-2">
                       <FaShoppingBag />
-                      Total de productos
+                      {t('cart.totalProducts')}
                     </span>
                     <span className="text-lg font-bold text-dark">
                       {items.reduce((sum, item) => sum + item.quantity, 0)}
@@ -274,19 +276,19 @@ const CartPage: React.FC = () => {
                   <div className="flex justify-between items-center pb-3 border-b border-gray-200">
                     <span className="text-gray-medium flex items-center gap-2">
                       <FaTags />
-                      Servicios únicos
+                      {t('cart.uniqueServices')}
                     </span>
                     <span className="text-lg font-bold text-dark">{items.length}</span>
                   </div>
                   
                   <div className="flex justify-between items-center pt-2">
-                    <span className="text-lg font-semibold text-dark">Total:</span>
+                    <span className="text-lg font-semibold text-dark">{t('cart.total')}</span>
                     <div className="text-right">
                       <div className="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent">
                         ${isQuoteMode ? 0 : totalAmount.toLocaleString()}
                       </div>
                       <div className="text-xs text-gray-medium">
-                        {isQuoteMode ? 'Cotización' : 'USD'}
+                        {isQuoteMode ? t('cart.quote') : 'USD'}
                       </div>
                     </div>
                   </div>
@@ -296,12 +298,12 @@ const CartPage: React.FC = () => {
                 <div className="mb-6">
                   <label className="flex items-center gap-2 text-sm font-semibold text-dark mb-2">
                     <FaCommentAlt className="text-primary" />
-                    Comentarios <span className="text-gray-medium font-normal">(Opcional)</span>
+                    {t('cart.comments')} <span className="text-gray-medium font-normal">{t('cart.commentsOptional')}</span>
                   </label>
                   <textarea
                     value={comments}
                     onChange={(e) => setComments(e.target.value)}
-                    placeholder="Requisitos especiales, preferencias de tecnología, plazos específicos..."
+                    placeholder={t('cart.commentsPlaceholder')}
                     className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all resize-none text-sm"
                     rows={4}
                     maxLength={500}
@@ -325,10 +327,10 @@ const CartPage: React.FC = () => {
                     <div className="flex-1">
                       <div className="flex items-center gap-2 text-dark font-semibold mb-1">
                         <FaFileInvoice className="text-secondary" />
-                        Solicitar cotización sin costo
+                        {t('cart.quoteMode')}
                       </div>
                       <p className="text-xs text-gray-medium">
-                        Te contactaremos con precios personalizados y detalles del proyecto.
+                        {t('cart.quoteModeDescription')}
                       </p>
                     </div>
                   </label>
@@ -338,13 +340,13 @@ const CartPage: React.FC = () => {
                   <div className="bg-primary/10 border border-primary/20 rounded-lg p-4 text-center">
                     <div className="flex flex-col items-center gap-4">
                       <FaInfoCircle className="text-primary text-2xl" />
-                      <p className="text-gray-dark">Inicia sesión para proceder con la compra</p>
-                      <button 
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-primary text-white font-semibold rounded-lg shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all" 
+                      <p className="text-gray-dark">{t('cart.loginRequired')}</p>
+                      <button
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-primary text-white font-semibold rounded-lg shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all"
                         onClick={openLogin}
                       >
                         <FaSignInAlt />
-                        Iniciar Sesión
+                        {t('nav.login')}
                       </button>
                     </div>
                   </div>
@@ -362,17 +364,17 @@ const CartPage: React.FC = () => {
                       {isProcessing ? (
                         <>
                           <FaSpinner className="animate-spin" />
-                          Procesando...
+                          {t('cart.processing')}
                         </>
                       ) : isQuoteMode ? (
                         <>
                           <FaFileInvoice />
-                          Solicitar Cotización
+                          {t('cart.requestQuote')}
                         </>
                       ) : (
                         <>
                           <FaCreditCard />
-                          Proceder al Pago - ${totalAmount.toLocaleString()} USD
+                          {t('cart.proceedPayment')} - ${totalAmount.toLocaleString()} USD
                         </>
                       )}
                     </button>
@@ -388,7 +390,7 @@ const CartPage: React.FC = () => {
                     
                     <div className="flex items-center justify-center gap-2 text-sm text-gray-medium">
                       {isQuoteMode ? <FaEnvelope className="text-secondary" /> : <FaShieldAlt className="text-success" />}
-                      <span>{isQuoteMode ? 'Cotización por email' : 'Pago seguro - Simulación'}</span>
+                      <span>{isQuoteMode ? t('cart.quoteByEmail') : t('cart.securePayment')}</span>
                     </div>
                   </div>
                 )}

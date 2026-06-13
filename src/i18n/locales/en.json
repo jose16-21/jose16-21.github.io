@@ -212,7 +212,8 @@
     "title": "My Orders",
     "empty": "You don't have orders yet",
     "emptyDescription": "When you make a purchase, your orders will appear here",
-    "explore": "Explore Services"
+    "explore": "Explore Services",
+    "viewDetails": "View Details"
   },
   "serviceDetail": {
     "description": "Detailed Description",
