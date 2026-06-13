@@ -163,7 +163,10 @@
     "quote": "Cotización",
     "removed": "eliminado del carrito",
     "cleared": "Carrito vaciado",
-    "added": "agregado al carrito"
+    "added": "agregado al carrito",
+    "quoteSuccess": "¡Cotización enviada! Te contactaremos pronto.",
+    "orderSuccess": "¡Orden procesada! Recibirás un email de confirmación.",
+    "checkoutError": "Error al procesar. Intenta de nuevo."
   },
   "auth": {
     "login": {

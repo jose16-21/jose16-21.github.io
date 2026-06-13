@@ -163,7 +163,10 @@
     "quote": "Quote",
     "removed": "removed from cart",
     "cleared": "Cart emptied",
-    "added": "added to cart"
+    "added": "added to cart",
+    "quoteSuccess": "Quote sent successfully! We'll contact you soon.",
+    "orderSuccess": "Order processed! You'll receive a confirmation email.",
+    "checkoutError": "Error processing request. Please try again."
   },
   "auth": {
     "login": {
