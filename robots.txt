@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+# Resumen estructurado para agentes IA
+# https://jose16-21.github.io/llms.txt
+
 Sitemap: https://jose16-21.github.io/sitemap.xml
