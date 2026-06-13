@@ -97,7 +97,12 @@ const Portfolio: React.FC = () => {
                 </div>
                 <p className="text-sm text-primary font-semibold mb-1">{project.company}</p>
                 <p className="text-xs text-gray-500 mb-3">{project.period}</p>
-                <p className="text-sm text-gray-medium mb-4 line-clamp-3">{project.description}</p>
+                <p className="text-sm text-gray-medium mb-3 line-clamp-3">{project.description}</p>
+                {project.outcome && (
+                  <p className="text-sm text-dark font-medium mb-4 bg-primary/5 border-l-2 border-primary pl-3 py-1.5 rounded-r">
+                    {project.outcome}
+                  </p>
+                )}
                 <div className="flex flex-wrap gap-1.5">
                   {project.technologies.slice(0, 5).map((tech) => (
                     <span key={tech} className="px-2 py-1 bg-gray-100 hover:bg-primary hover:text-white text-gray-700 text-xs rounded-full transition-colors">{tech}</span>

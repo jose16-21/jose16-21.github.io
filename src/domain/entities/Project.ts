@@ -6,6 +6,8 @@ export interface Project {
   countryFlag: string;
   period: string;
   description: string;
+  /** Resultado de negocio del proyecto, en términos de impacto (enfoque gerencial). */
+  outcome?: string;
   achievements: string[];
   technologies: string[];
   icon: string;

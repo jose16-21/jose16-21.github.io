@@ -4,7 +4,7 @@ import {
   FaCode, FaMobileAlt, FaInfinity, FaCloud, FaLightbulb, FaGraduationCap,
   FaPlug, FaShoppingCart, FaServer, FaCodeBranch, FaShieldAlt, FaDatabase,
   FaChalkboardTeacher, FaStore, FaProjectDiagram, FaUniversity, FaCity,
-  FaCertificate,
+  FaCertificate, FaRobot, FaHeartbeat, FaFileInvoiceDollar, FaSyncAlt,
 } from 'react-icons/fa';
 
 export type FaIconComponent = FC<IconBaseProps>;
@@ -28,4 +28,8 @@ export const faIconMap: Record<string, FaIconComponent> = {
   'fa-university':         FaUniversity,
   'fa-city':               FaCity,
   'fa-certificate':        FaCertificate,
+  'fa-robot':              FaRobot,
+  'fa-heartbeat':          FaHeartbeat,
+  'fa-file-invoice':       FaFileInvoiceDollar,
+  'fa-sync':               FaSyncAlt,
 };

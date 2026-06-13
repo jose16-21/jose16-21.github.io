@@ -12,11 +12,12 @@ export const experiencesData: ExperienceData = {
       remote: true,
       companyUrl: 'https://www.capitalvalleytech.com/',
       companyLogo: 'https://www.capitalvalleytech.com/favicon.ico',
-      description: 'Liderazgo técnico y definición de arquitectura cloud-native. Implementación de mejores prácticas DevOps, diseño de soluciones escalables en AWS y mentoría de equipos de alto rendimiento.',
+      description: 'Lidero el desarrollo end-to-end de un ATS (Applicant Tracking System) y un equipo de 5 desarrolladores. Diseñé la infraestructura sobre AWS EKS (multi-AZ, HPA, autoscaling, IAM/RBAC) con IaC en Terraform y CI/CD en GitHub Actions y Azure DevOps. Integré IA al ciclo de desarrollo, diseñando servidores MCP, agentes y skills.',
       skills: [
-        'AWS Architecture',
-        'Kubernetes',
-        'Terraform',
+        'AWS EKS (multi-AZ, HPA)',
+        'Terraform / IaC',
+        'IA aplicada · MCP, agentes y skills',
+        'Liderazgo de equipo',
         'Microservices',
         'Node.js',
         'TypeScript',
@@ -35,15 +36,15 @@ export const experiencesData: ExperienceData = {
       remote: true,
       companyUrl: 'https://www.finerioconnect.com/',
       companyLogo: 'https://www.finerioconnect.com/favicon.ico',
-      description: 'Arquitectura de soluciones financieras serverless. Optimización de procesos de data scraping e implementación de Clean Architecture para garantizar escalabilidad y mantenibilidad.',
+      description: 'Open Banking / Open Finance: crawlers y scrapers financieros en C# y AWS Lambda (Python) con integración a bancos de Colombia, México y Chile. Apliqué arquitectura hexagonal y Clean Architecture, con observabilidad sobre Loki y Datadog para sostener procesos críticos.',
       skills: [
-        'Serverless',
-        'AWS Lambda',
+        'Open Banking / Open Finance',
+        'Serverless · AWS Lambda',
         'Python',
-        'Clean Architecture',
+        'Hexagonal / Clean Architecture',
+        'Observabilidad (Loki, Datadog)',
         'Fintech',
-        'Web Scraping',
-        'SonarQube'
+        'Web Scraping'
       ],
       delay: 100
     },
@@ -57,13 +58,13 @@ export const experiencesData: ExperienceData = {
       remote: true,
       companyUrl: 'https://www.rappi.com/',
       companyLogo: 'https://www.rappi.com/favicon.ico',
-      description: 'Desarrollo de microservicios de alto rendimiento. Integración de sistemas críticos y optimización de flujos operativos en entornos de alta concurrencia.',
+      description: 'Microservicios de alta concurrencia en AdonisJS/TypeScript con arquitectura event-driven sobre Apache Kafka. Observabilidad con cAdvisor, Prometheus y Grafana, y soporte on-call con Opsgenie para mantener la operación de delivery en producción.',
       skills: [
         'High Concurrency',
-        'Microservices',
-        'Apache Kafka',
-        'MongoDB',
-        'PostgreSQL',
+        'Event-driven · Apache Kafka',
+        'AdonisJS / TypeScript',
+        'Observabilidad (Prometheus, Grafana)',
+        'On-call (Opsgenie)',
         'Docker',
         'Redis'
       ],
@@ -120,7 +121,17 @@ export const experiencesData: ExperienceData = {
     {
       icon: 'fa-cloud',
       title: 'Expertise Cloud & DevOps',
-      description: 'Especialización en AWS (Route 53, EC2, ELB, S3, RDS), Docker, Kubernetes y Pipelines de CI/CD (Jenkins, GitHub Actions).'
+      description: 'Especialización en AWS (EKS, EC2, Lambda, S3, RDS), Docker, Kubernetes, Terraform y observabilidad (Grafana, Prometheus, CloudWatch, Datadog).'
+    },
+    {
+      icon: 'fa-robot',
+      title: 'IA aplicada al desarrollo',
+      description: 'Diseño y despliegue de servidores MCP, agentes y skills; integración de IA al ciclo de desarrollo con Claude Code, Codex y GitHub Copilot.'
+    },
+    {
+      icon: 'fa-university',
+      title: 'Banca & Fintech',
+      description: '10+ años en banca y fintech: Open Banking, integración con bancos (Bancolombia, BAC, Banrural) y facturación electrónica (SAT).'
     }
   ],
   devopsTools: [

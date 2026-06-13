@@ -9,7 +9,8 @@ export const projectsData: ProjectsData = {
       country: 'Guatemala',
       countryFlag: '🇬🇹',
       period: '2019 - 2025',
-      description: 'Aplicativo web y móvil para administración y ventas de productos de primera necesidad, con integración de factura electrónica SAT.',
+      description: 'Transformación digital de extremo a extremo para dos distribuidoras: aplicativo web y móvil para administración y ventas, con facturación electrónica integrada a la SAT e infraestructura propia en AWS.',
+      outcome: 'Digitalizó la operación de ventas y la facturación ante la SAT, reemplazando procesos manuales por una plataforma unificada que el negocio opera desde 2019.',
       achievements: [
         'Desarrollo de arquitectura Micro frontend con Angular',
         'Aplicación móvil híbrida con Ionic Framework',
@@ -40,7 +41,8 @@ export const projectsData: ProjectsData = {
       countryFlag: '🇵🇪',
       period: '2022 - 2024',
       url: 'https://www.linkedin.com/company/gravitymarketplace/',
-      description: 'Desarrollo de soluciones tecnológicas para múltiples clientes en Perú y Argentina con arquitectura escalable.',
+      description: 'Plataforma multi-cliente para marcas en Perú y Argentina (Dyner Club, Shopstart, Vía Compras), con arquitectura de microservicios escalable, integración a couriers y mensajería event-driven.',
+      outcome: 'Permitió operar varias marcas de e-commerce sobre una misma plataforma, con despachos integrados a couriers y facturación electrónica automatizada.',
       achievements: [
         'Integración con sistemas de Courier (Envíame, Urbano)',
         'Implementación de factura electrónica',
@@ -63,13 +65,14 @@ export const projectsData: ProjectsData = {
     },
     {
       id: 3,
-      title: 'Sistema Bancario Mobile',
+      title: 'App de Gestión y Facturación Electrónica',
       company: 'Menoo App',
       country: 'Uruguay',
       countryFlag: '🇺🇾',
       period: '2021 - 2022',
       url: 'https://www.linkedin.com/company/menoouy/',
-      description: 'Desarrollo de aplicativo SPA y móvil para gestión administrativa, super admin y factura electrónica.',
+      description: 'Aplicativo SPA y móvil para gestión administrativa, panel de super admin y factura electrónica, sobre infraestructura AWS con CI/CD y control de calidad de código.',
+      outcome: 'Centralizó la gestión administrativa y la facturación en una sola herramienta, con despliegues continuos y control de calidad de código automatizado.',
       achievements: [
         'SPA con Ionic Angular',
         'Infraestructura en AWS (EC2, ELB, Route 53)',
@@ -99,7 +102,8 @@ export const projectsData: ProjectsData = {
       countryFlag: '🇬🇹',
       period: '2021 - 2022',
       url: 'https://www.tsc.com.gt/',
-      description: 'Aplicativos financieros para gestión de créditos con integración a banca virtual Banrural.',
+      description: 'Aplicativos financieros para gestión de créditos con integración a la banca virtual de Banrural, construidos con arquitectura limpia en Angular y .NET Core.',
+      outcome: 'Conectó la gestión de créditos directamente con la banca virtual de Banrural, sobre una arquitectura limpia pensada para mantenerse y escalar.',
       achievements: [
         'SPA con arquitectura limpia en Angular 12',
         'REST API con Clean Architecture',
@@ -128,7 +132,8 @@ export const projectsData: ProjectsData = {
       countryFlag: '🇬🇹',
       period: '2021',
       url: 'https://www.villanueva.gob.gt/ventanilla-unica-municipal/',
-      description: 'Sistema de ventanilla única virtual para trámites municipales con integración de servicios web SOAP.',
+      description: 'Ventanilla única virtual para trámites municipales, desarrollada para la Municipalidad de Villa Nueva con apoyo de USAID, integrada a sistemas legados vía servicios web SOAP.',
+      outcome: 'Habilitó a los ciudadanos a realizar trámites municipales en línea, reduciendo gestiones presenciales mediante integración con los sistemas existentes.',
       achievements: [
         'Desarrollo e integración con servicios SOAP',
         'Frontend con Angular',
