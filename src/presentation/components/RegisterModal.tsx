@@ -121,7 +121,12 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={handleClose} />
 
       {/* Modal */}
-      <div className="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-hidden flex flex-col animate-slide-up">
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="register-modal-title"
+        className="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-hidden flex flex-col animate-slide-up"
+      >
         {/* Header con imagen de fondo */}
         <div className="relative h-36 w-full overflow-hidden flex-shrink-0">
           <div className="absolute inset-0 bg-gray-900">
@@ -141,8 +146,8 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
                 <FaUserPlus className="text-xl text-white" />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-white">Crear Cuenta</h2>
-                <p className="text-gray-300 text-sm">Regístrate para continuar</p>
+                <h2 id="register-modal-title" className="text-xl font-bold text-white">{t('auth.register.title')}</h2>
+                <p className="text-gray-300 text-sm">{t('auth.register.subtitle')}</p>
               </div>
             </div>
           </div>
@@ -150,9 +155,10 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
           {/* Botón cerrar */}
           <button
             onClick={handleClose}
+            aria-label={t('common.close')}
             className="absolute top-4 right-4 w-10 h-10 bg-black/20 hover:bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center transition-all text-white border border-white/10 z-20"
           >
-            <FaTimes className="text-lg" />
+            <FaTimes aria-hidden="true" className="text-lg" />
           </button>
         </div>
 

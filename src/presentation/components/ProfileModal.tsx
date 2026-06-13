@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../application/hooks/useAuth';
 import { NotificationManager } from '../../infrastructure/services/NotificationManager';
 
@@ -7,9 +8,10 @@ interface ProfileModalProps {
   onClose: () => void;
 }
 
-import { FaUser, FaEnvelope, FaBuilding, FaPhone, FaCalendar, FaEdit, FaSave } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaBuilding, FaPhone, FaCalendar, FaEdit, FaSave, FaTimes } from 'react-icons/fa';
 
 const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) => {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
@@ -61,10 +63,16 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-dark/80 backdrop-blur-sm flex items-center justify-center p-4 z-50" onClick={handleClose}>
-      <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="profile-modal-title"
+        className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="flex items-center justify-between p-6 border-b border-gray-lighter sticky top-0 bg-white z-10">
-          <h2 className="text-2xl font-bold text-dark flex items-center gap-3"><FaUser className="text-primary" /> Mi Perfil</h2>
-          <button className="w-10 h-10 bg-gray-lighter hover:bg-gray-light rounded-full flex items-center justify-center text-gray-dark hover:text-dark transition-colors text-2xl" onClick={handleClose}>&times;</button>
+          <h2 id="profile-modal-title" className="text-2xl font-bold text-dark flex items-center gap-3"><FaUser className="text-primary" /> {t('profile.title')}</h2>
+          <button aria-label={t('common.close')} className="w-10 h-10 bg-gray-lighter hover:bg-gray-light rounded-full flex items-center justify-center text-gray-dark hover:text-dark transition-colors" onClick={handleClose}><FaTimes aria-hidden="true" /></button>
         </div>
         
         <div className="p-6">

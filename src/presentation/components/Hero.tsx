@@ -120,33 +120,37 @@ const Hero: React.FC = () => {
                 <div className="flex gap-3 pt-4 border-t border-slate-100">
                   <a
                     href="mailto:ju16jo@gmail.com"
+                    aria-label="Email"
                     className="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center hover:bg-primary hover:text-white transition-all text-slate-500"
                   >
-                    <FaEnvelope className="text-sm" />
+                    <FaEnvelope aria-hidden="true" className="text-sm" />
                   </a>
                   <a
                     href="https://www.linkedin.com/in/juan-jose-hernandez-gt/"
+                    aria-label="LinkedIn"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center hover:bg-[#0077B5] hover:text-white transition-all text-slate-500"
                   >
-                    <FaLinkedinIn className="text-sm" />
+                    <FaLinkedinIn aria-hidden="true" className="text-sm" />
                   </a>
                   <a
                     href="https://github.com/jose16-21"
+                    aria-label="GitHub"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center hover:bg-slate-800 hover:text-white transition-all text-slate-500"
                   >
-                    <FaGithub className="text-sm" />
+                    <FaGithub aria-hidden="true" className="text-sm" />
                   </a>
                   <a
                     href="https://wa.me/50231322197"
+                    aria-label="WhatsApp"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all text-slate-500"
                   >
-                    <FaWhatsapp className="text-sm" />
+                    <FaWhatsapp aria-hidden="true" className="text-sm" />
                   </a>
                 </div>
               </div>
