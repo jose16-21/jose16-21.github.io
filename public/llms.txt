@@ -40,7 +40,11 @@ C#/.NET y .NET Core, TypeScript, JavaScript, Node.js (Express, NestJS, AdonisJS)
 - CMS Headless con Strapi en AWS — desde USD 5,500. Arquitectura enterprise: CloudFront, ECS Fargate, Aurora, S3.
 - Infraestructura como Código Multi-Cloud — desde USD 6,800. Terraform para AWS, Azure y GCP con CI/CD.
 - Auditoría de Ciberseguridad y Pentesting — desde USD 4,200. Vulnerabilidades, pentesting y remediación OWASP.
-- Integración de IA y agentes (MCP) — diseño y despliegue de servidores MCP, agentes y skills.
+- Integración de IA y agentes (MCP) — por hora. Diseño y despliegue de servidores MCP, agentes y skills.
+- Observabilidad y Monitoreo (SRE) — desde USD 2,800. Logs, métricas, dashboards y alertas con Grafana, Prometheus, CloudWatch, Datadog y Loki; on-call.
+- Integración Bancaria y Open Banking — desde USD 5,000. Open Banking / Open Finance, agregación de datos financieros e integración con bancos.
+- Facturación Electrónica (SAT / e-Factura) — desde USD 1,500. Emisión integrada a aplicaciones web y móviles, conectada al flujo de ventas.
+- Modernización de Sistemas Legacy — desde USD 7,500. Migración por fases de monolitos y legacy a microservicios, sin detener la operación.
 - Desarrollo de APIs — desde USD 1,800. REST y GraphQL escalables y seguras.
 - Soluciones E-commerce — desde USD 3,200. Tiendas online con pasarelas de pago.
 - Diseño de Base de Datos — desde USD 800. Modelado, optimización y migraciones.
