@@ -1,0 +1,75 @@
+# Juan José Hernández
+
+> Tech Lead y Senior Software Engineer con más de 10 años de experiencia en banca y fintech. Especializado en arquitecturas de microservicios, cloud (AWS y Azure), Kubernetes (EKS/AKS), Infrastructure as Code con Terraform, observabilidad e integración de IA aplicada al desarrollo (servidores MCP, agentes y skills). Basado en Guatemala, con liderazgo de equipos multinacionales en Latinoamérica.
+
+## Contacto
+
+- Email: ju16jo@gmail.com
+- Teléfono / WhatsApp: +502 3132-2197
+- Ubicación: Guatemala (GMT-6) · trabajo remoto en LATAM
+- GitHub: https://github.com/jose16-21
+- LinkedIn: https://www.linkedin.com/in/juan-jose-hernandez-gt/
+- Sitio web: https://jose16-21.github.io
+- Disponibilidad: Lun–Vie, 9:00–18:00 (GMT-6)
+
+## Perfil
+
+Senior Software Engineer e Ingeniero en Sistemas con 10+ años construyendo aplicaciones web, principalmente en el sector bancario y fintech. Tech Lead con experiencia liderando equipos multinacionales (Guatemala, México, Colombia, Perú, Uruguay y Argentina). Combina visión de negocio con profundidad técnica: define arquitecturas, lidera equipos y entrega productos en producción.
+
+## Áreas de especialización
+
+- Arquitectura de microservicios, Clean Architecture, hexagonal, event-driven (Apache Kafka), SOLID, TDD
+- Cloud: AWS (EC2, EKS, Lambda, S3, RDS, DynamoDB, Route 53, IAM, SSM, CodePipeline) y Azure (AKS, DevOps, Blob Storage, Key Vault)
+- DevOps: Docker, Kubernetes (HPA, autoscaling), Terraform, CloudFormation, CI/CD (GitHub Actions, Azure DevOps, Jenkins)
+- Observabilidad: AWS CloudWatch, Grafana, Prometheus, cAdvisor, Loki, Datadog, SignalFX, Opsgenie (logs, métricas, dashboards y alertas)
+- IA aplicada al desarrollo: servidores MCP (Model Context Protocol), agentes y skills; uso de Claude Code, Codex y GitHub Copilot integrados al flujo de desarrollo
+- Banca y fintech: Open Banking / Open Finance, integración con bancos (Bancolombia, BAC Credomatic, Banrural), facturación electrónica (SAT), scraping financiero
+- Bases de datos: SQL Server, PostgreSQL, MySQL, MongoDB, DynamoDB, Cosmos DB, Firebase
+
+## Stack principal
+
+C#/.NET y .NET Core, TypeScript, JavaScript, Node.js (Express, NestJS, AdonisJS), Python, Angular, React, Vue, Ionic, Kubernetes, Terraform, Apache Kafka, Krakend Gateway.
+
+## Servicios
+
+- Desarrollo de Aplicaciones Web — desde USD 2,500. React, Vue, Angular, Next.js; APIs e integración cloud.
+- Desarrollo de Aplicaciones Móviles — desde USD 3,500. iOS y Android con React Native o Flutter.
+- DevOps y Automatización — por hora. CI/CD, contenedores, Kubernetes e IaC.
+- Arquitectura Cloud — desde USD 4,000. Soluciones escalables en AWS, Azure y GCP.
+- Consultoría Tecnológica — por hora. Arquitectura, selección de stack, auditorías y optimización.
+- CMS Headless con Strapi en AWS — desde USD 5,500. Arquitectura enterprise: CloudFront, ECS Fargate, Aurora, S3.
+- Infraestructura como Código Multi-Cloud — desde USD 6,800. Terraform para AWS, Azure y GCP con CI/CD.
+- Auditoría de Ciberseguridad y Pentesting — desde USD 4,200. Vulnerabilidades, pentesting y remediación OWASP.
+- Integración de IA y agentes (MCP) — diseño y despliegue de servidores MCP, agentes y skills.
+- Desarrollo de APIs — desde USD 1,800. REST y GraphQL escalables y seguras.
+- Soluciones E-commerce — desde USD 3,200. Tiendas online con pasarelas de pago.
+- Diseño de Base de Datos — desde USD 800. Modelado, optimización y migraciones.
+- Capacitación Técnica — desde USD 600. Workshops y mentoría en tecnologías modernas.
+
+## Experiencia profesional
+
+- Capital Valley Tech (HR Tech) — Tech Lead, remoto, Guatemala (2023–presente). Lideró el desarrollo end-to-end de un ATS (Applicant Tracking System); diseñó la infraestructura sobre AWS EKS (multi-AZ, HPA, autoscaling, IAM/RBAC); IaC con Terraform; CI/CD en GitHub Actions y Azure DevOps; integró IA al desarrollo y diseñó servidores MCP, agentes y skills. Lideró un equipo de 5 developers.
+- Finerio Connect (Fintech) — Senior Full Stack Developer, remoto, México (2022–2023). Open Banking / Open Finance; crawlers y scrapers en C# y AWS Lambda (Python); integración con bancos en Colombia, México y Chile; arquitectura hexagonal y Clean Architecture; observabilidad con Loki y Datadog.
+- Rappi (Delivery) — Sr. Backend Developer, remoto, Colombia (2021–2022). Microservicios de alta concurrencia en AdonisJS/TypeScript; event-driven con Apache Kafka; observabilidad con cAdvisor, Prometheus y Grafana; on-call con Opsgenie.
+- Business Development Group (Banca) — Analista Programador, Guatemala (2019–2021). Sistemas bancarios core (.NET, C#, WCF, SQL Server); clientes Cooperativa Génesis Empresarial, Grupo TRT y BAC Credomatic.
+- E-Solutions (Banca) — Analista Programador, Guatemala (2014–2018). Productos financieros corporativos full-stack; Web Services REST/WSDL e integración con plataformas legacy (AS400, Broker, 390).
+
+## Proyectos destacados
+
+- Distribuidora Don Julio & Anabel (Guatemala, 2019–presente): transformación digital end-to-end, web (Angular) y móvil (Ionic), integración con SAT para facturación electrónica, infraestructura AWS con Kubernetes y Docker.
+- QuickComm (Perú/Argentina, 2022–2024): plataforma multi-cliente (Dyner Club, Shopstart, Vía Compras); integración con couriers (Envíame, Urbano); IaC en Azure; Apache Kafka.
+- Menoo App (Uruguay, 2021–2022): SPA y móvil para gestión administrativa y factura electrónica; infraestructura AWS; CI/CD con Jenkins y GitHub Actions.
+- Technology Center (Guatemala, 2021–2022): sistemas financieros con integración a banca virtual Banrural; Angular 12, .NET Core, Cosmos DB.
+- USAID / Municipalidad de Villa Nueva (Guatemala, 2021): ventanilla única virtual para trámites municipales con integración SOAP.
+
+## Educación y certificaciones
+
+- Ingeniero en Sistemas — Universidad Mariano Gálvez de Guatemala
+- Técnico en Software y Business Intelligence — Universidad del Valle de Guatemala
+- Certified Secure Development — Devel Security
+- Scrum Fundamental Certified — Scrum Study
+- Formación continua: 60+ cursos en Platzi (JavaScript, Node.js, AWS, Docker, Kubernetes, Git, MongoDB, entre otros)
+
+## Idiomas
+
+Español (nativo), Inglés (básico-intermedio).
