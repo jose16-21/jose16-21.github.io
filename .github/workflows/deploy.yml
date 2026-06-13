@@ -27,6 +27,18 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Localiza el Chrome preinstalado en el runner para el prerender (postbuild).
+      # Si no se encuentra, el prerender se omite sin romper el build (deploy CSR).
+      - name: Locate Chrome for prerender
+        run: |
+          CHROME_BIN="$(command -v google-chrome-stable || command -v google-chrome || command -v chromium-browser || command -v chromium || true)"
+          if [ -n "$CHROME_BIN" ]; then
+            echo "CHROME_PATH=$CHROME_BIN" >> "$GITHUB_ENV"
+            echo "Chrome encontrado en: $CHROME_BIN"
+          else
+            echo "No se encontró Chrome; el prerender se omitirá (deploy client-side)."
+          fi
+
       - name: Build project
         run: npm run build
 
