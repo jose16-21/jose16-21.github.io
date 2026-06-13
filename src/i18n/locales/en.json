@@ -69,6 +69,10 @@
     "subtitle": "My career path in the technology industry",
     "present": "Present"
   },
+  "clients": {
+    "title": "Brands that trust my work",
+    "disclaimer": "Institutions I have built solutions for, mostly as part of teams or outsourcing engagements. All trademarks belong to their respective owners."
+  },
   "contact": {
     "title": "Ready to Work Together?",
     "subtitle": "Let's talk about your next technology project",
