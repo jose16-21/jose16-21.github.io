@@ -69,6 +69,10 @@
     "subtitle": "Mi trayectoria en la industria tecnológica",
     "present": "Presente"
   },
+  "clients": {
+    "title": "Marcas que confían en mi trabajo",
+    "disclaimer": "Instituciones para las que he desarrollado soluciones, en su mayoría como parte de equipos o esquemas de outsourcing. Las marcas pertenecen a sus respectivos titulares."
+  },
   "contact": {
     "title": "¿Listo para Trabajar Juntos?",
     "subtitle": "Conversemos sobre tu próximo proyecto tecnológico",

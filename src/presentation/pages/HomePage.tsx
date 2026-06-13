@@ -8,6 +8,7 @@ import Services from '../components/Services.tsx';
 import Technologies from '../components/Technologies.tsx';
 import Portfolio from '../components/Portfolio.tsx';
 import Experience from '../components/Experience.tsx';
+import Clients from '../components/Clients.tsx';
 import Contact from '../components/Contact.tsx';
 import Footer from '../components/Footer.tsx';
 import { useModal } from '../../application/context/ModalContext';
@@ -76,6 +77,7 @@ const HomePage: React.FC = () => {
       <Technologies />
       <Portfolio />
       <Experience />
+      <Clients />
       <Contact />
       <Footer />
       
