@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navigation from '../components/Navigation.tsx';
 import Hero from '../components/Hero.tsx';
@@ -8,11 +8,12 @@ import Portfolio from '../components/Portfolio.tsx';
 import Experience from '../components/Experience.tsx';
 import Contact from '../components/Contact.tsx';
 import Footer from '../components/Footer.tsx';
-import LoginModal from '../components/LoginModal.tsx';
-import RegisterModal from '../components/RegisterModal.tsx';
-import ProfileModal from '../components/ProfileModal.tsx';
-import OrdersModal from '../components/OrdersModal.tsx';
 import { useModal } from '../../application/context/ModalContext';
+
+const LoginModal = lazy(() => import('../components/LoginModal.tsx'));
+const RegisterModal = lazy(() => import('../components/RegisterModal.tsx'));
+const ProfileModal = lazy(() => import('../components/ProfileModal.tsx'));
+const OrdersModal = lazy(() => import('../components/OrdersModal.tsx'));
 
 const HomePage: React.FC = () => {
   const location = useLocation();
@@ -73,11 +74,19 @@ const HomePage: React.FC = () => {
       <Contact />
       <Footer />
       
-      {/* Modals */}
-      <LoginModal isOpen={isLoginOpen} onClose={closeLogin} onShowRegister={switchToRegister} />
-      <RegisterModal isOpen={isRegisterOpen} onClose={closeRegister} onShowLogin={switchToLogin} />
-      <ProfileModal isOpen={isProfileOpen} onClose={closeProfile} />
-      <OrdersModal isOpen={isOrdersOpen} onClose={closeOrders} />
+      {/* Modals — lazy loaded, chunks download only when first opened */}
+      <Suspense fallback={null}>
+        {isLoginOpen && <LoginModal isOpen={isLoginOpen} onClose={closeLogin} onShowRegister={switchToRegister} />}
+      </Suspense>
+      <Suspense fallback={null}>
+        {isRegisterOpen && <RegisterModal isOpen={isRegisterOpen} onClose={closeRegister} onShowLogin={switchToLogin} />}
+      </Suspense>
+      <Suspense fallback={null}>
+        {isProfileOpen && <ProfileModal isOpen={isProfileOpen} onClose={closeProfile} />}
+      </Suspense>
+      <Suspense fallback={null}>
+        {isOrdersOpen && <OrdersModal isOpen={isOrdersOpen} onClose={closeOrders} />}
+      </Suspense>
     </div>
   );
 };
