@@ -232,6 +232,10 @@
     "available": "Disponible Ahora",
     "unavailable": "No Disponible"
   },
+  "meta": {
+    "titleHome": "Juan José Hernández | Consultor de Desarrollo y Tecnología",
+    "titleCart": "Carrito | Juan José Hernández"
+  },
   "common": {
     "loading": "Cargando...",
     "loadError": "Error al cargar. Intenta recargar la página.",
