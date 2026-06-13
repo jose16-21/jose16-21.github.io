@@ -13,7 +13,7 @@ import RegisterModal from '../components/RegisterModal';
 const CartPage: React.FC = () => {
   const { t } = useTranslation();
   const { items, totalAmount, updateQuantity, removeFromCart, clearCart } = useCart();
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated } = useAuth();
   const { 
     openLogin, 
     isLoginOpen, 
@@ -31,45 +31,23 @@ const CartPage: React.FC = () => {
 
   const handleCheckout = async () => {
     setIsProcessing(true);
-    
+
     try {
-      const orderType = isQuoteMode ? 'cotización' : 'orden';
-      const finalAmount = isQuoteMode ? 0 : totalAmount;
-      
-      console.log(`💳 Procesando ${orderType}...`);
-      console.log('Usuario:', user);
-      console.log('Items:', items);
-      console.log('Total:', finalAmount);
-      console.log('Comentarios:', comments);
-      console.log('Es cotización:', isQuoteMode);
-      
       // TODO: Enviar orden/cotización al backend
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      if (isQuoteMode) {
-        notificationManager.show({
-          message: '¡Cotización enviada exitosamente! Te contactaremos pronto con los detalles.',
-          type: 'success'
-        });
-        
-        alert(`✅ Cotización Enviada\n\nServicios solicitados: ${items.length}\nProductos totales: ${items.reduce((sum, item) => sum + item.quantity, 0)}\n\nComentarios: ${comments || 'Sin comentarios'}\n\nNos pondremos en contacto contigo pronto, ${user?.firstName}!`);
-      } else {
-        notificationManager.show({
-          message: '¡Orden procesada exitosamente! Recibirás un email de confirmación.',
-          type: 'success'
-        });
-        
-        alert(`✅ Orden Confirmada\n\nTotal: $${totalAmount.toLocaleString()} USD\nItems: ${items.length}\nProductos: ${items.reduce((sum, item) => sum + item.quantity, 0)}\n\nComentarios: ${comments || 'Sin comentarios'}\n\nGracias por tu compra, ${user?.firstName}!`);
-      }
-      
+
+      notificationManager.show({
+        message: isQuoteMode ? t('cart.quoteSuccess') : t('cart.orderSuccess'),
+        type: 'success'
+      });
+
       clearCart();
       setComments('');
       setIsQuoteMode(false);
       navigate('/');
     } catch (error) {
-      console.error('❌ Error al procesar:', error);
       notificationManager.show({
-        message: `Error al procesar la ${isQuoteMode ? 'cotización' : 'orden'}. Intenta de nuevo.`,
+        message: t('cart.checkoutError'),
         type: 'error'
       });
     } finally {
