@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../application/hooks/useAuth';
 import { FaShoppingBag, FaTimes } from 'react-icons/fa';
+import { useFocusTrap } from '../../application/hooks/useFocusTrap';
 
 interface Order {
   id: string;
@@ -28,11 +29,14 @@ const OrdersModal: React.FC<OrdersModalProps> = ({ isOpen, onClose }) => {
   // TODO: Fetch orders from backend
   const orders: Order[] = [];
 
+  const containerRef = useFocusTrap(isOpen, onClose);
+
   if (!isOpen || !user) return null;
 
   return (
     <div className="fixed inset-0 bg-dark/80 backdrop-blur-sm flex items-center justify-center p-4 z-50" onClick={onClose}>
       <div
+        ref={containerRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby="orders-modal-title"

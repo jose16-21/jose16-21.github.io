@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Service } from '../../domain/entities/Service';
 import { faIconMap } from '../utils/faIconMap';
+import { useFocusTrap } from '../../application/hooks/useFocusTrap';
 
 interface ServiceDetailModalProps {
   isOpen: boolean;
@@ -19,6 +20,8 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
   onAddToCart
 }) => {
   const { t } = useTranslation();
+  const containerRef = useFocusTrap(isOpen, onClose);
+
   if (!isOpen || !service) return null;
 
   const handleAddToCart = () => {
@@ -46,6 +49,7 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
 
       {/* Modal */}
       <div
+        ref={containerRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby="service-modal-title"

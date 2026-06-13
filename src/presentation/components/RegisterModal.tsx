@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../application/hooks/useAuth';
 import { NotificationManager } from '../../infrastructure/services/NotificationManager';
+import { useFocusTrap } from '../../application/hooks/useFocusTrap';
 
 interface RegisterModalProps {
   isOpen: boolean;
@@ -11,6 +13,7 @@ interface RegisterModalProps {
 import { FaUserPlus, FaTimes, FaUser, FaEnvelope, FaLock, FaBuilding, FaPhone, FaSpinner } from 'react-icons/fa';
 
 const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLogin }) => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -108,6 +111,8 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
     onShowLogin();
   };
 
+  const containerRef = useFocusTrap(isOpen, handleClose);
+
   if (!isOpen) return null;
 
   const inputClass = (field: string) =>
@@ -122,6 +127,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
 
       {/* Modal */}
       <div
+        ref={containerRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby="register-modal-title"

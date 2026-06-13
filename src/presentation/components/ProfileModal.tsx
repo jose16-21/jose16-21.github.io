@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../application/hooks/useAuth';
 import { NotificationManager } from '../../infrastructure/services/NotificationManager';
+import { useFocusTrap } from '../../application/hooks/useFocusTrap';
 
 interface ProfileModalProps {
   isOpen: boolean;
@@ -59,11 +60,14 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) => {
     onClose();
   };
 
+  const containerRef = useFocusTrap(isOpen, handleClose);
+
   if (!isOpen || !user) return null;
 
   return (
     <div className="fixed inset-0 bg-dark/80 backdrop-blur-sm flex items-center justify-center p-4 z-50" onClick={handleClose}>
       <div
+        ref={containerRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby="profile-modal-title"
