@@ -234,6 +234,7 @@
   },
   "common": {
     "loading": "Loading...",
+    "loadError": "Failed to load. Try refreshing the page.",
     "error": "Error",
     "success": "Success",
     "cancel": "Cancel",

@@ -1,5 +1,6 @@
 import React, { lazy, Suspense, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import ErrorBoundary from '../components/ErrorBoundary';
 import Navigation from '../components/Navigation.tsx';
 import Hero from '../components/Hero.tsx';
 import Services from '../components/Services.tsx';
@@ -74,19 +75,27 @@ const HomePage: React.FC = () => {
       <Contact />
       <Footer />
       
-      {/* Modals — lazy loaded, chunks download only when first opened */}
-      <Suspense fallback={null}>
-        {isLoginOpen && <LoginModal isOpen={isLoginOpen} onClose={closeLogin} onShowRegister={switchToRegister} />}
-      </Suspense>
-      <Suspense fallback={null}>
-        {isRegisterOpen && <RegisterModal isOpen={isRegisterOpen} onClose={closeRegister} onShowLogin={switchToLogin} />}
-      </Suspense>
-      <Suspense fallback={null}>
-        {isProfileOpen && <ProfileModal isOpen={isProfileOpen} onClose={closeProfile} />}
-      </Suspense>
-      <Suspense fallback={null}>
-        {isOrdersOpen && <OrdersModal isOpen={isOrdersOpen} onClose={closeOrders} />}
-      </Suspense>
+      {/* Modals — lazy loaded; ErrorBoundary silently drops the modal if the chunk fails */}
+      <ErrorBoundary>
+        <Suspense fallback={null}>
+          {isLoginOpen && <LoginModal isOpen={isLoginOpen} onClose={closeLogin} onShowRegister={switchToRegister} />}
+        </Suspense>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <Suspense fallback={null}>
+          {isRegisterOpen && <RegisterModal isOpen={isRegisterOpen} onClose={closeRegister} onShowLogin={switchToLogin} />}
+        </Suspense>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <Suspense fallback={null}>
+          {isProfileOpen && <ProfileModal isOpen={isProfileOpen} onClose={closeProfile} />}
+        </Suspense>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <Suspense fallback={null}>
+          {isOrdersOpen && <OrdersModal isOpen={isOrdersOpen} onClose={closeOrders} />}
+        </Suspense>
+      </ErrorBoundary>
     </div>
   );
 };
