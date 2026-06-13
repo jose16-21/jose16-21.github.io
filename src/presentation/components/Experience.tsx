@@ -1,35 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import {
-  SiAmazon,
-  SiDocker,
-  SiKubernetes,
-  SiJenkins,
-  SiGithubactions,
-  SiTerraform,
-  SiPrometheus,
-  SiGrafana,
-  SiGitlab,
-  SiArgo
-} from 'react-icons/si';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import { faIconMap } from '../utils/faIconMap';
 import { GetExperiencesUseCase } from '../../domain/use-cases/GetExperiencesUseCase';
 import { ExperienceRepositoryImpl } from '../../infrastructure/repositories/ExperienceRepositoryImpl';
 import { ExperienceData } from '../../domain/entities/Experience';
-
-// Mapa de iconos para DevOps tools
-const iconMap: Record<string, React.ReactElement> = {
-  SiAmazon: <SiAmazon className="w-8 h-8" />,
-  SiDocker: <SiDocker className="w-8 h-8" />,
-  SiKubernetes: <SiKubernetes className="w-8 h-8" />,
-  SiJenkins: <SiJenkins className="w-8 h-8" />,
-  SiGithubactions: <SiGithubactions className="w-8 h-8" />,
-  SiTerraform: <SiTerraform className="w-8 h-8" />,
-  SiPrometheus: <SiPrometheus className="w-8 h-8" />,
-  SiGrafana: <SiGrafana className="w-8 h-8" />,
-  SiGitlab: <SiGitlab className="w-8 h-8" />,
-  SiArgo: <SiArgo className="w-8 h-8" />
-};
 
 // Componente de fondo animado
 const AnimatedBackground: React.FC = () => {
@@ -107,7 +81,7 @@ const Experience: React.FC = () => {
     );
   }
 
-  const { timeline, achievements, devopsTools } = experienceData;
+  const { timeline, achievements } = experienceData;
 
   return (
     <section className="py-24 bg-white relative overflow-hidden" id="experiencia">
@@ -197,26 +171,6 @@ const Experience: React.FC = () => {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* DevOps Tools Bar at Bottom */}
-        <div className="mt-20 pt-10 border-t border-gray-100">
-          <p className="text-center text-sm text-gray-400 uppercase tracking-widest mb-8">Tecnologías & Herramientas</p>
-          <div className="flex flex-wrap justify-center gap-8 md:gap-12 opacity-80 hover:opacity-100 transition-opacity">
-            {devopsTools.map((tool, index) => (
-              <div
-                key={tool.name}
-                className="group flex flex-col items-center gap-2"
-                data-aos="fade-in"
-                data-aos-delay={index * 50}
-                title={tool.name}
-              >
-                <div className="text-gray-400 group-hover:text-gray-600 transition-colors transform group-hover:scale-110 duration-300">
-                  {iconMap[tool.icon]}
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>

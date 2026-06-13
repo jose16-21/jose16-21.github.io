@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
       links: [
         { icon: <FaEnvelope />, text: 'ju16jo@gmail.com', href: 'mailto:ju16jo@gmail.com', copyable: true },
         { icon: <FaPhone />, text: '+502 3132-2197', href: 'tel:+50231322197', copyable: true },
-        { icon: <FaMapMarkerAlt />, text: 'Guatemala', href: '#', copyable: false }
+        { icon: <FaMapMarkerAlt />, text: 'Guatemala', href: null, copyable: false }
       ]
     }
   ];
@@ -54,12 +54,15 @@ const Footer: React.FC = () => {
             <div className="flex gap-4 mt-4">
               <a href="mailto:ju16jo@gmail.com" aria-label="Email" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-primary-light rounded-full flex items-center justify-center transition-all hover:bg-secondary hover:text-white">
                 <FaEnvelope />
+                <span className="sr-only">Email: ju16jo@gmail.com</span>
               </a>
               <a href="https://www.linkedin.com/in/juan-jose-hernandez-gt/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-primary-light rounded-full flex items-center justify-center transition-all hover:bg-secondary hover:text-white">
                 <FaLinkedin />
+                <span className="sr-only">LinkedIn: Juan José Hernández</span>
               </a>
               <a href="https://github.com/jose16-21" aria-label="GitHub" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-primary-light rounded-full flex items-center justify-center transition-all hover:bg-secondary hover:text-white">
                 <FaGithub />
+                <span className="sr-only">GitHub: jose16-21</span>
               </a>
             </div>
           </div>
@@ -71,9 +74,18 @@ const Footer: React.FC = () => {
                   <li key={index} className="mb-2">
                     {'icon' in link ? (
                       <div className="flex items-center gap-2 justify-between group">
-                        <span className="cursor-pointer transition-colors hover:text-secondary font-light">
-                          {link.icon} {link.text}
-                        </span>
+                        {link.href ? (
+                          <a
+                            href={link.href}
+                            className="flex items-center gap-2 transition-colors hover:text-secondary font-light no-underline"
+                          >
+                            {link.icon} {link.text}
+                          </a>
+                        ) : (
+                          <span className="flex items-center gap-2 transition-colors font-light">
+                            {link.icon} {link.text}
+                          </span>
+                        )}
                         {link.copyable && (
                           <button
                             className="bg-primary-light text-gray-light border-none rounded px-2 py-1 cursor-pointer transition-all flex items-center justify-center w-7 h-7 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 hover:bg-secondary hover:text-white active:scale-95"
