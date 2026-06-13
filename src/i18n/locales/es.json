@@ -234,6 +234,7 @@
   },
   "common": {
     "loading": "Cargando...",
+    "loadError": "Error al cargar. Intenta recargar la página.",
     "error": "Error",
     "success": "Éxito",
     "cancel": "Cancelar",
