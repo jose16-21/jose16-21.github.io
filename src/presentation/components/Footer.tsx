@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGithub, FaCheck, FaCopy } from 'react-icons/fa';
 import { ClipboardUtils } from '../../utils';
 
 const Footer: React.FC = () => {
@@ -36,9 +37,9 @@ const Footer: React.FC = () => {
     {
       titleKey: 'footer.contact',
       links: [
-        { icon: 'fas fa-envelope', text: 'ju16jo@gmail.com', href: 'mailto:ju16jo@gmail.com', copyable: true },
-        { icon: 'fas fa-phone', text: '+502 3132-2197', href: 'tel:+50231322197', copyable: true },
-        { icon: 'fas fa-map-marker-alt', text: 'Guatemala', href: '#', copyable: false }
+        { icon: <FaEnvelope />, text: 'ju16jo@gmail.com', href: 'mailto:ju16jo@gmail.com', copyable: true },
+        { icon: <FaPhone />, text: '+502 3132-2197', href: 'tel:+50231322197', copyable: true },
+        { icon: <FaMapMarkerAlt />, text: 'Guatemala', href: '#', copyable: false }
       ]
     }
   ];
@@ -52,13 +53,13 @@ const Footer: React.FC = () => {
             <p className="text-gray-light mb-4 font-light leading-relaxed">{t('footer.description')}</p>
             <div className="flex gap-4 mt-4">
               <a href="mailto:ju16jo@gmail.com" aria-label="Email" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-primary-light rounded-full flex items-center justify-center transition-all hover:bg-secondary hover:text-white">
-                <i className="fas fa-envelope"></i>
+                <FaEnvelope />
               </a>
               <a href="https://www.linkedin.com/in/juan-jose-hernandez-gt/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-primary-light rounded-full flex items-center justify-center transition-all hover:bg-secondary hover:text-white">
-                <i className="fab fa-linkedin"></i>
+                <FaLinkedin />
               </a>
               <a href="https://github.com/jose16-21" aria-label="GitHub" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-primary-light rounded-full flex items-center justify-center transition-all hover:bg-secondary hover:text-white">
-                <i className="fab fa-github"></i>
+                <FaGithub />
               </a>
             </div>
           </div>
@@ -71,7 +72,7 @@ const Footer: React.FC = () => {
                     {'icon' in link ? (
                       <div className="flex items-center gap-2 justify-between group">
                         <span className="cursor-pointer transition-colors hover:text-secondary font-light">
-                          <i className={link.icon}></i> {link.text}
+                          {link.icon} {link.text}
                         </span>
                         {link.copyable && (
                           <button
@@ -80,9 +81,9 @@ const Footer: React.FC = () => {
                             title={`${t('common.copied').replace('!', '')} ${link.text}`}
                           >
                             {copiedField === `${section.titleKey}-${index}` ? (
-                              <i className="fas fa-check text-xs"></i>
+                              <FaCheck className="text-xs" />
                             ) : (
-                              <i className="fas fa-copy text-xs"></i>
+                              <FaCopy className="text-xs" />
                             )}
                           </button>
                         )}

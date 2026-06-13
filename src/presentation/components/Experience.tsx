@@ -11,6 +11,8 @@ import {
   SiGitlab,
   SiArgo
 } from 'react-icons/si';
+import { FaExternalLinkAlt } from 'react-icons/fa';
+import { faIconMap } from '../utils/faIconMap';
 import { GetExperiencesUseCase } from '../../domain/use-cases/GetExperiencesUseCase';
 import { ExperienceRepositoryImpl } from '../../infrastructure/repositories/ExperienceRepositoryImpl';
 import { ExperienceData } from '../../domain/entities/Experience';
@@ -147,7 +149,7 @@ const Experience: React.FC = () => {
                       <span className="text-lg">{item.countryFlag}</span>
                       <span>{item.company}</span>
                       {item.remote && <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">Remoto</span>}
-                      <i className="fas fa-external-link-alt text-xs opacity-50"></i>
+                      <FaExternalLinkAlt className="text-xs opacity-50" />
                     </a>
                   ) : (
                     <h4 className={`inline-flex items-center gap-2 text-base text-primary font-medium mb-3 ${isEven ? 'md:flex-row-reverse' : ''}`}>
@@ -186,7 +188,7 @@ const Experience: React.FC = () => {
             >
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm flex-shrink-0 text-primary">
-                  <i className={`fas ${achievement.icon} text-lg`}></i>
+                  { (() => { const I = faIconMap[achievement.icon]; return I ? <I className="text-lg" /> : null; })() }
                 </div>
                 <div>
                   <h4 className="text-lg font-bold text-gray-900 mb-2">{achievement.title}</h4>

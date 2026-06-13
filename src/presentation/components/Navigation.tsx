@@ -5,6 +5,7 @@ import { useCart } from '../../application/hooks/useCart';
 import { useAuth } from '../../application/hooks/useAuth';
 import { useModal } from '../../application/context/ModalContext';
 import LanguageSelector from './LanguageSelector';
+import { FaUser, FaChevronUp, FaChevronDown, FaShoppingBag, FaSignOutAlt, FaShoppingCart } from 'react-icons/fa';
 
 const Navigation: React.FC = () => {
   const { t } = useTranslation();
@@ -109,20 +110,20 @@ const Navigation: React.FC = () => {
             ) : (
               <div className="relative hidden lg:block">
                 <button className="flex items-center gap-2 bg-white border border-gray-light text-primary px-4 py-2 rounded-lg cursor-pointer transition-all font-semibold text-sm hover:border-primary" onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}>
-                  <i className="fas fa-user"></i>
+                  <FaUser />
                   <span>{user?.firstName}</span>
-                  <i className={`fas fa-chevron-${isUserMenuOpen ? 'up' : 'down'} text-xs`}></i>
+                  {isUserMenuOpen ? <FaChevronUp className="text-xs" /> : <FaChevronDown className="text-xs" />}
                 </button>
                 {isUserMenuOpen && (
                   <div className="absolute top-full right-0 bg-white border border-gray-200 rounded-lg shadow-xl min-w-[200px] mt-2 overflow-hidden">
                     <a href="#profile" className="flex items-center gap-3 px-4 py-3 text-gray-dark no-underline transition-all border-b border-gray-lighter font-medium text-sm hover:bg-gray-lighter hover:text-primary" onClick={(e) => { e.preventDefault(); openProfile(); setIsUserMenuOpen(false); }}>
-                      <i className="fas fa-user w-4"></i>{t('nav.profile')}
+                      <FaUser className="w-4" />{t('nav.profile')}
                     </a>
                     <a href="#orders" className="flex items-center gap-3 px-4 py-3 text-gray-dark no-underline transition-all border-b border-gray-lighter font-medium text-sm hover:bg-gray-lighter hover:text-primary" onClick={(e) => { e.preventDefault(); openOrders(); setIsUserMenuOpen(false); }}>
-                      <i className="fas fa-shopping-bag w-4"></i>{t('nav.orders')}
+                      <FaShoppingBag className="w-4" />{t('nav.orders')}
                     </a>
                     <a href="#logout" className="flex items-center gap-3 px-4 py-3 text-gray-dark no-underline transition-all font-medium text-sm hover:bg-gray-lighter hover:text-error" onClick={(e) => { e.preventDefault(); logout(); setIsUserMenuOpen(false); }}>
-                      <i className="fas fa-sign-out-alt w-4"></i>{t('nav.logout')}
+                      <FaSignOutAlt className="w-4" />{t('nav.logout')}
                     </a>
                   </div>
                 )}
@@ -133,7 +134,7 @@ const Navigation: React.FC = () => {
               to="/carrito"
               className="relative bg-gradient-primary text-white rounded-lg w-11 h-11 flex items-center justify-center cursor-pointer transition-all hover:shadow-lg"
             >
-              <i className="fas fa-shopping-cart"></i>
+              <FaShoppingCart />
               {itemCount > 0 && (<span className="absolute -top-1 -right-1 bg-error text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">{itemCount}</span>)}
             </Link>
 

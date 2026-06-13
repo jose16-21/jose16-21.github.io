@@ -8,6 +8,8 @@ interface LoginModalProps {
   onShowRegister: () => void;
 }
 
+import { FaSignInAlt, FaTimes, FaEnvelope, FaLock, FaSpinner } from 'react-icons/fa';
+
 const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onShowRegister }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -71,7 +73,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onShowRegister
           <div className="absolute bottom-0 left-0 w-full p-6 z-10">
             <div className="flex items-center gap-4">
               <div className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/20 shadow-2xl">
-                <i className="fas fa-sign-in-alt text-2xl text-white"></i>
+                <FaSignInAlt className="text-2xl text-white" />
               </div>
               <div>
                 <h2 className="text-2xl font-bold text-white">Bienvenido</h2>
@@ -85,7 +87,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onShowRegister
             onClick={handleClose}
             className="absolute top-4 right-4 w-10 h-10 bg-black/20 hover:bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center transition-all text-white border border-white/10 z-20"
           >
-            <i className="fas fa-times text-lg"></i>
+            <FaTimes className="text-lg" />
           </button>
         </div>
 
@@ -95,7 +97,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onShowRegister
             <label className="block text-sm font-medium text-gray-700 mb-1.5">Email</label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                <i className="fas fa-envelope"></i>
+                <FaEnvelope />
               </span>
               <input
                 type="email"
@@ -112,7 +114,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onShowRegister
             <label className="block text-sm font-medium text-gray-700 mb-1.5">Contraseña</label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                <i className="fas fa-lock"></i>
+                <FaLock />
               </span>
               <input
                 type="password"
@@ -132,12 +134,12 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onShowRegister
           >
             {isLoading ? (
               <>
-                <i className="fas fa-spinner fa-spin"></i>
+                <FaSpinner className="animate-spin" />
                 Iniciando...
               </>
             ) : (
               <>
-                <i className="fas fa-sign-in-alt"></i>
+                <FaSignInAlt />
                 Iniciar Sesión
               </>
             )}

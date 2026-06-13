@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { FaChevronDown, FaCheck } from 'react-icons/fa';
 
 const languages = [
   { code: 'en', name: 'English', flag: '🇺🇸' },
@@ -38,7 +39,7 @@ const LanguageSelector: React.FC = () => {
       >
         <span className="text-lg">{currentLanguage.flag}</span>
         <span className="hidden sm:inline">{currentLanguage.code.toUpperCase()}</span>
-        <i className={`fas fa-chevron-down text-xs transition-transform ${isOpen ? 'rotate-180' : ''}`}></i>
+        <FaChevronDown className={`text-xs transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {isOpen && (
@@ -54,7 +55,7 @@ const LanguageSelector: React.FC = () => {
               <span className="text-lg">{lang.flag}</span>
               <span>{lang.name}</span>
               {i18n.language === lang.code && (
-                <i className="fas fa-check text-xs ml-auto text-primary"></i>
+                <FaCheck className="text-xs ml-auto text-primary" />
               )}
             </button>
           ))}
