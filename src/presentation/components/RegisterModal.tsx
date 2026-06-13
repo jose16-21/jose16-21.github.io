@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../application/hooks/useAuth';
 import { NotificationManager } from '../../infrastructure/services/NotificationManager';
+import { useFocusTrap } from '../../application/hooks/useFocusTrap';
 
 interface RegisterModalProps {
   isOpen: boolean;
@@ -108,6 +109,8 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
     onShowLogin();
   };
 
+  const containerRef = useFocusTrap(isOpen, handleClose);
+
   if (!isOpen) return null;
 
   const inputClass = (field: string) =>
@@ -122,6 +125,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
 
       {/* Modal */}
       <div
+        ref={containerRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby="register-modal-title"

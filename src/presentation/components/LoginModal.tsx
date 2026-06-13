@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../application/hooks/useAuth';
 import { NotificationManager } from '../../infrastructure/services/NotificationManager';
+import { useFocusTrap } from '../../application/hooks/useFocusTrap';
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -50,6 +51,8 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onShowRegister
     onShowRegister();
   };
 
+  const containerRef = useFocusTrap(isOpen, handleClose);
+
   if (!isOpen) return null;
 
   return (
@@ -59,6 +62,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onShowRegister
 
       {/* Modal */}
       <div
+        ref={containerRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby="login-modal-title"
