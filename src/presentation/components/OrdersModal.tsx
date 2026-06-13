@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../application/hooks/useAuth';
-import { FaShoppingBag } from 'react-icons/fa';
+import { FaShoppingBag, FaTimes } from 'react-icons/fa';
 
 interface Order {
   id: string;
@@ -32,10 +32,16 @@ const OrdersModal: React.FC<OrdersModalProps> = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-dark/80 backdrop-blur-sm flex items-center justify-center p-4 z-50" onClick={onClose}>
-      <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] flex flex-col" onClick={(e) => e.stopPropagation()}>
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="orders-modal-title"
+        className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] flex flex-col"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="flex items-center justify-between p-6 border-b border-gray-lighter">
-          <h2 className="text-2xl font-bold text-dark flex items-center gap-3"><FaShoppingBag className="text-primary" /> {t('orders.title')}</h2>
-          <button className="w-10 h-10 bg-gray-lighter hover:bg-gray-light rounded-full flex items-center justify-center text-gray-dark hover:text-dark transition-colors text-2xl" onClick={onClose}>&times;</button>
+          <h2 id="orders-modal-title" className="text-2xl font-bold text-dark flex items-center gap-3"><FaShoppingBag className="text-primary" /> {t('orders.title')}</h2>
+          <button aria-label={t('common.close')} className="w-10 h-10 bg-gray-lighter hover:bg-gray-light rounded-full flex items-center justify-center text-gray-dark hover:text-dark transition-colors" onClick={onClose}><FaTimes aria-hidden="true" /></button>
         </div>
         
         <div className="flex-1 overflow-y-auto p-6">

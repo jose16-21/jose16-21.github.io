@@ -52,7 +52,7 @@ const Navigation: React.FC = () => {
   };
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 border-b ${isScrolled
+    <nav aria-label={t('nav.ariaLabel')} className={`fixed top-0 w-full z-50 transition-all duration-300 border-b ${isScrolled
       ? 'bg-white shadow-lg border-gray-200'
       : 'bg-white/90 backdrop-blur-sm border-gray-100'
       }`} id="navbar">
@@ -65,7 +65,7 @@ const Navigation: React.FC = () => {
           </Link>
 
           {/* Menú móvil desplegable */}
-          <div className={`${isMenuOpen ? 'block' : 'hidden'} lg:hidden absolute top-full left-0 w-full bg-white border-t border-gray-200 shadow-lg max-h-[calc(100vh-5rem)] overflow-y-auto`}>
+          <div id="mobile-menu" className={`${isMenuOpen ? 'block' : 'hidden'} lg:hidden absolute top-full left-0 w-full bg-white border-t border-gray-200 shadow-lg max-h-[calc(100vh-5rem)] overflow-y-auto`}>
             <ul className="list-none flex flex-col p-4 gap-2">
               <li><a href="#inicio" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2.5 px-3 rounded-lg hover:bg-gray-lighter" onClick={(e) => handleNavClick(e, '#inicio')}>{t('nav.home')}</a></li>
               <li><a href="#servicios" className="text-gray-dark font-medium hover:text-primary transition-colors block py-2.5 px-3 rounded-lg hover:bg-gray-lighter" onClick={(e) => handleNavClick(e, '#servicios')}>{t('nav.services')}</a></li>
@@ -109,7 +109,7 @@ const Navigation: React.FC = () => {
               </div>
             ) : (
               <div className="relative hidden lg:block">
-                <button className="flex items-center gap-2 bg-white border border-gray-light text-primary px-4 py-2 rounded-lg cursor-pointer transition-all font-semibold text-sm hover:border-primary" onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}>
+                <button aria-expanded={isUserMenuOpen} aria-haspopup="true" className="flex items-center gap-2 bg-white border border-gray-light text-primary px-4 py-2 rounded-lg cursor-pointer transition-all font-semibold text-sm hover:border-primary" onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}>
                   <FaUser />
                   <span>{user?.firstName}</span>
                   {isUserMenuOpen ? <FaChevronUp className="text-xs" /> : <FaChevronDown className="text-xs" />}
@@ -132,13 +132,20 @@ const Navigation: React.FC = () => {
 
             <Link
               to="/carrito"
+              aria-label={t('nav.openCart')}
               className="relative bg-gradient-primary text-white rounded-lg w-11 h-11 flex items-center justify-center cursor-pointer transition-all hover:shadow-lg"
             >
-              <FaShoppingCart />
-              {itemCount > 0 && (<span className="absolute -top-1 -right-1 bg-error text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">{itemCount}</span>)}
+              <FaShoppingCart aria-hidden="true" />
+              {itemCount > 0 && (<span aria-hidden="true" className="absolute -top-1 -right-1 bg-error text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">{itemCount}</span>)}
             </Link>
 
-            <button className="lg:hidden flex flex-col gap-1 w-8 h-8 items-center justify-center" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <button
+              aria-label={t('nav.toggleMenu')}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
+              className="lg:hidden flex flex-col gap-1 w-8 h-8 items-center justify-center"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
               <span className={`w-5 h-0.5 bg-gray-dark transition-all ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
               <span className={`w-5 h-0.5 bg-gray-dark transition-all ${isMenuOpen ? 'opacity-0' : ''}`}></span>
               <span className={`w-5 h-0.5 bg-gray-dark transition-all ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>

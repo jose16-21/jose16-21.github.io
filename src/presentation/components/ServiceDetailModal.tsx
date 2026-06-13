@@ -45,7 +45,12 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
       ></div>
 
       {/* Modal */}
-      <div className="relative bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden animate-slideUp flex flex-col">
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="service-modal-title"
+        className="relative bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden animate-slideUp flex flex-col"
+      >
         {/* Header con imagen */}
         <div className="relative h-56 md:h-64 w-full overflow-hidden group flex-shrink-0">
           <div className="absolute inset-0 bg-gray-900">
@@ -77,7 +82,7 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
                     </span>
                   )}
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-white mb-1 tracking-tight leading-tight">{service.title}</h2>
+                <h2 id="service-modal-title" className="text-2xl md:text-3xl font-bold text-white mb-1 tracking-tight leading-tight">{service.title}</h2>
                 <p className="text-gray-300 text-sm md:text-base font-light max-w-2xl leading-relaxed">{service.shortDescription}</p>
               </div>
             </div>
@@ -86,9 +91,10 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
           {/* Botón cerrar */}
           <button
             onClick={onClose}
+            aria-label={t('common.close')}
             className="absolute top-6 right-6 w-10 h-10 bg-black/20 hover:bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center transition-all text-white border border-white/10 z-20"
           >
-            <FaTimes className="text-lg" />
+            <FaTimes aria-hidden="true" className="text-lg" />
           </button>
         </div>
 

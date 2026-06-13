@@ -58,7 +58,12 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onShowRegister
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={handleClose} />
 
       {/* Modal */}
-      <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden animate-slide-up">
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="login-modal-title"
+        className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden animate-slide-up"
+      >
         {/* Header con imagen de fondo */}
         <div className="relative h-40 w-full overflow-hidden">
           <div className="absolute inset-0 bg-gray-900">
@@ -78,8 +83,8 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onShowRegister
                 <FaSignInAlt className="text-2xl text-white" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-white">Bienvenido</h2>
-                <p className="text-gray-300 text-sm">Inicia sesión para continuar</p>
+                <h2 id="login-modal-title" className="text-2xl font-bold text-white">{t('auth.login.title')}</h2>
+                <p className="text-gray-300 text-sm">{t('auth.login.subtitle')}</p>
               </div>
             </div>
           </div>
@@ -87,9 +92,10 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onShowRegister
           {/* Botón cerrar */}
           <button
             onClick={handleClose}
+            aria-label={t('common.close')}
             className="absolute top-4 right-4 w-10 h-10 bg-black/20 hover:bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center transition-all text-white border border-white/10 z-20"
           >
-            <FaTimes className="text-lg" />
+            <FaTimes aria-hidden="true" className="text-lg" />
           </button>
         </div>
 

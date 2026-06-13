@@ -10,7 +10,10 @@
     "register": "Registrarse",
     "logout": "Cerrar Sesión",
     "profile": "Perfil",
-    "orders": "Mis Pedidos"
+    "orders": "Mis Pedidos",
+    "ariaLabel": "Navegación principal",
+    "openCart": "Abrir carrito de compras",
+    "toggleMenu": "Abrir menú de navegación"
   },
   "hero": {
     "available": "Disponible para nuevos proyectos",
