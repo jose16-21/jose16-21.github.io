@@ -100,7 +100,12 @@ export class AnimationUtils {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
+          const delay = entry.target.getAttribute('data-aos-delay');
+          if (delay) {
+            (entry.target as HTMLElement).style.transitionDelay = `${delay}ms`;
+          }
           entry.target.classList.add('aos-animate');
+          observer.unobserve(entry.target);
         }
       });
     }, {

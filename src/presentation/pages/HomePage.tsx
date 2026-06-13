@@ -16,13 +16,13 @@ import { useModal } from '../../application/context/ModalContext';
 
 const HomePage: React.FC = () => {
   const location = useLocation();
-  const { 
-    isLoginOpen, 
-    isRegisterOpen, 
+  const {
+    isLoginOpen,
+    isRegisterOpen,
     isProfileOpen,
     isOrdersOpen,
-    closeLogin, 
-    closeRegister, 
+    closeLogin,
+    closeRegister,
     closeProfile,
     closeOrders,
     switchToRegister,
@@ -30,7 +30,25 @@ const HomePage: React.FC = () => {
   } = useModal();
 
   useEffect(() => {
-    // Si venimos con un hash, hacer scroll a esa sección
+    const elements = document.querySelectorAll<Element>('[data-aos]');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const delay = entry.target.getAttribute('data-aos-delay');
+            if (delay) (entry.target as HTMLElement).style.transitionDelay = `${delay}ms`;
+            entry.target.classList.add('aos-animate');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
     if (location.hash) {
       setTimeout(() => {
         const element = document.querySelector(location.hash);
@@ -40,7 +58,6 @@ const HomePage: React.FC = () => {
         }
       }, 100);
     } else {
-      // Si no hay hash, hacer scroll al inicio
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [location]);

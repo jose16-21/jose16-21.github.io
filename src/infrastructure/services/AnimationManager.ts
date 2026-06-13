@@ -11,14 +11,9 @@ export class AnimationManager {
   }
 
   private init(): void {
-    this.setupScrollAnimations();
     this.setupStatsAnimation();
     this.setupParallaxEffect();
     this.setupTypingEffect();
-  }
-
-  private setupScrollAnimations(): void {
-    AnimationUtils.animateOnScroll(this.animatedElements);
   }
 
   private setupStatsAnimation(): void {
