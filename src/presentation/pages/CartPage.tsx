@@ -134,7 +134,7 @@ const CartPage: React.FC = () => {
                       {/* Header de la card */}
                       <div className="flex items-center gap-4 p-4 border-b border-gray-100">
                         <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center flex-shrink-0 shadow-md">
-                          { (() => { const ic = (item.product as any).icon; const I = faIconMap[ic] ?? faIconMap['fa-code']; return <I className="text-xl text-white" />; })() }
+                          { (() => { const I = faIconMap[item.product.icon] ?? faIconMap['fa-code']; return <I className="text-xl text-white" />; })() }
                         </div>
                         
                         <div className="flex-1 min-w-0">
