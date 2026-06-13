@@ -1,8 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { 
-  SiReact, 
-  SiTypescript, 
+import {
+  SiReact,
+  SiTypescript,
   SiNodedotjs,
   SiPython,
   SiMongodb,
@@ -19,8 +19,20 @@ import {
   SiKubernetes,
   SiFlutter,
   SiPhp,
-  SiGit
+  SiGit,
+  SiDotnet,
+  SiSharp,
+  SiTerraform,
+  SiApachekafka,
+  SiNestjs,
+  SiIonic,
+  SiGrafana,
+  SiPrometheus,
+  SiFirebase,
+  SiAmazondynamodb
 } from 'react-icons/si';
+import { VscAzure } from 'react-icons/vsc';
+import { DiMsqlServer } from 'react-icons/di';
 
 interface Technology {
   name: string;
@@ -31,25 +43,42 @@ interface Technology {
 const Technologies: React.FC = () => {
   const { t } = useTranslation();
   const technologies: Technology[] = [
-    { name: 'React', icon: <SiReact className="w-8 h-8" />, color: '#61DAFB' },
+    // Lenguajes
+    { name: 'C#', icon: <SiSharp className="w-8 h-8" />, color: '#9B4F96' },
+    { name: '.NET', icon: <SiDotnet className="w-8 h-8" />, color: '#512BD4' },
     { name: 'TypeScript', icon: <SiTypescript className="w-8 h-8" />, color: '#3178C6' },
-    { name: 'Node.js', icon: <SiNodedotjs className="w-8 h-8" />, color: '#68A063' },
+    { name: 'JavaScript', icon: <SiJavascript className="w-8 h-8" />, color: '#F7DF1E' },
     { name: 'Python', icon: <SiPython className="w-8 h-8" />, color: '#3776AB' },
-    { name: 'MongoDB', icon: <SiMongodb className="w-8 h-8" />, color: '#47A248' },
-    { name: 'Docker', icon: <SiDocker className="w-8 h-8" />, color: '#2496ED' },
-    { name: 'Vue', icon: <SiVuedotjs className="w-8 h-8" />, color: '#42B883' },
-    { name: 'AWS', icon: <SiAmazon className="w-8 h-8" />, color: '#FF9900' },
-    { name: 'PostgreSQL', icon: <SiPostgresql className="w-8 h-8" />, color: '#336791' },
-    { name: 'GraphQL', icon: <SiGraphql className="w-8 h-8" />, color: '#E10098' },
-    { name: 'Tailwind', icon: <SiTailwindcss className="w-8 h-8" />, color: '#06B6D4' },
-    { name: 'Angular', icon: <SiAngular className="w-8 h-8" />, color: '#DD0031' },
-    { name: 'Java', icon: <SiJavascript className="w-8 h-8" />, color: '#F7DF1E' },
-    { name: 'MySQL', icon: <SiMysql className="w-8 h-8" />, color: '#4479A1' },
-    { name: 'Redis', icon: <SiRedis className="w-8 h-8" />, color: '#DC382D' },
-    { name: 'Kubernetes', icon: <SiKubernetes className="w-8 h-8" />, color: '#326CE5' },
-    { name: 'Flutter', icon: <SiFlutter className="w-8 h-8" />, color: '#02569B' },
     { name: 'PHP', icon: <SiPhp className="w-8 h-8" />, color: '#777BB4' },
+    // Frameworks / Frontend
+    { name: 'React', icon: <SiReact className="w-8 h-8" />, color: '#61DAFB' },
+    { name: 'Angular', icon: <SiAngular className="w-8 h-8" />, color: '#DD0031' },
+    { name: 'Vue', icon: <SiVuedotjs className="w-8 h-8" />, color: '#42B883' },
+    { name: 'Node.js', icon: <SiNodedotjs className="w-8 h-8" />, color: '#68A063' },
+    { name: 'NestJS', icon: <SiNestjs className="w-8 h-8" />, color: '#E0234E' },
+    { name: 'Ionic', icon: <SiIonic className="w-8 h-8" />, color: '#3880FF' },
+    { name: 'Flutter', icon: <SiFlutter className="w-8 h-8" />, color: '#02569B' },
+    { name: 'Tailwind', icon: <SiTailwindcss className="w-8 h-8" />, color: '#06B6D4' },
+    { name: 'GraphQL', icon: <SiGraphql className="w-8 h-8" />, color: '#E10098' },
+    // Cloud / DevOps
+    { name: 'AWS', icon: <SiAmazon className="w-8 h-8" />, color: '#FF9900' },
+    { name: 'Azure', icon: <VscAzure className="w-8 h-8" />, color: '#0078D4' },
+    { name: 'Docker', icon: <SiDocker className="w-8 h-8" />, color: '#2496ED' },
+    { name: 'Kubernetes', icon: <SiKubernetes className="w-8 h-8" />, color: '#326CE5' },
+    { name: 'Terraform', icon: <SiTerraform className="w-8 h-8" />, color: '#7B42BC' },
+    { name: 'Kafka', icon: <SiApachekafka className="w-8 h-8" />, color: '#FFFFFF' },
     { name: 'Git', icon: <SiGit className="w-8 h-8" />, color: '#F05032' },
+    // Observabilidad
+    { name: 'Grafana', icon: <SiGrafana className="w-8 h-8" />, color: '#F46800' },
+    { name: 'Prometheus', icon: <SiPrometheus className="w-8 h-8" />, color: '#E6522C' },
+    // Bases de datos
+    { name: 'SQL Server', icon: <DiMsqlServer className="w-8 h-8" />, color: '#CC2927' },
+    { name: 'PostgreSQL', icon: <SiPostgresql className="w-8 h-8" />, color: '#336791' },
+    { name: 'MySQL', icon: <SiMysql className="w-8 h-8" />, color: '#4479A1' },
+    { name: 'MongoDB', icon: <SiMongodb className="w-8 h-8" />, color: '#47A248' },
+    { name: 'DynamoDB', icon: <SiAmazondynamodb className="w-8 h-8" />, color: '#4053D6' },
+    { name: 'Redis', icon: <SiRedis className="w-8 h-8" />, color: '#DC382D' },
+    { name: 'Firebase', icon: <SiFirebase className="w-8 h-8" />, color: '#FFCA28' },
   ];
   return (
     <section className="py-24 bg-gradient-to-b from-gray-900 via-slate-900 to-gray-900 relative overflow-hidden" id="tecnologias">
