@@ -129,6 +129,8 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
               src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80"
               alt="Register background"
               className="w-full h-full object-cover opacity-60"
+              loading="lazy"
+              decoding="async"
             />
           </div>
           <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>
