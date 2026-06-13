@@ -232,6 +232,10 @@
     "available": "Available Now",
     "unavailable": "Not Available"
   },
+  "meta": {
+    "titleHome": "Juan José Hernández | Development Consultant & Technology",
+    "titleCart": "Cart | Juan José Hernández"
+  },
   "common": {
     "loading": "Loading...",
     "loadError": "Failed to load. Try refreshing the page.",

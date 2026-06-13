@@ -1,4 +1,5 @@
 import React, { lazy, Suspense, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import ErrorBoundary from '../components/ErrorBoundary';
 import Navigation from '../components/Navigation.tsx';
@@ -10,6 +11,7 @@ import Experience from '../components/Experience.tsx';
 import Contact from '../components/Contact.tsx';
 import Footer from '../components/Footer.tsx';
 import { useModal } from '../../application/context/ModalContext';
+import { useDocumentTitle } from '../../application/hooks/useDocumentTitle';
 
 const LoginModal = lazy(() => import('../components/LoginModal.tsx'));
 const RegisterModal = lazy(() => import('../components/RegisterModal.tsx'));
@@ -17,6 +19,8 @@ const ProfileModal = lazy(() => import('../components/ProfileModal.tsx'));
 const OrdersModal = lazy(() => import('../components/OrdersModal.tsx'));
 
 const HomePage: React.FC = () => {
+  const { t } = useTranslation();
+  useDocumentTitle(t('meta.titleHome'));
   const location = useLocation();
   const {
     isLoginOpen,

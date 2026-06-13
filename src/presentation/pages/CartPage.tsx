@@ -2,6 +2,7 @@ import { FaArrowLeft, FaShoppingCart, FaTrash, FaSearch, FaList, FaClock, FaEdit
 import { faIconMap } from '../utils/faIconMap';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDocumentTitle } from '../../application/hooks/useDocumentTitle';
 import { useCart } from '../../application/hooks/useCart';
 import { useAuth } from '../../application/hooks/useAuth';
 import { useModal } from '../../application/context/ModalContext';
@@ -12,6 +13,7 @@ import RegisterModal from '../components/RegisterModal';
 
 const CartPage: React.FC = () => {
   const { t } = useTranslation();
+  useDocumentTitle(t('meta.titleCart'));
   const { items, totalAmount, updateQuantity, removeFromCart, clearCart } = useCart();
   const { isAuthenticated } = useAuth();
   const { 
