@@ -13,6 +13,10 @@ export interface Service {
   shortDescription: string;
   category: ServiceCategory;
   icon: string;
+  /** Resultado de negocio que obtiene el cliente (enfoque gerencial, "resultado primero"). */
+  businessOutcome?: string;
+  /** A quién está dirigido el servicio. */
+  targetAudience?: string;
   features: string[];
   technologies: string[];
   price: {

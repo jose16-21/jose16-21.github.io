@@ -222,6 +222,8 @@
     "viewDetails": "View Details"
   },
   "serviceDetail": {
+    "businessOutcome": "Business outcome",
+    "audience": "Ideal for:",
     "description": "Detailed Description",
     "features": "Features Included",
     "technologies": "Technologies Used",

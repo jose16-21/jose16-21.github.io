@@ -11,7 +11,7 @@ interface ServiceDetailModalProps {
   onAddToCart?: (service: Service) => void;
 }
 
-import { FaStar, FaTimes, FaInfoCircle, FaCheckDouble, FaCheck, FaLayerGroup, FaClock, FaShoppingCart, FaPaperPlane, FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
+import { FaStar, FaTimes, FaInfoCircle, FaCheckDouble, FaCheck, FaLayerGroup, FaClock, FaShoppingCart, FaPaperPlane, FaCheckCircle, FaTimesCircle, FaBullseye } from 'react-icons/fa';
 
 const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
   isOpen,
@@ -107,6 +107,23 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
             {/* Columna principal */}
             <div className="lg:col-span-2 space-y-6">
+              {/* Resultado de negocio (enfoque gerencial) */}
+              {service.businessOutcome && (
+                <div className="bg-primary/5 border border-primary/15 rounded-xl p-4">
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-primary mb-2 flex items-center gap-2">
+                    <FaBullseye className="text-primary" />
+                    {t('serviceDetail.businessOutcome')}
+                  </h3>
+                  <p className="text-gray-dark leading-relaxed">{service.businessOutcome}</p>
+                  {service.targetAudience && (
+                    <p className="text-sm text-gray-medium mt-3">
+                      <span className="font-semibold text-dark">{t('serviceDetail.audience')} </span>
+                      {service.targetAudience}
+                    </p>
+                  )}
+                </div>
+              )}
+
               {/* Descripción completa */}
               <div>
                 <h3 className="text-xl font-bold text-dark mb-3 flex items-center gap-2">

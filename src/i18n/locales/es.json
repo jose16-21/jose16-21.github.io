@@ -222,6 +222,8 @@
     "viewDetails": "Ver Detalles"
   },
   "serviceDetail": {
+    "businessOutcome": "Resultado para tu negocio",
+    "audience": "Ideal para:",
     "description": "Descripción Detallada",
     "features": "Características Incluidas",
     "technologies": "Tecnologías Utilizadas",
