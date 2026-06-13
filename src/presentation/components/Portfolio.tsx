@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { GetProjectsUseCase } from '../../domain/use-cases/GetProjectsUseCase';
 import { ProjectRepositoryImpl } from '../../infrastructure/repositories/ProjectRepositoryImpl';
 import { Project } from '../../domain/entities/Project';
@@ -7,6 +8,7 @@ import { FaExternalLinkAlt } from 'react-icons/fa';
 import { faIconMap } from '../utils/faIconMap';
 
 const Portfolio: React.FC = () => {
+  const { t } = useTranslation();
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -31,7 +33,7 @@ const Portfolio: React.FC = () => {
     return (
       <section className="py-24 bg-white" id="portafolio">
         <div className="max-w-7xl mx-auto px-8 text-center">
-          <p className="text-gray-medium">Cargando proyectos...</p>
+          <p className="text-gray-medium">{t('common.loading')}</p>
         </div>
       </section>
     );
@@ -41,8 +43,8 @@ const Portfolio: React.FC = () => {
     <section className="py-24 bg-white" id="portafolio">
       <div className="max-w-7xl mx-auto px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-dark mb-4">Proyectos Destacados</h2>
-          <p className="text-lg text-gray-medium max-w-2xl mx-auto">Algunos de los proyectos más relevantes en mi carrera</p>
+          <h2 className="text-4xl font-bold text-dark mb-4">{t('portfolio.title')}</h2>
+          <p className="text-lg text-gray-medium max-w-2xl mx-auto">{t('portfolio.subtitle')}</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project) => (
@@ -85,7 +87,7 @@ const Portfolio: React.FC = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="ml-2 text-primary hover:text-dark transition-colors"
-                      title="Ver proyecto"
+                      title={t('portfolio.viewProject')}
                     >
                       <FaExternalLinkAlt className="text-sm" />
                     </a>

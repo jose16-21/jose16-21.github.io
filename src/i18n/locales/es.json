@@ -212,7 +212,8 @@
     "title": "Mis Pedidos",
     "empty": "Aún no tienes pedidos",
     "emptyDescription": "Cuando realices una compra, tus pedidos aparecerán aquí",
-    "explore": "Explorar Servicios"
+    "explore": "Explorar Servicios",
+    "viewDetails": "Ver Detalles"
   },
   "serviceDetail": {
     "description": "Descripción Detallada",

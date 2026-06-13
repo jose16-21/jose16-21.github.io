@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../application/hooks/useAuth';
 import { FaShoppingBag } from 'react-icons/fa';
 
@@ -21,6 +22,7 @@ interface OrdersModalProps {
 }
 
 const OrdersModal: React.FC<OrdersModalProps> = ({ isOpen, onClose }) => {
+  const { t } = useTranslation();
   const { user } = useAuth();
 
   // TODO: Fetch orders from backend
@@ -32,7 +34,7 @@ const OrdersModal: React.FC<OrdersModalProps> = ({ isOpen, onClose }) => {
     <div className="fixed inset-0 bg-dark/80 backdrop-blur-sm flex items-center justify-center p-4 z-50" onClick={onClose}>
       <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] flex flex-col" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between p-6 border-b border-gray-lighter">
-          <h2 className="text-2xl font-bold text-dark flex items-center gap-3"><FaShoppingBag className="text-primary" /> Mis Órdenes</h2>
+          <h2 className="text-2xl font-bold text-dark flex items-center gap-3"><FaShoppingBag className="text-primary" /> {t('orders.title')}</h2>
           <button className="w-10 h-10 bg-gray-lighter hover:bg-gray-light rounded-full flex items-center justify-center text-gray-dark hover:text-dark transition-colors text-2xl" onClick={onClose}>&times;</button>
         </div>
         
@@ -40,10 +42,10 @@ const OrdersModal: React.FC<OrdersModalProps> = ({ isOpen, onClose }) => {
           {orders.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-12 text-center">
               <FaShoppingBag className="text-8xl text-gray-light mb-6" />
-              <h3 className="text-2xl font-bold text-dark mb-2">No tienes órdenes aún</h3>
-              <p className="text-gray-medium mb-6">Cuando realices tu primera compra, aparecerá aquí.</p>
+              <h3 className="text-2xl font-bold text-dark mb-2">{t('orders.empty')}</h3>
+              <p className="text-gray-medium mb-6">{t('orders.emptyDescription')}</p>
               <button className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-primary text-white font-semibold rounded-lg shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all" onClick={onClose}>
-                Explorar Servicios
+                {t('orders.explore')}
               </button>
             </div>
           ) : (
@@ -70,7 +72,7 @@ const OrdersModal: React.FC<OrdersModalProps> = ({ isOpen, onClose }) => {
                   <div className="flex justify-between items-center pt-4 border-t border-gray-light">
                     <strong className="text-lg text-dark">Total: ${order.total.toLocaleString()} USD</strong>
                     <button className="inline-flex items-center gap-2 px-4 py-2 bg-white text-primary font-semibold rounded-lg border-2 border-primary hover:bg-primary hover:text-white transition-all text-sm">
-                      Ver Detalles
+                      {t('orders.viewDetails')}
                     </button>
                   </div>
                 </div>
