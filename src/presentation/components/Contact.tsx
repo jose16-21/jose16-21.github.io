@@ -324,7 +324,7 @@ const Contact: React.FC = () => {
                 {isSubmitting ? (
                   <>
                     <i className="fas fa-spinner fa-spin text-xs"></i>
-                    Enviando...
+                    {t('contact.form.sending')}
                   </>
                 ) : (
                   <>
@@ -344,7 +344,7 @@ const Contact: React.FC = () => {
               {submitStatus === 'error' && (
                 <div className="mt-4 p-3 bg-red-50 text-red-700 text-sm rounded-lg border border-red-200 flex items-center gap-2 animate-fade-in">
                   <i className="fas fa-exclamation-circle"></i>
-                  Error al enviar el mensaje. Por favor intenta de nuevo.
+                  {t('contact.form.error')}
                 </div>
               )}
             </form>
