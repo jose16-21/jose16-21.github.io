@@ -1,6 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { FaPaperPlane, FaBriefcase, FaCheckCircle, FaEnvelope, FaLinkedinIn, FaGithub, FaWhatsapp, FaChevronDown } from 'react-icons/fa';
+
 const Hero: React.FC = () => {
   const { t } = useTranslation();
   
@@ -71,14 +73,14 @@ const Hero: React.FC = () => {
                 href="#contacto"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-semibold rounded-lg shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300"
               >
-                <i className="fas fa-paper-plane text-sm"></i>
+                <FaPaperPlane className="text-sm" />
                 {t('hero.cta.startProject')}
               </a>
               <a
                 href="#portafolio"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-white text-slate-700 font-semibold rounded-lg border border-slate-200 hover:border-primary hover:text-primary hover:-translate-y-0.5 transition-all duration-300"
               >
-                <i className="fas fa-briefcase text-sm"></i>
+                <FaBriefcase className="text-sm" />
                 {t('hero.cta.viewWork')}
               </a>
             </div>
@@ -101,15 +103,15 @@ const Hero: React.FC = () => {
                 {/* Especialidades */}
                 <div className="space-y-3 mb-6">
                   <div className="flex items-center gap-3 text-sm text-slate-600">
-                    <i className="fas fa-check-circle text-emerald-500"></i>
+                    <FaCheckCircle className="text-emerald-500" />
                     <span>{t('hero.specialties.architecture')}</span>
                   </div>
                   <div className="flex items-center gap-3 text-sm text-slate-600">
-                    <i className="fas fa-check-circle text-emerald-500"></i>
+                    <FaCheckCircle className="text-emerald-500" />
                     <span>{t('hero.specialties.devops')}</span>
                   </div>
                   <div className="flex items-center gap-3 text-sm text-slate-600">
-                    <i className="fas fa-check-circle text-emerald-500"></i>
+                    <FaCheckCircle className="text-emerald-500" />
                     <span>{t('hero.specialties.leadership')}</span>
                   </div>
                 </div>
@@ -120,7 +122,7 @@ const Hero: React.FC = () => {
                     href="mailto:ju16jo@gmail.com"
                     className="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center hover:bg-primary hover:text-white transition-all text-slate-500"
                   >
-                    <i className="fas fa-envelope text-sm"></i>
+                    <FaEnvelope className="text-sm" />
                   </a>
                   <a
                     href="https://www.linkedin.com/in/juan-jose-hernandez-gt/"
@@ -128,7 +130,7 @@ const Hero: React.FC = () => {
                     rel="noopener noreferrer"
                     className="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center hover:bg-[#0077B5] hover:text-white transition-all text-slate-500"
                   >
-                    <i className="fab fa-linkedin-in text-sm"></i>
+                    <FaLinkedinIn className="text-sm" />
                   </a>
                   <a
                     href="https://github.com/jose16-21"
@@ -136,7 +138,7 @@ const Hero: React.FC = () => {
                     rel="noopener noreferrer"
                     className="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center hover:bg-slate-800 hover:text-white transition-all text-slate-500"
                   >
-                    <i className="fab fa-github text-sm"></i>
+                    <FaGithub className="text-sm" />
                   </a>
                   <a
                     href="https://wa.me/50231322197"
@@ -144,7 +146,7 @@ const Hero: React.FC = () => {
                     rel="noopener noreferrer"
                     className="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all text-slate-500"
                   >
-                    <i className="fab fa-whatsapp text-sm"></i>
+                    <FaWhatsapp className="text-sm" />
                   </a>
                 </div>
               </div>
@@ -161,7 +163,7 @@ const Hero: React.FC = () => {
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20">
         <a href="#servicios" className="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors">
           <span className="text-xs font-medium tracking-wider uppercase">{t('hero.explore')}</span>
-          <i className="fas fa-chevron-down text-sm animate-bounce"></i>
+          <FaChevronDown className="text-sm animate-bounce" />
         </a>
       </div>
     </section>

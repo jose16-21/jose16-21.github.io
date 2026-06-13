@@ -1,5 +1,6 @@
 import React from 'react';
 import { Service } from '../../domain/entities/Service';
+import { faIconMap } from '../utils/faIconMap';
 
 interface ServiceDetailModalProps {
   isOpen: boolean;
@@ -7,6 +8,8 @@ interface ServiceDetailModalProps {
   service: Service | null;
   onAddToCart?: (service: Service) => void;
 }
+
+import { FaStar, FaTimes, FaInfoCircle, FaCheckDouble, FaCheck, FaLayerGroup, FaClock, FaShoppingCart, FaPaperPlane, FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 
 const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
   isOpen,
@@ -57,7 +60,7 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
           <div className="absolute bottom-0 left-0 w-full p-6 md:p-8 z-10">
             <div className="flex flex-col md:flex-row md:items-end gap-4">
               <div className="w-16 h-16 md:w-18 md:h-18 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/20 shadow-2xl flex-shrink-0">
-                <i className={`fas ${service.icon} text-3xl text-white`}></i>
+                { (() => { const I = faIconMap[service.icon]; return I ? <I className="text-3xl text-white" /> : null; })() }
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
@@ -66,7 +69,7 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
                   </span>
                   {service.featured && (
                     <span className="px-2.5 py-1 bg-accent/90 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-wider rounded-full flex items-center gap-1">
-                      <i className="fas fa-star text-[10px]"></i> Popular
+                      <FaStar className="text-[10px]" /> Popular
                     </span>
                   )}
                 </div>
@@ -81,7 +84,7 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
             onClick={onClose}
             className="absolute top-6 right-6 w-10 h-10 bg-black/20 hover:bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center transition-all text-white border border-white/10 z-20"
           >
-            <i className="fas fa-times text-lg"></i>
+            <FaTimes className="text-lg" />
           </button>
         </div>
 
@@ -93,7 +96,7 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
               {/* Descripción completa */}
               <div>
                 <h3 className="text-xl font-bold text-dark mb-3 flex items-center gap-2">
-                  <i className="fas fa-info-circle text-primary"></i>
+                  <FaInfoCircle className="text-primary" />
                   Descripción Detallada
                 </h3>
                 <p className="text-gray-dark leading-relaxed">{service.description}</p>
@@ -102,7 +105,7 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
               {/* Características completas */}
               <div>
                 <h3 className="text-xl font-bold text-dark mb-4 flex items-center gap-2">
-                  <i className="fas fa-check-double text-secondary"></i>
+                  <FaCheckDouble className="text-secondary" />
                   Características Incluidas
                 </h3>
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -111,7 +114,7 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
                       key={index}
                       className="flex items-start gap-2 text-sm text-gray-dark bg-gray-50 p-3 rounded-lg border border-gray-100"
                     >
-                      <i className="fas fa-check text-success mt-0.5 flex-shrink-0"></i>
+                      <FaCheck className="text-success mt-0.5 flex-shrink-0" />
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -121,7 +124,7 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
               {/* Tecnologías */}
               <div>
                 <h3 className="text-xl font-bold text-dark mb-4 flex items-center gap-2">
-                  <i className="fas fa-layer-group text-accent"></i>
+                  <FaLayerGroup className="text-accent" />
                   Tecnologías Utilizadas
                 </h3>
                 <div className="flex flex-wrap gap-2">
@@ -152,7 +155,7 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
 
                 {service.deliveryTime && (
                   <div className="flex items-center justify-center gap-2 text-gray-dark text-sm bg-white p-3 rounded-lg border border-gray-200 mb-4">
-                    <i className="fas fa-clock text-primary"></i>
+                    <FaClock className="text-primary" />
                     <span className="font-medium">Entrega: {service.deliveryTime}</span>
                   </div>
                 )}
@@ -163,7 +166,7 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
                       onClick={handleAddToCart}
                       className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-primary text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
                     >
-                      <i className="fas fa-shopping-cart"></i>
+                      <FaShoppingCart />
                       Agregar al Carrito
                     </button>
                   )}
@@ -172,7 +175,7 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
                     onClick={handleContactService}
                     className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-white text-primary font-semibold rounded-xl border-2 border-primary hover:bg-primary hover:text-white hover:scale-105 transition-all duration-300"
                   >
-                    <i className="fas fa-paper-plane"></i>
+                    <FaPaperPlane />
                     Contactar Ahora
                   </button>
                 </div>
@@ -181,7 +184,7 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
               {/* Disponibilidad */}
               <div className={`p-4 rounded-xl border-2 ${service.available ? 'bg-success/10 border-success/30' : 'bg-gray-100 border-gray-300'}`}>
                 <div className="flex items-center gap-2 justify-center">
-                  <i className={`fas ${service.available ? 'fa-check-circle text-success' : 'fa-times-circle text-gray-500'}`}></i>
+                  {service.available ? <FaCheckCircle className="text-success" /> : <FaTimesCircle className="text-gray-500" />}
                   <span className={`font-semibold ${service.available ? 'text-success' : 'text-gray-500'}`}>
                     {service.available ? 'Disponible Ahora' : 'No Disponible'}
                   </span>

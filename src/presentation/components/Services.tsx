@@ -6,6 +6,8 @@ import { GetServicesUseCase } from '../../domain/use-cases/GetServicesUseCase';
 import { useCart } from '../../application/hooks/useCart';
 import { NotificationManager } from '../../infrastructure/services/NotificationManager';
 import ServiceDetailModal from './ServiceDetailModal';
+import { FaTh, FaChevronLeft, FaChevronRight, FaStar, FaCheck, FaClock, FaInfoCircle, FaCartPlus, FaInbox } from 'react-icons/fa';
+import { faIconMap } from '../utils/faIconMap';
 import { CategoryConfig } from '../../domain/repositories/ServiceRepository';
 
 const Services: React.FC = () => {
@@ -90,7 +92,7 @@ const Services: React.FC = () => {
                   }`}
                 onClick={() => setFilter('all')}
               >
-                <i className="fas fa-th text-xs"></i>
+                <FaTh className="text-xs" />
                 <span className="hidden sm:inline">{t('services.categories.all')}</span>
               </button>
 
@@ -104,7 +106,7 @@ const Services: React.FC = () => {
                   onClick={() => setFilter(config.id)}
                   title={config.label}
                 >
-                  <i className={`fas ${config.icon} text-xs`}></i>
+                  { (() => { const I = faIconMap[config.icon]; return I ? <I className="text-xs" /> : null; })() }
                   <span className="hidden sm:inline">{config.label}</span>
                 </button>
               ))}
@@ -113,9 +115,9 @@ const Services: React.FC = () => {
           {/* Indicador de scroll en móvil */}
           <div className="md:hidden text-center mt-2">
             <span className="text-xs text-gray-medium">
-              <i className="fas fa-chevron-left mr-1"></i>
+              <FaChevronLeft className="mr-1" />
               {t('services.swipeMore')}
-              <i className="fas fa-chevron-right ml-1"></i>
+              <FaChevronRight className="ml-1" />
             </span>
           </div>
         </div>
@@ -148,12 +150,12 @@ const Services: React.FC = () => {
 
                     <div className="absolute inset-0 p-4 md:p-6 flex items-center justify-between z-10">
                       <div className="w-10 h-10 md:w-14 md:h-14 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/20 shadow-lg">
-                        <i className={`fas ${service.icon} text-xl md:text-2xl text-white`}></i>
+                        { (() => { const I = faIconMap[service.icon]; return I ? <I className="text-xl md:text-2xl text-white" /> : null; })() }
                       </div>
 
                       {service.featured && (
                         <div className="bg-accent/90 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-lg">
-                          <i className="fas fa-star text-[10px]"></i>
+                          <FaStar className="text-[10px]" />
                           {t('services.popular')}
                         </div>
                       )}
@@ -176,7 +178,7 @@ const Services: React.FC = () => {
                           key={index}
                           className="flex items-start gap-2 text-xs md:text-sm text-gray-dark"
                         >
-                          <i className="fas fa-check text-success mt-0.5 md:mt-1 text-xs flex-shrink-0"></i>
+                          <FaCheck className="text-success mt-0.5 md:mt-1 text-xs flex-shrink-0" />
                           <span className="line-clamp-1">{feature}</span>
                         </li>
                       ))}
@@ -197,7 +199,7 @@ const Services: React.FC = () => {
                           </div>
                           {service.deliveryTime && (
                             <div className="flex items-center gap-1 md:gap-1.5 text-gray-medium text-xs bg-white px-1.5 md:px-2 py-1 rounded-lg border border-gray-200">
-                              <i className="fas fa-clock text-xs"></i>
+                              <FaClock className="text-xs" />
                               <span className="hidden sm:inline">{service.deliveryTime}</span>
                             </div>
                           )}
@@ -227,14 +229,14 @@ const Services: React.FC = () => {
                         className="flex-1 bg-white text-primary font-semibold rounded-lg border-2 border-primary py-2 text-xs"
                         onClick={() => handleViewDetails(service)}
                       >
-                        <i className="fas fa-info-circle mr-1"></i>
+                        <FaInfoCircle className="mr-1" />
                         {t('services.details')}
                       </button>
                       <button
                         className="flex-1 bg-gradient-primary text-white font-semibold rounded-lg py-2 text-xs"
                         onClick={() => handleAddToCart(service)}
                       >
-                        <i className="fas fa-cart-plus mr-1"></i>
+                        <FaCartPlus className="mr-1" />
                         {t('services.addToCart')}
                       </button>
                     </div>
@@ -258,7 +260,7 @@ const Services: React.FC = () => {
         )}
         {!loading && services.length === 0 && (
           <div className="text-center py-12">
-            <i className="fas fa-inbox text-6xl text-gray-light mb-4"></i>
+            <FaInbox className="text-6xl text-gray-light mb-4" />
             <p className="text-xl text-gray-medium">{t('services.noServices')}</p>
           </div>
         )}

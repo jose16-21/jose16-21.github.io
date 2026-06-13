@@ -1,12 +1,9 @@
 import { DOMUtils, AnimationUtils, PerformanceUtils } from '../../utils';
 
 export class AnimationManager {
-  private animatedElements: NodeListOf<Element>;
   private statsAnimated: boolean = false;
 
   constructor() {
-    this.animatedElements = DOMUtils.querySelectorAll<Element>('[data-aos]');
-    
     this.init();
   }
 

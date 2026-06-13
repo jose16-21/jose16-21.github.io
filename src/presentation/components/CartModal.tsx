@@ -9,6 +9,8 @@ interface CartModalProps {
   onClose: () => void;
 }
 
+import { FaShoppingCart, FaList, FaCode, FaClock, FaTrash, FaEdit, FaFileInvoice, FaSpinner, FaCreditCard, FaEnvelope, FaShieldAlt } from 'react-icons/fa';
+
 const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
   const { items, totalAmount, updateQuantity, removeFromCart, clearCart } = useCart();
   const { isAuthenticated, user } = useAuth();
@@ -78,7 +80,7 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
       <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full h-[90vh] flex flex-col" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between p-6 border-b border-gray-lighter flex-shrink-0">
           <h2 className="text-2xl font-bold text-dark flex items-center gap-3">
-            <i className="fas fa-shopping-cart text-primary"></i> Mi Carrito
+            <FaShoppingCart className="text-primary" /> Mi Carrito
             {items.length > 0 && (
               <span className="text-sm font-normal bg-primary text-white px-3 py-1 rounded-full">
                 {items.length} {items.length === 1 ? 'servicio' : 'servicios'}
@@ -91,7 +93,7 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
         <div className="flex-1 overflow-y-auto p-6 min-h-0" style={{ flexBasis: '60%' }}>
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-12 text-center">
-              <i className="fas fa-shopping-cart text-8xl text-gray-light mb-6"></i>
+              <FaShoppingCart className="text-8xl text-gray-light mb-6" />
               <p className="text-xl text-gray-medium mb-6">Tu carrito está vacío</p>
               <button className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-primary text-white font-semibold rounded-lg shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all" onClick={onClose}>
                 Explorar Servicios
@@ -102,7 +104,7 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
               {/* Título de la sección */}
               <div className="flex items-center justify-between pb-2 border-b-2 border-primary/20 sticky top-0 bg-white z-10 -mx-6 px-6 py-2">
                 <h3 className="text-base font-semibold text-dark flex items-center gap-2">
-                  <i className="fas fa-list text-primary"></i>
+                  <FaList className="text-primary" />
                   Servicios ({items.length})
                 </h3>
                 <span className="text-xs text-gray-medium bg-gray-100 px-3 py-1 rounded-full">
@@ -115,7 +117,7 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
                   <div className="flex gap-3 mb-3">
                     {/* Icono del servicio */}
                     <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm">
-                      <i className="fas fa-code text-lg text-white"></i>
+                      <FaCode className="text-lg text-white" />
                     </div>
                     
                     {/* Información principal */}
@@ -130,7 +132,7 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
                       {/* Delivery time */}
                       {item.product.deliveryTime && (
                         <div className="flex items-center gap-1.5 text-xs text-gray-medium">
-                          <i className="fas fa-clock"></i>
+                          <FaClock />
                           <span>{item.product.deliveryTime}</span>
                         </div>
                       )}
@@ -142,7 +144,7 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
                       onClick={() => removeFromCart(item.product.id)}
                       title="Eliminar"
                     >
-                      <i className="fas fa-trash text-xs"></i>
+                      <FaTrash className="text-xs" />
                     </button>
                   </div>
                   
@@ -150,7 +152,7 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
                   {item.customizations && (
                     <div className="bg-primary/5 border border-primary/20 rounded-lg p-2 mb-2">
                       <p className="text-xs text-gray-dark">
-                        <i className="fas fa-edit text-primary mr-1"></i>
+                        <FaEdit className="text-primary mr-1" />
                         <span className="font-medium">Personalización:</span> {item.customizations}
                       </p>
                     </div>
@@ -246,7 +248,7 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
                 />
                 <div className="flex-1">
                   <div className="flex items-center gap-1.5 text-dark font-semibold text-xs">
-                    <i className="fas fa-file-invoice text-secondary text-xs"></i>
+                    <FaFileInvoice className="text-secondary text-xs" />
                     Solicitar cotización sin costo
                   </div>
                 </div>
@@ -273,24 +275,24 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
                 >
                   {isProcessing ? (
                     <>
-                      <i className="fas fa-spinner fa-spin"></i>
+                      <FaSpinner className="animate-spin" />
                       Procesando...
                     </>
                   ) : isQuoteMode ? (
                     <>
-                      <i className="fas fa-file-invoice"></i>
+                      <FaFileInvoice />
                       Solicitar Cotización
                     </>
                   ) : (
                     <>
-                      <i className="fas fa-credit-card"></i>
+                      <FaCreditCard />
                       Pagar ${totalAmount.toLocaleString()}
                     </>
                   )}
                 </button>
                 
                 <div className="flex items-center justify-center gap-2 text-xs text-gray-medium mt-2">
-                  <i className={`fas ${isQuoteMode ? 'fa-envelope' : 'fa-shield-alt'} ${isQuoteMode ? 'text-secondary' : 'text-success'}`}></i>
+                  {isQuoteMode ? <FaEnvelope className="text-secondary" /> : <FaShieldAlt className="text-success" />}
                   <span>{isQuoteMode ? 'Cotización por email' : 'Pago seguro'}</span>
                 </div>
               </div>

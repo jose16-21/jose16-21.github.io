@@ -3,6 +3,9 @@ import { GetProjectsUseCase } from '../../domain/use-cases/GetProjectsUseCase';
 import { ProjectRepositoryImpl } from '../../infrastructure/repositories/ProjectRepositoryImpl';
 import { Project } from '../../domain/entities/Project';
 
+import { FaExternalLinkAlt } from 'react-icons/fa';
+import { faIconMap } from '../utils/faIconMap';
+
 const Portfolio: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
@@ -63,7 +66,7 @@ const Portfolio: React.FC = () => {
                 ) : (
                   <div className="w-full h-full bg-gradient-primary flex items-center justify-center">
                     <div className="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
-                      <i className={`fas ${project.icon} text-4xl text-white`}></i>
+                      { (() => { const I = faIconMap[project.icon]; return I ? <I className="text-4xl text-white" /> : null; })() }
                     </div>
                   </div>
                 )}
@@ -84,7 +87,7 @@ const Portfolio: React.FC = () => {
                       className="ml-2 text-primary hover:text-dark transition-colors"
                       title="Ver proyecto"
                     >
-                      <i className="fas fa-external-link-alt text-sm"></i>
+                      <FaExternalLinkAlt className="text-sm" />
                     </a>
                   )}
                 </div>

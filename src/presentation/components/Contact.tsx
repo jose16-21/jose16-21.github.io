@@ -1,4 +1,5 @@
 import React, { useState, FormEvent, useEffect, useRef } from 'react';
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaClock, FaCheck, FaCopy, FaSpinner, FaPaperPlane, FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { ClipboardUtils } from '../../utils';
 
@@ -159,22 +160,22 @@ const Contact: React.FC = () => {
 
   const contactInfo = [
     {
-      icon: 'fa-envelope',
+      icon: FaEnvelope,
       titleKey: 'contact.info.email',
       value: 'ju16jo@gmail.com'
     },
     {
-      icon: 'fa-phone',
+      icon: FaPhone,
       titleKey: 'contact.info.phone',
       value: '+502 3132-2197'
     },
     {
-      icon: 'fa-map-marker-alt',
+      icon: FaMapMarkerAlt,
       titleKey: 'contact.info.location',
       value: 'Guatemala'
     },
     {
-      icon: 'fa-clock',
+      icon: FaClock,
       titleKey: 'contact.info.availability',
       valueKey: 'contact.info.schedule'
     }
@@ -192,7 +193,7 @@ const Contact: React.FC = () => {
             {contactInfo.map((item) => (
               <div key={item.titleKey} className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                  <i className={`fas ${item.icon} text-sm text-white`}></i>
+                  <item.icon className="text-sm text-white" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <h4 className="text-sm font-semibold text-gray-900">{t(item.titleKey)}</h4>
@@ -205,9 +206,9 @@ const Contact: React.FC = () => {
                         title={`${t('common.copied').replace('!', '')} ${t(item.titleKey).toLowerCase()}`}
                       >
                         {copiedField === item.titleKey ? (
-                          <i className="fas fa-check text-xs"></i>
+                          <FaCheck className="text-xs" />
                         ) : (
-                          <i className="fas fa-copy text-xs"></i>
+                          <FaCopy className="text-xs" />
                         )}
                       </button>
                     </div>
@@ -323,12 +324,12 @@ const Contact: React.FC = () => {
               >
                 {isSubmitting ? (
                   <>
-                    <i className="fas fa-spinner fa-spin text-xs"></i>
+                    <FaSpinner className="animate-spin text-xs" />
                     {t('contact.form.sending')}
                   </>
                 ) : (
                   <>
-                    <i className="fas fa-paper-plane text-xs"></i>
+                    <FaPaperPlane className="text-xs" />
                     {t('contact.form.submit')}
                   </>
                 )}
@@ -336,14 +337,14 @@ const Contact: React.FC = () => {
 
               {submitStatus === 'success' && (
                 <div className="mt-4 p-3 bg-green-50 text-green-700 text-sm rounded-lg border border-green-200 flex items-center gap-2 animate-fade-in">
-                  <i className="fas fa-check-circle"></i>
+                  <FaCheckCircle />
                   {t('contact.form.success')}
                 </div>
               )}
 
               {submitStatus === 'error' && (
                 <div className="mt-4 p-3 bg-red-50 text-red-700 text-sm rounded-lg border border-red-200 flex items-center gap-2 animate-fade-in">
-                  <i className="fas fa-exclamation-circle"></i>
+                  <FaExclamationCircle />
                   {t('contact.form.error')}
                 </div>
               )}

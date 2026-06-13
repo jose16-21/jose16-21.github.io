@@ -8,6 +8,8 @@ interface RegisterModalProps {
   onShowLogin: () => void;
 }
 
+import { FaUserPlus, FaTimes, FaUser, FaEnvelope, FaLock, FaBuilding, FaPhone, FaSpinner } from 'react-icons/fa';
+
 const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLogin }) => {
   const [formData, setFormData] = useState({
     firstName: '',
@@ -134,7 +136,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
           <div className="absolute bottom-0 left-0 w-full p-5 z-10">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/20 shadow-2xl">
-                <i className="fas fa-user-plus text-xl text-white"></i>
+                <FaUserPlus className="text-xl text-white" />
               </div>
               <div>
                 <h2 className="text-xl font-bold text-white">Crear Cuenta</h2>
@@ -148,7 +150,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
             onClick={handleClose}
             className="absolute top-4 right-4 w-10 h-10 bg-black/20 hover:bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center transition-all text-white border border-white/10 z-20"
           >
-            <i className="fas fa-times text-lg"></i>
+            <FaTimes className="text-lg" />
           </button>
         </div>
 
@@ -160,7 +162,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
               <label className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
               <div className="relative">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                  <i className="fas fa-user text-xs"></i>
+                  <FaUser className="text-xs" />
                 </span>
                 <input
                   type="text"
@@ -177,7 +179,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
               <label className="block text-sm font-medium text-gray-700 mb-1">Apellido</label>
               <div className="relative">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                  <i className="fas fa-user text-xs"></i>
+                  <FaUser className="text-xs" />
                 </span>
                 <input
                   type="text"
@@ -197,7 +199,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
             <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                <i className="fas fa-envelope text-xs"></i>
+                <FaEnvelope className="text-xs" />
               </span>
               <input
                 type="email"
@@ -217,7 +219,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
               <label className="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
               <div className="relative">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                  <i className="fas fa-lock text-xs"></i>
+                  <FaLock className="text-xs" />
                 </span>
                 <input
                   type="password"
@@ -234,7 +236,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
               <label className="block text-sm font-medium text-gray-700 mb-1">Confirmar</label>
               <div className="relative">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                  <i className="fas fa-lock text-xs"></i>
+                  <FaLock className="text-xs" />
                 </span>
                 <input
                   type="password"
@@ -257,7 +259,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
               </label>
               <div className="relative">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                  <i className="fas fa-building text-xs"></i>
+                  <FaBuilding className="text-xs" />
                 </span>
                 <input
                   type="text"
@@ -275,7 +277,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
               </label>
               <div className="relative">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                  <i className="fas fa-phone text-xs"></i>
+                  <FaPhone className="text-xs" />
                 </span>
                 <input
                   type="tel"
@@ -296,12 +298,12 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLo
           >
             {isLoading ? (
               <>
-                <i className="fas fa-spinner fa-spin"></i>
+                <FaSpinner className="animate-spin" />
                 Creando cuenta...
               </>
             ) : (
               <>
-                <i className="fas fa-user-plus"></i>
+                <FaUserPlus />
                 Crear Cuenta
               </>
             )}

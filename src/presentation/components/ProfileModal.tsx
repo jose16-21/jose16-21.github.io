@@ -7,6 +7,8 @@ interface ProfileModalProps {
   onClose: () => void;
 }
 
+import { FaUser, FaEnvelope, FaBuilding, FaPhone, FaCalendar, FaEdit, FaSave } from 'react-icons/fa';
+
 const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) => {
   const { user } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
@@ -61,7 +63,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) => {
     <div className="fixed inset-0 bg-dark/80 backdrop-blur-sm flex items-center justify-center p-4 z-50" onClick={handleClose}>
       <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between p-6 border-b border-gray-lighter sticky top-0 bg-white z-10">
-          <h2 className="text-2xl font-bold text-dark flex items-center gap-3"><i className="fas fa-user text-primary"></i> Mi Perfil</h2>
+          <h2 className="text-2xl font-bold text-dark flex items-center gap-3"><FaUser className="text-primary" /> Mi Perfil</h2>
           <button className="w-10 h-10 bg-gray-lighter hover:bg-gray-light rounded-full flex items-center justify-center text-gray-dark hover:text-dark transition-colors text-2xl" onClick={handleClose}>&times;</button>
         </div>
         
@@ -70,33 +72,33 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) => {
             <div>
               <div className="flex flex-col items-center mb-8">
                 <div className="w-24 h-24 bg-gradient-primary rounded-full flex items-center justify-center mb-4">
-                  <i className="fas fa-user text-4xl text-white"></i>
+                  <FaUser className="text-4xl text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-dark">{user.firstName} {user.lastName}</h3>
               </div>
 
               <div className="space-y-4 mb-6">
                 <div className="bg-gray-lighter rounded-lg p-4">
-                  <label className="flex items-center gap-2 text-gray-dark font-medium mb-2"><i className="fas fa-envelope text-primary"></i> Email</label>
+                  <label className="flex items-center gap-2 text-gray-dark font-medium mb-2"><FaEnvelope className="text-primary" /> Email</label>
                   <p className="text-dark">{user.email}</p>
                 </div>
                 
                 {user.company && (
                   <div className="bg-gray-lighter rounded-lg p-4">
-                    <label className="flex items-center gap-2 text-gray-dark font-medium mb-2"><i className="fas fa-building text-primary"></i> Empresa</label>
+                    <label className="flex items-center gap-2 text-gray-dark font-medium mb-2"><FaBuilding className="text-primary" /> Empresa</label>
                     <p className="text-dark">{user.company}</p>
                   </div>
                 )}
                 
                 {user.phone && (
                   <div className="bg-gray-lighter rounded-lg p-4">
-                    <label className="flex items-center gap-2 text-gray-dark font-medium mb-2"><i className="fas fa-phone text-primary"></i> Teléfono</label>
+                    <label className="flex items-center gap-2 text-gray-dark font-medium mb-2"><FaPhone className="text-primary" /> Teléfono</label>
                     <p className="text-dark">{user.phone}</p>
                   </div>
                 )}
 
                 <div className="bg-gray-lighter rounded-lg p-4">
-                  <label className="flex items-center gap-2 text-gray-dark font-medium mb-2"><i className="fas fa-calendar text-primary"></i> Miembro desde</label>
+                  <label className="flex items-center gap-2 text-gray-dark font-medium mb-2"><FaCalendar className="text-primary" /> Miembro desde</label>
                   <p className="text-dark">{user.createdAt ? new Date(user.createdAt).toLocaleDateString('es-ES') : 'N/A'}</p>
                 </div>
               </div>
@@ -105,7 +107,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) => {
                 className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-primary text-white font-semibold rounded-lg shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all"
                 onClick={() => setIsEditing(true)}
               >
-                <i className="fas fa-edit"></i>
+                <FaEdit />
                 Editar Perfil
               </button>
             </div>
@@ -188,7 +190,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) => {
                   Cancelar
                 </button>
                 <button type="submit" className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-primary text-white font-semibold rounded-lg shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all">
-                  <i className="fas fa-save"></i>
+                  <FaSave />
                   Guardar Cambios
                 </button>
               </div>
