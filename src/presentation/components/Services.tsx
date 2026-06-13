@@ -143,6 +143,8 @@ const Services: React.FC = () => {
                           src={service.imageUrl}
                           alt={service.title}
                           className="w-full h-full object-cover opacity-80"
+                          loading="lazy"
+                          decoding="async"
                         />
                       )}
                     </div>

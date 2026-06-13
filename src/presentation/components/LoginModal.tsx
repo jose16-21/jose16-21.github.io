@@ -66,6 +66,8 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onShowRegister
               src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80"
               alt="Login background"
               className="w-full h-full object-cover opacity-60"
+              loading="lazy"
+              decoding="async"
             />
           </div>
           <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>

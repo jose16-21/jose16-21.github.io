@@ -54,6 +54,8 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
                 src={service.imageUrl}
                 alt={service.title}
                 className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+                decoding="async"
               />
             )}
           </div>
