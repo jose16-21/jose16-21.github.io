@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../application/hooks/useAuth';
 import { NotificationManager } from '../../infrastructure/services/NotificationManager';
 import { useFocusTrap } from '../../application/hooks/useFocusTrap';
@@ -12,6 +13,7 @@ interface RegisterModalProps {
 import { FaUserPlus, FaTimes, FaUser, FaEnvelope, FaLock, FaBuilding, FaPhone, FaSpinner } from 'react-icons/fa';
 
 const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onShowLogin }) => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',

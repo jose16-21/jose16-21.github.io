@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../application/hooks/useAuth';
 import { NotificationManager } from '../../infrastructure/services/NotificationManager';
 import { useFocusTrap } from '../../application/hooks/useFocusTrap';
@@ -12,6 +13,7 @@ interface LoginModalProps {
 import { FaSignInAlt, FaTimes, FaEnvelope, FaLock, FaSpinner } from 'react-icons/fa';
 
 const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onShowRegister }) => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
